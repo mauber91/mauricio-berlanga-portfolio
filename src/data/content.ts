@@ -233,9 +233,3 @@ export const researchThemes = [
     tags: ['orchestration', 'local inference', 'agents'],
   },
 ]
-
-export const writing = [
-  { title: 'Measuring What a Retrieval Pipeline Actually Improves', topic: 'RAG & retrieval', status: 'Coming soon' },
-  { title: 'Notes on Cloud-Orchestrated Local Models', topic: 'Local AI', status: 'Coming soon' },
-  { title: 'When the Baseline Wins', topic: 'Machine learning', status: 'Coming soon' },
-]

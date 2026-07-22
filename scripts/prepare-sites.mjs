@@ -9,6 +9,17 @@ await mkdir(metadataDir, { recursive: true })
 await copyFile(hostingSource, new URL('hosting.json', metadataDir))
 
 const worker = `
+const articleMeta = {
+  '/writing/usd-mxn-forecasting/': {
+    title: 'When the baseline wins: lessons from forecasting USD/MXN — Mauricio Berlanga',
+    description: 'A technical account of testing linear models, tree ensembles, and a neural network against autoregressive baselines on monthly USD/MXN data.',
+  },
+  '/writing/verifier-aware-model-routing/': {
+    title: 'Routing code generation with verifiers — Mauricio Berlanga',
+    description: 'A cost-sensitive contextual-bandit study of routing code generation between local and stronger models using executable test feedback.',
+  },
+}
+
 function textResponse(body, contentType) {
   return new Response(body, {
     headers: {
@@ -30,8 +41,10 @@ export default {
     }
 
     if (url.pathname === '/sitemap.xml') {
+      const paths = ['/', '/writing/usd-mxn-forecasting/', '/writing/verifier-aware-model-routing/']
+      const entries = paths.map((path) => \`<url><loc>\${url.origin}\${path}</loc></url>\`).join('')
       return textResponse(
-        \`<?xml version="1.0" encoding="UTF-8"?>\\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>\${url.origin}/</loc></url></urlset>\`,
+        \`<?xml version="1.0" encoding="UTF-8"?>\\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\${entries}</urlset>\`,
         'application/xml; charset=UTF-8',
       )
     }
@@ -45,7 +58,21 @@ export default {
     if (response.headers.get('content-type')?.includes('text/html')) {
       const headers = new Headers(response.headers)
       headers.set('cache-control', 'public, max-age=300')
-      const html = (await response.text()).replaceAll('__SITE_ORIGIN__', url.origin)
+      const pathname = url.pathname.endsWith('/') ? url.pathname : url.pathname + '/'
+      const meta = articleMeta[pathname]
+      let html = (await response.text()).replaceAll('__SITE_ORIGIN__', url.origin)
+
+      if (meta) {
+        html = html
+          .replace(/<title>[^<]*<\\/title>/, \`<title>\${meta.title}</title>\`)
+          .replace(/<meta name="description" content="[^"]*" [/]>/, \`<meta name="description" content="\${meta.description}" />\`)
+          .replace(/<meta property="og:title" content="[^"]*" [/]>/, \`<meta property="og:title" content="\${meta.title}" />\`)
+          .replace(/<meta property="og:description" content="[^"]*" [/]>/, \`<meta property="og:description" content="\${meta.description}" />\`)
+          .replace(/<meta name="twitter:title" content="[^"]*" [/]>/, \`<meta name="twitter:title" content="\${meta.title}" />\`)
+          .replace(/<meta name="twitter:description" content="[^"]*" [/]>/, \`<meta name="twitter:description" content="\${meta.description}" />\`)
+          .replace(/<link rel="canonical" href="[^"]*" [/]>/, \`<link rel="canonical" href="\${url.origin}\${pathname}" />\`)
+      }
+
       return new Response(html, { status: response.status, headers })
     }
 

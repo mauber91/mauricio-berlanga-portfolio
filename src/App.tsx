@@ -2,13 +2,18 @@ import { ArrowDown, ArrowRight, ArrowUpRight, BriefcaseBusiness, Code2, Download
 import { Header } from './components/Header'
 import { SectionHeader } from './components/SectionHeader'
 import { HeroSystemMap, ProjectVisual } from './components/TechnicalVisuals'
-import { education, experience, githubProjects, personal, projects, researchThemes, skillGroups, socialLinks, writing } from './data/content'
+import { ArticlePage } from './components/article/ArticlePage'
+import { articles, getArticleByPath } from './data/articles'
+import { education, experience, githubProjects, personal, projects, researchThemes, skillGroups, socialLinks } from './data/content'
 
 function PlaceholderBadge() {
   return <span className="placeholder-badge">placeholder</span>
 }
 
 function App() {
+  const activeArticle = getArticleByPath(window.location.pathname)
+  if (activeArticle) return <ArticlePage article={activeArticle} />
+
   const githubProfile = socialLinks.find((link) => link.label === 'GitHub')
 
   const handleUnavailableResume = (event: React.MouseEvent<HTMLAnchorElement>) => {
@@ -196,14 +201,14 @@ function App() {
         </section>
 
         <section className="section shell" id="writing">
-          <SectionHeader eyebrow="07 / Writing & Notes" title="Learning in public—soon." copy="A future home for field notes from experiments, papers, and engineering work." />
+          <SectionHeader eyebrow="07 / Writing & Notes" title="Learning in public." copy="Technical project write-ups with enough context to make the underlying ideas accessible beyond AI and ML specialists." />
           <div className="writing-list">
-            {writing.map((article, index) => (
-              <article className="writing-item reveal" key={article.title}>
+            {articles.map((article, index) => (
+              <a className="writing-item reveal" href={article.path} key={article.title}>
                 <span>0{index + 1}</span>
-                <div><p>{article.topic}</p><h3>{article.title}</h3></div>
-                <span className="coming-soon">{article.status}</span>
-              </article>
+                <div><p>{article.course}</p><h3>{article.title}</h3></div>
+                <span className="coming-soon">Read · {article.readTime.replace(' read', '')}</span>
+              </a>
             ))}
           </div>
         </section>
