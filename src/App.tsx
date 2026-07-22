@@ -127,6 +127,12 @@ function App() {
                   <p>{project.description}</p>
                   <p className="project-insight"><b>What mattered</b>{project.insight}</p>
                   <ul className="tag-list">{project.technologies.map((technology) => <li key={technology}>{technology}</li>)}</ul>
+                  {(project.article || project.github) && (
+                    <div className="project-links">
+                      {project.article && <a href={project.article}>Read case study <ArrowRight size={15} /></a>}
+                      {project.github && <a href={project.github} target="_blank" rel="noreferrer">Repository <ArrowUpRight size={15} /></a>}
+                    </div>
+                  )}
                 </div>
               </article>
             ))}

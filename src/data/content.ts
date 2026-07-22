@@ -12,6 +12,7 @@ export type Project = {
   status: 'Built' | 'Study' | 'Exploratory'
   featured: boolean
   insight: string
+  article?: string
   github?: string
   demo?: string
   paper?: string
@@ -116,17 +117,21 @@ export const projects: Project[] = [
     featured: true,
     insight:
       'Simple baselines remained difficult to beat—a useful result that reinforced rigorous evaluation in noisy financial time series.',
+    article: '/writing/usd-mxn-forecasting/',
+    github: 'https://github.com/mauber91/USD_MXN_prediction',
     visual: 'forecast',
   },
   {
-    title: 'Cloud-Orchestrated Local AI Systems',
+    title: 'Verifier-Aware Model Routing for Code Generation',
     description:
-      'An exploratory architecture where a powerful cloud model orchestrates work and delegates suitable tasks to smaller, hardware-aware local models.',
-    technologies: ['Model Routing', 'Local LLMs', 'Agents', 'Inference', 'Orchestration'],
-    status: 'Exploratory',
+      'A cost-sensitive contextual-bandit study of when to keep a local model’s code and when to escalate to a stronger API model using executable test feedback.',
+    technologies: ['Contextual Bandits', 'LLM Routing', 'LoRA', 'PyTorch', 'EvalPlus'],
+    status: 'Study',
     featured: true,
     insight:
-      'Investigating tradeoffs across inference cost, privacy, cloud-token consumption, latency, and device capability.',
+      'A verifier-aware cheap-then-escalate policy reached strong hidden-test performance at a fraction of full API cost; the learned router was competitive, but calibration and random seeds still mattered.',
+    article: '/writing/verifier-aware-model-routing/',
+    github: 'https://github.com/mauber91/cs224R',
     visual: 'orchestration',
   },
 ]
