@@ -18,6 +18,17 @@ export type Project = {
   visual: 'retrieval' | 'forecast' | 'orchestration'
 }
 
+export type GitHubProject = {
+  title: string
+  description: string
+  technologies: string[]
+  activity: string
+  category: string
+  repository: string
+  url: string
+  demo?: string
+}
+
 export const personal = {
   name: 'Mauricio Berlanga',
   title: 'Senior Software Engineer · AI / ML Engineer',
@@ -31,7 +42,7 @@ export const personal = {
 }
 
 export const socialLinks: SocialLink[] = [
-  { label: 'GitHub', href: '#contact', display: 'github.com/username', placeholder: true },
+  { label: 'GitHub', href: 'https://github.com/mauber91', display: 'github.com/mauber91' },
   { label: 'LinkedIn', href: '#contact', display: 'linkedin.com/in/username', placeholder: true },
   { label: 'Email', href: `mailto:${personal.email}`, display: personal.email, placeholder: true },
 ]
@@ -117,6 +128,70 @@ export const projects: Project[] = [
     insight:
       'Investigating tradeoffs across inference cost, privacy, cloud-token consumption, latency, and device capability.',
     visual: 'orchestration',
+  },
+]
+
+export const githubProjects: GitHubProject[] = [
+  {
+    title: 'Cost-Aware Model Routing for Code Generation',
+    description:
+      'A CS224R research project studying contextual-bandit routing and verifier-aware escalation between local and stronger code models, with reproducible evaluation infrastructure for MBPP and LiveCodeBench.',
+    technologies: ['Python', 'PyTorch', 'Transformers', 'Contextual Bandits', 'Model Routing'],
+    activity: 'Active · Jul 2026',
+    category: 'AI research',
+    repository: 'cs224R',
+    url: 'https://github.com/mauber91/cs224R',
+  },
+  {
+    title: 'World Cup Forecast',
+    description:
+      'A local-first 2026 tournament forecasting and Monte Carlo simulation platform implementing FIFA tie-break rules, live market inputs, automated data refreshes, and typed match-report extraction.',
+    technologies: ['React', 'TypeScript', 'FastAPI', 'scikit-learn', 'Monte Carlo'],
+    activity: 'Active · Jun 2026',
+    category: 'Full-stack ML',
+    repository: 'WC',
+    url: 'https://github.com/mauber91/WC',
+  },
+  {
+    title: 'X Bookmarks Reader',
+    description:
+      'A focused reading workflow that organizes exported X bookmarks into searchable categories, surfaces article insights, prioritizes a reading queue, and tracks completion locally.',
+    technologies: ['React', 'TypeScript', 'Vite', 'Content Processing', 'Local Storage'],
+    activity: 'Active · Jul 2026',
+    category: 'Product engineering',
+    repository: 'bookmarks-viewer',
+    url: 'https://github.com/mauber91/bookmarks-viewer',
+  },
+  {
+    title: 'World Cup 2026 Heat Impact Atlas',
+    description:
+      'A self-contained data dashboard exploring heat impact across tournament venues and match schedules through comparative metrics, reference definitions, and embedded charts.',
+    technologies: ['JavaScript', 'Chart.js', 'Data Visualization', 'Responsive UI'],
+    activity: 'Published · Jun 2026',
+    category: 'Data visualization',
+    repository: 'worldcup2026-heat-impact-dashboard',
+    url: 'https://github.com/mauber91/worldcup2026-heat-impact-dashboard',
+  },
+  {
+    title: 'Football Predictions Leaderboard',
+    description:
+      'A responsive React application for tracking football prediction rankings, accuracy, points, and aggregate leaderboard statistics across desktop and mobile.',
+    technologies: ['React', 'TypeScript', 'Responsive Design', 'Data UI'],
+    activity: 'Updated · Jan 2026',
+    category: 'Frontend product',
+    repository: 'leaderboard',
+    url: 'https://github.com/mauber91/leaderboard',
+    demo: 'https://leaderboard.football',
+  },
+  {
+    title: 'HandFlow / aetherTouch',
+    description:
+      'An interactive browser art experiment that maps real-time hand gestures to a 35,000-particle Three.js environment through MediaPipe hand tracking.',
+    technologies: ['Three.js', 'MediaPipe', 'WebGL', 'Gesture Interaction'],
+    activity: 'Updated · Aug 2025',
+    category: 'Creative technology',
+    repository: 'aetherTouch',
+    url: 'https://github.com/mauber91/aetherTouch',
   },
 ]
 

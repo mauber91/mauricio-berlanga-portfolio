@@ -2,13 +2,15 @@ import { ArrowDown, ArrowRight, ArrowUpRight, BriefcaseBusiness, Code2, Download
 import { Header } from './components/Header'
 import { SectionHeader } from './components/SectionHeader'
 import { HeroSystemMap, ProjectVisual } from './components/TechnicalVisuals'
-import { education, experience, personal, projects, researchThemes, skillGroups, socialLinks, writing } from './data/content'
+import { education, experience, githubProjects, personal, projects, researchThemes, skillGroups, socialLinks, writing } from './data/content'
 
 function PlaceholderBadge() {
   return <span className="placeholder-badge">placeholder</span>
 }
 
 function App() {
+  const githubProfile = socialLinks.find((link) => link.label === 'GitHub')
+
   const handleUnavailableResume = (event: React.MouseEvent<HTMLAnchorElement>) => {
     if (!personal.resumeAvailable) {
       event.preventDefault()
@@ -30,7 +32,7 @@ function App() {
             <p className="hero-summary">{personal.summary}</p>
             <div className="hero-actions">
               <a className="button button-primary" href="#projects">View projects <ArrowDown size={15} /></a>
-              <a className="text-link" href="#contact"><Code2 size={16} /> GitHub <ArrowUpRight size={14} /></a>
+              <a className="text-link" href={githubProfile?.href} target="_blank" rel="noreferrer"><Code2 size={16} /> GitHub <ArrowUpRight size={14} /></a>
               <a className="text-link" href="#contact"><BriefcaseBusiness size={16} /> LinkedIn <ArrowUpRight size={14} /></a>
               <a
                 className="text-link"
@@ -124,6 +126,39 @@ function App() {
               </article>
             ))}
           </div>
+
+          <div className="github-projects">
+            <div className="github-projects-header reveal">
+              <div>
+                <p className="eyebrow">Recent on GitHub</p>
+                <h3>Public work, from research systems to product experiments.</h3>
+              </div>
+              <a className="text-link" href={githubProfile?.href} target="_blank" rel="noreferrer">
+                View profile <ArrowUpRight size={14} />
+              </a>
+            </div>
+            <div className="github-projects-grid">
+              {githubProjects.map((project, index) => (
+                <article className="github-project reveal" key={project.repository}>
+                  <div className="github-project-meta">
+                    <span>{String(index + 1).padStart(2, '0')} / {project.category}</span>
+                    <span>{project.activity}</span>
+                  </div>
+                  <h3>
+                    <a href={project.url} target="_blank" rel="noreferrer">
+                      {project.title} <ArrowUpRight size={16} />
+                    </a>
+                  </h3>
+                  <p>{project.description}</p>
+                  <ul className="tag-list">{project.technologies.map((technology) => <li key={technology}>{technology}</li>)}</ul>
+                  <div className="github-project-footer">
+                    <a href={project.url} target="_blank" rel="noreferrer"><Code2 size={14} /> mauber91/{project.repository}</a>
+                    {project.demo && <a href={project.demo} target="_blank" rel="noreferrer">Live site <ArrowUpRight size={13} /></a>}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
         </section>
 
         <section className="section shell" id="education">
@@ -183,7 +218,12 @@ function App() {
             </div>
             <div className="contact-links">
               {socialLinks.map((link) => (
-                <a href={link.href} key={link.label}>
+                <a
+                  href={link.href}
+                  key={link.label}
+                  target={!link.placeholder && link.href.startsWith('http') ? '_blank' : undefined}
+                  rel={!link.placeholder && link.href.startsWith('http') ? 'noreferrer' : undefined}
+                >
                   {link.label === 'GitHub' && <Code2 size={18} />}
                   {link.label === 'LinkedIn' && <BriefcaseBusiness size={18} />}
                   {link.label === 'Email' && <Mail size={18} />}
