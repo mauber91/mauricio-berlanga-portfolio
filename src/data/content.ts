@@ -2,7 +2,6 @@ export type SocialLink = {
   label: string
   href: string
   display: string
-  placeholder?: boolean
 }
 
 export type Project = {
@@ -36,8 +35,6 @@ export const personal = {
   employer: 'Walmart Global Tech',
   location: 'Bentonville, Arkansas, United States',
   email: 'mberlanga91@gmail.com',
-  resumePath: '/resume/mauricio-berlanga-resume.pdf',
-  resumeAvailable: false,
   summary:
     'I build production software and intelligent systems, combining more than ten years of software engineering with graduate-level work in machine learning, reinforcement learning, and modern AI systems.',
 }

@@ -1,28 +1,18 @@
-import { ArrowDown, ArrowRight, ArrowUpRight, BriefcaseBusiness, Code2, Download, FlaskConical, Mail } from 'lucide-react'
+import { ArrowDown, ArrowRight, ArrowUpRight, BriefcaseBusiness, Code2, FlaskConical, Mail } from 'lucide-react'
 import { Header } from './components/Header'
 import { SectionHeader } from './components/SectionHeader'
 import { HeroSystemMap, ProjectVisual } from './components/TechnicalVisuals'
 import { ArticlePage } from './components/article/ArticlePage'
 import { articles, getArticleByPath } from './data/articles'
 import { education, experience, githubProjects, personal, projects, researchThemes, skillGroups, socialLinks } from './data/content'
-
-function PlaceholderBadge() {
-  return <span className="placeholder-badge">placeholder</span>
-}
+import { sitePath, stripSiteBase } from './lib/paths'
 
 function App() {
-  const activeArticle = getArticleByPath(window.location.pathname)
+  const activeArticle = getArticleByPath(stripSiteBase(window.location.pathname))
   if (activeArticle) return <ArticlePage article={activeArticle} />
 
   const githubProfile = socialLinks.find((link) => link.label === 'GitHub')
   const linkedInProfile = socialLinks.find((link) => link.label === 'LinkedIn')
-
-  const handleUnavailableResume = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    if (!personal.resumeAvailable) {
-      event.preventDefault()
-      document.getElementById('resume-note')?.focus()
-    }
-  }
 
   return (
     <div id="top">
@@ -32,7 +22,6 @@ function App() {
       <main id="main">
         <section className="hero shell" aria-labelledby="hero-title">
           <div className="hero-copy">
-            <div className="availability"><i /> Open to ambitious AI & ML systems work</div>
             <p className="hero-kicker">Mauricio Berlanga</p>
             <h1 id="hero-title">Engineering systems that <em>learn, reason,</em> and perform.</h1>
             <p className="hero-summary">{personal.summary}</p>
@@ -40,17 +29,7 @@ function App() {
               <a className="button button-primary" href="#projects">View projects <ArrowDown size={15} /></a>
               <a className="text-link" href={githubProfile?.href} target="_blank" rel="noreferrer"><Code2 size={16} /> GitHub <ArrowUpRight size={14} /></a>
               <a className="text-link" href={linkedInProfile?.href} target="_blank" rel="noreferrer"><BriefcaseBusiness size={16} /> LinkedIn <ArrowUpRight size={14} /></a>
-              <a
-                className="text-link"
-                href={personal.resumePath}
-                download
-                onClick={handleUnavailableResume}
-                aria-describedby="resume-note"
-              ><Download size={16} /> Resume</a>
             </div>
-            <p className="resume-note" id="resume-note" tabIndex={-1}>
-              Resume PDF path is configured; add the file to enable the download.
-            </p>
           </div>
           <div className="hero-visual"><HeroSystemMap /></div>
           <div className="hero-meta">
@@ -130,7 +109,7 @@ function App() {
                   <ul className="tag-list">{project.technologies.map((technology) => <li key={technology}>{technology}</li>)}</ul>
                   {(project.article || project.github) && (
                     <div className="project-links">
-                      {project.article && <a href={project.article}>Read case study <ArrowRight size={15} /></a>}
+                      {project.article && <a href={sitePath(project.article)}>Read case study <ArrowRight size={15} /></a>}
                       {project.github && <a href={project.github} target="_blank" rel="noreferrer">Repository <ArrowUpRight size={15} /></a>}
                     </div>
                   )}
@@ -210,7 +189,7 @@ function App() {
           <SectionHeader eyebrow="07 / Writing & Notes" title="Learning in public." copy="Technical project write-ups with enough context to make the underlying ideas accessible beyond AI and ML specialists." />
           <div className="writing-list">
             {articles.map((article, index) => (
-              <a className="writing-item reveal" href={article.path} key={article.title}>
+              <a className="writing-item reveal" href={sitePath(article.path)} key={article.title}>
                 <span>0{index + 1}</span>
                 <div><p>{article.course}</p><h3>{article.title}</h3></div>
                 <span className="coming-soon">Read · {article.readTime.replace(' read', '')}</span>
@@ -232,14 +211,14 @@ function App() {
                 <a
                   href={link.href}
                   key={link.label}
-                  target={!link.placeholder && link.href.startsWith('http') ? '_blank' : undefined}
-                  rel={!link.placeholder && link.href.startsWith('http') ? 'noreferrer' : undefined}
+                  target={link.href.startsWith('http') ? '_blank' : undefined}
+                  rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
                 >
                   {link.label === 'GitHub' && <Code2 size={18} />}
                   {link.label === 'LinkedIn' && <BriefcaseBusiness size={18} />}
                   {link.label === 'Email' && <Mail size={18} />}
                   <span><b>{link.label}</b><small>{link.display}</small></span>
-                  {link.placeholder ? <PlaceholderBadge /> : <ArrowUpRight size={16} />}
+                  <ArrowUpRight size={16} />
                 </a>
               ))}
             </div>

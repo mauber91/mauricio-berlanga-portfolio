@@ -1,5 +1,6 @@
 import { Lightbulb } from 'lucide-react'
 import type { ReactNode } from 'react'
+import { sitePath } from '../../lib/paths'
 
 export function PlainLanguage({ children }: { children: ReactNode }) {
   return (
@@ -17,7 +18,7 @@ export function Equation({ children, label }: { children: ReactNode; label?: str
 export function ArticleFigure({ src, alt, caption }: { src: string; alt: string; caption: string }) {
   return (
     <figure className="article-figure">
-      <div><img src={src} alt={alt} loading="lazy" /></div>
+      <div><img src={sitePath(src)} alt={alt} loading="lazy" /></div>
       <figcaption>{caption}</figcaption>
     </figure>
   )
