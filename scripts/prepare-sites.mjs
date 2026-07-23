@@ -13,6 +13,8 @@ const articleMeta = {
   '/writing/usd-mxn-forecasting/': {
     title: 'When the baseline wins: lessons from forecasting USD/MXN — Mauricio Berlanga',
     description: 'A technical account of testing linear models, tree ensembles, and a neural network against autoregressive baselines on monthly USD/MXN data.',
+    image: '/articles/usdmxn-social.png',
+    imageAlt: 'The United States and Mexico overlaid with currency, forecasting, and machine-learning imagery.',
   },
   '/writing/verifier-aware-model-routing/': {
     title: 'Routing code generation with verifiers — Mauricio Berlanga',
@@ -74,6 +76,10 @@ export default {
           .replace(/<meta property="og:description" content="[^"]*" [/]>/, \`<meta property="og:description" content="\${meta.description}" />\`)
           .replace(/<meta name="twitter:title" content="[^"]*" [/]>/, \`<meta name="twitter:title" content="\${meta.title}" />\`)
           .replace(/<meta name="twitter:description" content="[^"]*" [/]>/, \`<meta name="twitter:description" content="\${meta.description}" />\`)
+          .replace(/<meta property="og:image" content="[^"]*" [/]>/, \`<meta property="og:image" content="\${url.origin}\${meta.image || '/og.png'}" />\`)
+          .replace(/<meta property="og:image:alt" content="[^"]*" [/]>/, \`<meta property="og:image:alt" content="\${meta.imageAlt || 'Mauricio Berlanga — Engineering systems that learn, reason, and perform.'}" />\`)
+          .replace(/<meta name="twitter:image" content="[^"]*" [/]>/, \`<meta name="twitter:image" content="\${url.origin}\${meta.image || '/og.png'}" />\`)
+          .replace(/<meta name="twitter:image:alt" content="[^"]*" [/]>/, \`<meta name="twitter:image:alt" content="\${meta.imageAlt || 'Mauricio Berlanga — Engineering systems that learn, reason, and perform.'}" />\`)
           .replace(/<link rel="canonical" href="[^"]*" [/]>/, \`<link rel="canonical" href="\${url.origin}\${pathname}" />\`)
       }
 

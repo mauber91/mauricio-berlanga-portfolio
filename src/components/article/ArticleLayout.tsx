@@ -40,6 +40,12 @@ export function ArticleLayout({ article, stats, sections, children }: ArticleLay
           <ul className="article-tags">{article.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
         </header>
 
+        {article.leadImage && (
+          <figure className="article-cover shell">
+            <img src={sitePath(article.leadImage)} alt={article.leadImageAlt ?? ''} />
+          </figure>
+        )}
+
         <section className="article-stats shell" aria-label="Project highlights">
           {stats.map((stat) => <div key={stat.label}><b>{stat.value}</b><span>{stat.label}</span></div>)}
         </section>

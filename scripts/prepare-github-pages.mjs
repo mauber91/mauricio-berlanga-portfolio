@@ -7,6 +7,8 @@ const routes = [
     path: '/writing/usd-mxn-forecasting/',
     title: 'When the baseline wins: lessons from forecasting USD/MXN — Mauricio Berlanga',
     description: 'A technical account of testing linear models, tree ensembles, and a neural network against autoregressive baselines on monthly USD/MXN data.',
+    image: '/articles/usdmxn-social.png',
+    imageAlt: 'The United States and Mexico overlaid with currency, forecasting, and machine-learning imagery.',
   },
   {
     path: '/writing/verifier-aware-model-routing/',
@@ -36,6 +38,10 @@ for (const route of routes) {
     .replace(/<meta property="og:description" content="[^"]*" \/>/, `<meta property="og:description" content="${route.description}" />`)
     .replace(/<meta name="twitter:title" content="[^"]*" \/>/, `<meta name="twitter:title" content="${route.title}" />`)
     .replace(/<meta name="twitter:description" content="[^"]*" \/>/, `<meta name="twitter:description" content="${route.description}" />`)
+    .replace(/<meta property="og:image" content="[^"]*" \/>/, `<meta property="og:image" content="${siteUrl}${route.image ?? '/og.png'}" />`)
+    .replace(/<meta property="og:image:alt" content="[^"]*" \/>/, `<meta property="og:image:alt" content="${route.imageAlt ?? 'Mauricio Berlanga — Engineering systems that learn, reason, and perform.'}" />`)
+    .replace(/<meta name="twitter:image" content="[^"]*" \/>/, `<meta name="twitter:image" content="${siteUrl}${route.image ?? '/og.png'}" />`)
+    .replace(/<meta name="twitter:image:alt" content="[^"]*" \/>/, `<meta name="twitter:image:alt" content="${route.imageAlt ?? 'Mauricio Berlanga — Engineering systems that learn, reason, and perform.'}" />`)
     .replace(/<link rel="canonical" href="[^"]*" \/>/, `<link rel="canonical" href="${siteUrl}${route.path}" />`)
   await writeFile(new URL('index.html', routeDirectory), html)
 }

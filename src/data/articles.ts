@@ -8,6 +8,8 @@ export type ArticleMeta = {
   readTime: string
   tags: string[]
   repository?: string
+  leadImage?: string
+  leadImageAlt?: string
 }
 
 export const articles: ArticleMeta[] = [
@@ -20,6 +22,9 @@ export const articles: ArticleMeta[] = [
       'A technical account of testing linear models, tree ensembles, and a neural network against simple autoregressive baselines on monthly exchange-rate data—and why the negative result mattered.',
     readTime: '11 min read',
     tags: ['Time series', 'Model evaluation', 'XGBoost', 'Negative results'],
+    leadImage: '/articles/usdmxn-social.png',
+    leadImageAlt:
+      'Illustration blending the United States and Mexico, currency imagery, forecasting curves, and machine-learning diagrams',
   },
   {
     slug: 'verifier-aware-model-routing',
