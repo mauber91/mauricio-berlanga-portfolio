@@ -28,23 +28,26 @@ export function ArticleLayout({ article, stats, sections, children }: ArticleLay
       </header>
 
       <main id="article-content">
-        <header className="article-hero shell">
-          <a className="article-course" href={sitePath('/#education')}>{article.course}</a>
-          <h1>{article.title}</h1>
-          <p className="article-dek">{article.description}</p>
-          <div className="article-byline">
-            <span>Mauricio Berlanga</span>
-            <span><Clock3 size={13} /> {article.readTime}</span>
-            <span>{article.projectType ?? 'Course project'}</span>
+        <header className={`article-hero shell${article.leadImage ? ' has-image' : ''}`}>
+          {article.leadImage && (
+            <img
+              className="article-hero-image"
+              src={sitePath(article.leadImage)}
+              alt={article.leadImageAlt ?? ''}
+            />
+          )}
+          <div className="article-hero-content">
+            <a className="article-course" href={sitePath('/#education')}>{article.course}</a>
+            <h1>{article.title}</h1>
+            <p className="article-dek">{article.description}</p>
+            <div className="article-byline">
+              <span>Mauricio Berlanga</span>
+              <span><Clock3 size={13} /> {article.readTime}</span>
+              <span>{article.projectType ?? 'Course project'}</span>
+            </div>
+            <ul className="article-tags">{article.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
           </div>
-          <ul className="article-tags">{article.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
         </header>
-
-        {article.leadImage && (
-          <figure className="article-cover shell">
-            <img src={sitePath(article.leadImage)} alt={article.leadImageAlt ?? ''} />
-          </figure>
-        )}
 
         <section className="article-stats shell" aria-label="Project highlights">
           {stats.map((stat) => <div key={stat.label}><b>{stat.value}</b><span>{stat.label}</span></div>)}
