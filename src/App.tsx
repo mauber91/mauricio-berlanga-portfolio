@@ -15,6 +15,7 @@ function App() {
   if (activeArticle) return <ArticlePage article={activeArticle} />
 
   const githubProfile = socialLinks.find((link) => link.label === 'GitHub')
+  const linkedInProfile = socialLinks.find((link) => link.label === 'LinkedIn')
 
   const handleUnavailableResume = (event: React.MouseEvent<HTMLAnchorElement>) => {
     if (!personal.resumeAvailable) {
@@ -38,7 +39,7 @@ function App() {
             <div className="hero-actions">
               <a className="button button-primary" href="#projects">View projects <ArrowDown size={15} /></a>
               <a className="text-link" href={githubProfile?.href} target="_blank" rel="noreferrer"><Code2 size={16} /> GitHub <ArrowUpRight size={14} /></a>
-              <a className="text-link" href="#contact"><BriefcaseBusiness size={16} /> LinkedIn <ArrowUpRight size={14} /></a>
+              <a className="text-link" href={linkedInProfile?.href} target="_blank" rel="noreferrer"><BriefcaseBusiness size={16} /> LinkedIn <ArrowUpRight size={14} /></a>
               <a
                 className="text-link"
                 href={personal.resumePath}

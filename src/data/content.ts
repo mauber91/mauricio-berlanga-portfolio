@@ -35,7 +35,7 @@ export const personal = {
   title: 'Senior Software Engineer · AI / ML Engineer',
   employer: 'Walmart Global Tech',
   location: 'Location · add city',
-  email: 'your.email@example.com',
+  email: 'mberlanga91@gmail.com',
   resumePath: '/resume/mauricio-berlanga-resume.pdf',
   resumeAvailable: false,
   summary:
@@ -44,8 +44,12 @@ export const personal = {
 
 export const socialLinks: SocialLink[] = [
   { label: 'GitHub', href: 'https://github.com/mauber91', display: 'github.com/mauber91' },
-  { label: 'LinkedIn', href: '#contact', display: 'linkedin.com/in/username', placeholder: true },
-  { label: 'Email', href: `mailto:${personal.email}`, display: personal.email, placeholder: true },
+  {
+    label: 'LinkedIn',
+    href: 'https://www.linkedin.com/in/mauricio-berlanga-carrillo-58a62334',
+    display: 'linkedin.com/in/mauricio-berlanga-carrillo-58a62334',
+  },
+  { label: 'Email', href: `mailto:${personal.email}`, display: personal.email },
 ]
 
 export const experience = [
