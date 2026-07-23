@@ -34,12 +34,12 @@ export const personal = {
   name: 'Mauricio Berlanga',
   title: 'Senior Software Engineer · AI / ML Engineer',
   employer: 'Walmart Global Tech',
-  location: 'Location · add city',
+  location: 'Bentonville, Arkansas, United States',
   email: 'mberlanga91@gmail.com',
   resumePath: '/resume/mauricio-berlanga-resume.pdf',
   resumeAvailable: false,
   summary:
-    'I build production software and intelligent systems, combining eight years of software engineering with graduate-level work in machine learning, reinforcement learning, and modern AI systems.',
+    'I build production software and intelligent systems, combining more than ten years of software engineering with graduate-level work in machine learning, reinforcement learning, and modern AI systems.',
 }
 
 export const socialLinks: SocialLink[] = [
@@ -56,9 +56,9 @@ export const experience = [
   {
     company: 'Walmart Global Tech',
     role: 'Senior Software Engineer',
-    period: '≈5 years · exact dates to add',
+    period: 'Jul 2023 – Present',
     description:
-      'Engineering large-scale frontend and enterprise systems, with a focus on architecture, maintainability, API integration, and production reliability.',
+      'Engineering large-scale frontend systems with React, monorepos, micro-frontends, and module federation, with an emphasis on maintainable architecture and production reliability.',
     focus: [
       'React architecture',
       'Modular frontends',
@@ -67,24 +67,46 @@ export const experience = [
       'Cross-team engineering',
       'Production reliability',
     ],
-    placeholder: true,
   },
   {
-    company: 'Previous engineering experience',
-    role: 'Software Engineer',
-    period: '≈3 years · company and dates to add',
+    company: 'Walmart',
+    role: 'Software Engineer III',
+    period: 'Dec 2019 – Jul 2023',
     description:
-      'Earlier software engineering work contributing to approximately eight years of total professional experience.',
-    focus: ['Frontend systems', 'Web applications', 'API integration'],
-    placeholder: true,
+      'Built internal frontend products with Angular and contributed to modular frontend architecture using micro-frontends and module federation.',
+    focus: ['Angular', 'Micro-frontends', 'Module federation', 'Internal platforms'],
+  },
+  {
+    company: 'TIBCO / Kwan Tecnología',
+    role: 'Software Engineer',
+    period: 'Mar 2017 – Nov 2019',
+    description:
+      'Worked on TIBCO Flogo, an event-driven, flow-based application engine for visually building APIs, microservices, serverless functions, activities, and connectors.',
+    focus: ['TIBCO Flogo', 'Event-driven systems', 'APIs', 'Microservices', 'RxJS'],
+  },
+  {
+    company: 'GoBus Rutas / Inovap',
+    role: 'Software Developer',
+    period: 'Apr 2016 – Feb 2017',
+    description:
+      'Built web and hybrid mobile applications for public-transit tracking and geofenced employee check-ins using Ionic, Angular, Laravel, relational databases, and AWS infrastructure.',
+    focus: ['Ionic', 'Angular', 'Laravel', 'PostgreSQL', 'MySQL', 'AWS'],
+  },
+  {
+    company: 'Edumatics México',
+    role: 'Frontend Developer and SEO Analyst',
+    period: 'Dec 2015 – Mar 2016',
+    description:
+      'Developed a responsive website for an education platform and applied technical SEO that brought multiple relevant local searches onto Google’s first page in under three months.',
+    focus: ['Frontend development', 'Responsive design', 'Technical SEO', 'Scrum', 'Kanban'],
   },
 ]
 
 export const education = [
   {
-    institution: 'Stanford University',
-    program: 'Graduate-level Artificial Intelligence / Machine Learning coursework',
-    note: 'Advanced coursework — not presented as a master’s degree',
+    institution: 'Stanford University School of Engineering',
+    program: 'Graduate Certificate, Artificial Intelligence',
+    note: 'Sep 2025 – Apr 2027 · In progress',
     courses: [
       ['CS229', 'Machine Learning'],
       ['CS234', 'Reinforcement Learning'],
@@ -92,11 +114,10 @@ export const education = [
     ],
   },
   {
-    institution: 'University name · add institution',
-    program: 'Bachelor’s / undergraduate degree in Information Systems Engineering',
-    note: 'Mexico · dates to add',
+    institution: 'Universidad Interamericana para el Desarrollo',
+    program: 'Bachelor’s Degree, Computer Science',
+    note: '2014 – 2017 · Mérida, Yucatán, Mexico',
     courses: [],
-    placeholder: true,
   },
 ]
 

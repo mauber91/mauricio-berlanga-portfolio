@@ -54,9 +54,10 @@ function App() {
           </div>
           <div className="hero-visual"><HeroSystemMap /></div>
           <div className="hero-meta">
-            <span><b>08</b> years engineering</span>
+            <span><b>10+</b> years engineering</span>
             <span><b>03</b> Stanford AI/ML courses</span>
             <span><b>∞</b> experiments ahead</span>
+            <span><b>HQ</b> {personal.location}</span>
           </div>
         </section>
 
@@ -64,7 +65,7 @@ function App() {
           <SectionHeader eyebrow="01 / About" title="Production engineering depth. Expanding AI scope." />
           <div className="about-grid reveal">
             <p className="lead-copy">
-              I’m a senior software engineer at <strong>Walmart Global Tech</strong> with approximately eight years of experience building dependable web and frontend systems at scale.
+              I’m a senior software engineer at <strong>Walmart Global Tech</strong> with more than ten years of experience building dependable web and frontend systems at scale.
             </p>
             <div className="about-detail">
               <p>My foundation is production software: React architecture, modular frontend systems, monorepos, API integration, and the engineering discipline required to operate software over time.</p>
@@ -87,7 +88,6 @@ function App() {
                 <div className="timeline-main">
                   <div className="timeline-title">
                     <div><h3>{item.role}</h3><p>{item.company}</p></div>
-                    {item.placeholder && <PlaceholderBadge />}
                   </div>
                   <p>{item.description}</p>
                   <ul className="tag-list">{item.focus.map((focus) => <li key={focus}>{focus}</li>)}</ul>
@@ -180,7 +180,6 @@ function App() {
               <article className="education-card reveal" key={item.institution}>
                 <div className="education-heading">
                   <div><p>{item.institution}</p><h3>{item.program}</h3></div>
-                  {item.placeholder && <PlaceholderBadge />}
                 </div>
                 <p className="education-note">{item.note}</p>
                 {item.courses.length > 0 && (

@@ -117,7 +117,7 @@
   .line-c { top: 49%; left: 19%; width: 120px; } .line-d { top: 50%; left: 57%; width: 115px; transform: rotate(-12deg); } .line-e { right: 22%; bottom: 76px; width: 220px; transform: rotate(157deg); }
   .map-readout { position: absolute; right: 36px; bottom: 34px; z-index: 4; display: flex; gap: 12px; font: 8px var(--mono); }
   .map-readout span { color: var(--faint); } .map-readout b { color: var(--accent); font-weight: 500; }
-  .hero-meta { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 28px; border-top: 1px solid var(--line); }
+  .hero-meta { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 28px; border-top: 1px solid var(--line); }
   .hero-meta span { padding-top: 18px; color: var(--faint); font: 9px var(--mono); text-transform: uppercase; letter-spacing: .06em; }
   .hero-meta b { margin-right: 8px; color: var(--text); font-size: 11px; }
 
