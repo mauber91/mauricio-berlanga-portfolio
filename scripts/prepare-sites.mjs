@@ -18,6 +18,10 @@ const articleMeta = {
     title: 'Routing code generation with verifiers — Mauricio Berlanga',
     description: 'A cost-sensitive contextual-bandit study of routing code generation between local and stronger models using executable test feedback.',
   },
+  '/writing/colmo/': {
+    title: 'Cloud thinks, local reads: building COLMo — Mauricio Berlanga',
+    description: 'A work-in-progress study of frontier-cloud supervision, local LLM execution, verification, cost, and privacy over long private documents.',
+  },
 }
 
 function textResponse(body, contentType) {
@@ -41,7 +45,7 @@ export default {
     }
 
     if (url.pathname === '/sitemap.xml') {
-      const paths = ['/', '/writing/usd-mxn-forecasting/', '/writing/verifier-aware-model-routing/']
+      const paths = ['/', '/writing/usd-mxn-forecasting/', '/writing/verifier-aware-model-routing/', '/writing/colmo/']
       const entries = paths.map((path) => \`<url><loc>\${url.origin}\${path}</loc></url>\`).join('')
       return textResponse(
         \`<?xml version="1.0" encoding="UTF-8"?>\\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\${entries}</urlset>\`,

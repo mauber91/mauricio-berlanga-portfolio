@@ -16,7 +16,7 @@ export type Project = {
   github?: string
   demo?: string
   paper?: string
-  visual: 'retrieval' | 'forecast' | 'orchestration'
+  visual: 'retrieval' | 'forecast' | 'routing' | 'orchestration'
 }
 
 export type GitHubProject = {
@@ -132,6 +132,19 @@ export const projects: Project[] = [
       'A verifier-aware cheap-then-escalate policy reached strong hidden-test performance at a fraction of full API cost; the learned router was competitive, but calibration and random seeds still mattered.',
     article: '/writing/verifier-aware-model-routing/',
     github: 'https://github.com/mauber91/cs224R',
+    visual: 'routing',
+  },
+  {
+    title: 'COLMo: Cloud-Orchestrated Local Models',
+    description:
+      'An empirical research system where a frontier cloud model plans and verifies while locally hosted models perform token-heavy reading over private documents.',
+    technologies: ['Local LLMs', 'DGX Spark', 'vLLM', 'Verification', 'Privacy Evaluation'],
+    status: 'Exploratory',
+    featured: true,
+    insight:
+      'The study measures the real boundary between cost, quality, and privacy—including a cloud-mini control that can falsify the economic case for local workers.',
+    article: '/writing/colmo/',
+    github: 'https://github.com/mauber91/COLMo',
     visual: 'orchestration',
   },
 ]

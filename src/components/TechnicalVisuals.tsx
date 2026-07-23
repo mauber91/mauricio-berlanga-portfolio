@@ -1,5 +1,5 @@
 type ProjectVisualProps = {
-  type: 'retrieval' | 'forecast' | 'orchestration'
+  type: 'retrieval' | 'forecast' | 'routing' | 'orchestration'
 }
 
 export function HeroSystemMap() {
@@ -38,6 +38,21 @@ export function ProjectVisual({ type }: ProjectVisualProps) {
         <div className="local-node local-one">local_01</div>
         <div className="local-node local-two">local_02</div>
         <div className="local-node local-three">local_03</div>
+      </div>
+    )
+  }
+
+  if (type === 'routing') {
+    return (
+      <div className="project-visual router-visual" aria-hidden="true">
+        <div className="router-flow">
+          <div className="route-box"><small>01</small><b>local</b><span>generate</span></div>
+          <i>→</i>
+          <div className="route-box verifier-box"><small>02</small><b>tests</b><span>verify</span></div>
+          <i>→</i>
+          <div className="route-box"><small>03</small><b>route</b><span>decide</span></div>
+        </div>
+        <div className="route-outcomes"><span>PASS · KEEP</span><span>FAIL · API ↑</span></div>
       </div>
     )
   }

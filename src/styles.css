@@ -162,7 +162,6 @@
 
   .projects-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
   .project-card { grid-column: span 6; display: flex; flex-direction: column; border: 1px solid var(--line); background: var(--surface); overflow: hidden; transition: transform 200ms, border-color 200ms, box-shadow 200ms; }
-  .project-card:nth-child(3) { grid-column: 4 / span 6; }
   .project-card:hover { border-color: var(--line-strong); transform: translateY(-4px); box-shadow: 0 24px 70px var(--shadow); }
   .project-topline { display: flex; justify-content: space-between; padding: 14px 16px; color: var(--faint); border-bottom: 1px solid var(--line); font: 9px var(--mono); }
   .status { color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
@@ -188,6 +187,17 @@
   .orchestration-visual > i { position: relative; top: 15px; width: 1px; height: 75px; background: var(--line-strong); }
   .local-node { position: absolute; bottom: 31px; display: grid; width: 86px; height: 42px; place-content: center; border: 1px solid var(--line-strong); background: var(--surface); font: 8px var(--mono); }
   .local-one { left: 12%; } .local-two { left: 50%; transform: translateX(-50%); } .local-three { right: 12%; }
+  .router-visual { display: grid; align-content: center; gap: 24px; padding: 30px; }
+  .router-flow { display: flex; align-items: center; justify-content: center; gap: 10px; }
+  .router-flow > i { color: var(--faint); font: normal 12px var(--mono); }
+  .route-box { display: grid; width: 98px; height: 74px; place-content: center; border: 1px solid var(--line-strong); background: var(--surface); text-align: center; }
+  .route-box small { color: var(--faint); font: 7px var(--mono); }
+  .route-box b { margin-top: 5px; font: 600 10px var(--mono); }
+  .route-box span { margin-top: 4px; color: var(--faint); font: 8px var(--mono); }
+  .route-box.verifier-box { border-color: var(--accent); box-shadow: inset 0 0 0 4px var(--accent-soft); }
+  .route-outcomes { display: flex; justify-content: center; gap: 8px; }
+  .route-outcomes span { min-width: 114px; padding: 8px 10px; color: var(--muted); border: 1px solid var(--line); background: var(--surface); text-align: center; font: 8px var(--mono); }
+  .route-outcomes span:first-child { color: var(--accent); }
   .project-body { display: flex; flex: 1; flex-direction: column; padding: 28px; }
   .project-body h3 { margin-bottom: 14px; font-size: 26px; }
   .project-insight { margin-top: 22px; padding-left: 15px; border-left: 1px solid var(--accent); font-size: 13px; }
@@ -389,7 +399,7 @@
     .research-card { grid-template-columns: 30px 1fr; min-height: 0; padding: 27px 22px; }
     .research-arrow { top: 26px; right: 20px; }
     .projects-grid { grid-template-columns: 1fr; }
-    .project-card, .project-card:nth-child(3) { grid-column: auto; width: 100%; }
+    .project-card { grid-column: auto; width: 100%; }
     .project-visual { height: 205px; }
     .project-body { padding: 23px; }
     .github-projects { margin-top: 82px; padding-top: 58px; }

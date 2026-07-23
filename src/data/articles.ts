@@ -1,7 +1,8 @@
 export type ArticleMeta = {
-  slug: 'usd-mxn-forecasting' | 'verifier-aware-model-routing'
+  slug: 'usd-mxn-forecasting' | 'verifier-aware-model-routing' | 'colmo'
   path: string
   course: string
+  projectType?: string
   title: string
   description: string
   readTime: string
@@ -30,6 +31,18 @@ export const articles: ArticleMeta[] = [
     readTime: '14 min read',
     tags: ['Contextual bandits', 'LLM routing', 'LoRA', 'Evaluation'],
     repository: 'https://github.com/mauber91/cs224R',
+  },
+  {
+    slug: 'colmo',
+    path: '/writing/colmo/',
+    course: 'Independent research · Local / cloud AI systems',
+    projectType: 'Research project',
+    title: 'Cloud thinks, local reads: building COLMo',
+    description:
+      'A work-in-progress study of whether a frontier cloud supervisor can delegate token-heavy reading to local models—reducing API cost and document exposure without giving up answer quality.',
+    readTime: '12 min read',
+    tags: ['LLM systems', 'Local inference', 'Verification', 'Privacy evaluation'],
+    repository: 'https://github.com/mauber91/COLMo',
   },
 ]
 

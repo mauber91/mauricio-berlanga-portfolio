@@ -34,7 +34,7 @@ export function ArticleLayout({ article, stats, sections, children }: ArticleLay
           <div className="article-byline">
             <span>Mauricio Berlanga</span>
             <span><Clock3 size={13} /> {article.readTime}</span>
-            <span>Course project</span>
+            <span>{article.projectType ?? 'Course project'}</span>
           </div>
           <ul className="article-tags">{article.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
         </header>
