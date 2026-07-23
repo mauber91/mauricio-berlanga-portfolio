@@ -14,11 +14,15 @@ const routes = [
     path: '/writing/verifier-aware-model-routing/',
     title: 'Routing code generation with verifiers — Mauricio Berlanga',
     description: 'A cost-sensitive contextual-bandit study of routing code generation between local and stronger models using executable test feedback.',
+    image: '/articles/model-routing-social.png',
+    imageAlt: 'A small local model routing work toward a brighter, more powerful model through a branching decision path.',
   },
   {
     path: '/writing/colmo/',
     title: 'Cloud thinks, local reads: building COLMo — Mauricio Berlanga',
     description: 'A work-in-progress study of frontier-cloud supervision, local LLM execution, verification, cost, and privacy over long private documents.',
+    image: '/articles/colmo-social.png',
+    imageAlt: 'A cloud intelligence coordinating a network of local computers through luminous information paths.',
   },
 ]
 

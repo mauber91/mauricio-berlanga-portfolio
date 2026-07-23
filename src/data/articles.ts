@@ -36,6 +36,9 @@ export const articles: ArticleMeta[] = [
     readTime: '14 min read',
     tags: ['Contextual bandits', 'LLM routing', 'LoRA', 'Evaluation'],
     repository: 'https://github.com/mauber91/cs224R',
+    leadImage: '/articles/model-routing-social.png',
+    leadImageAlt:
+      'A small local model routes a stream of work toward a brighter, more powerful model through a branching decision path',
   },
   {
     slug: 'colmo',
@@ -48,6 +51,9 @@ export const articles: ArticleMeta[] = [
     readTime: '12 min read',
     tags: ['LLM systems', 'Local inference', 'Verification', 'Privacy evaluation'],
     repository: 'https://github.com/mauber91/COLMo',
+    leadImage: '/articles/colmo-social.png',
+    leadImageAlt:
+      'A cloud intelligence coordinating a network of local computers through luminous information paths',
   },
 ]
 
