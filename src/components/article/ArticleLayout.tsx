@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowUpRight, Clock3, Code2 } from 'lucide-react'
+import { ArrowLeft, ArrowUpRight, Clock3, Code2, Sparkles } from 'lucide-react'
 import { type ReactNode, useEffect } from 'react'
 import { ThemeToggle } from '../ThemeToggle'
 import type { ArticleMeta } from '../../data/articles'
@@ -52,6 +52,11 @@ export function ArticleLayout({ article, stats, sections, children }: ArticleLay
         <section className="article-stats shell" aria-label="Project highlights">
           {stats.map((stat) => <div key={stat.label}><b>{stat.value}</b><span>{stat.label}</span></div>)}
         </section>
+
+        <aside className="article-disclaimer shell" aria-label="Content disclosure">
+          <Sparkles size={16} aria-hidden="true" />
+          <p><strong>Disclosure:</strong> This article was generated with AI from my academic paper. It presents an accessible adaptation of the original research; the paper remains the authoritative source for the complete methodology and results.</p>
+        </aside>
 
         <div className="article-layout shell">
           <aside className="article-toc" aria-label="Article contents">
