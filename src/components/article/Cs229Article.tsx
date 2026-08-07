@@ -19,13 +19,13 @@ export function Cs229Article({ article }: { article: ArticleMeta }) {
       sections={sections}
       stats={[
         { value: '2000–24', label: 'Monthly data window' },
-        { value: '0.583', label: 'Best direction accuracy' },
-        { value: '18', label: 'Final direction features' },
-        { value: 'AR(1)', label: 'Winning baseline' },
+        { value: '0.600', label: 'Best raw accuracy' },
+        { value: '20', label: 'Direction features' },
+        { value: 'AR(1)', label: 'Best balanced model' },
       ]}
     >
       <p className="article-lead">
-        This project began with an optimistic question: could modern machine-learning models find useful cross-border signal in U.S. financial conditions and forecast the next monthly move in USD/MXN? The most important result was that they could not—not reliably, and not better than a very small baseline.
+        This project began with an optimistic question: could modern machine-learning models find useful cross-border signal in U.S. financial conditions and forecast the next monthly move in USD/MXN? The real-data rerun found no robust directional winner: XGBoost posted the highest raw accuracy, while a one-lag AR rule retained the strongest balanced accuracy.
       </p>
 
       <section id="question">
@@ -61,7 +61,7 @@ export function Cs229Article({ article }: { article: ArticleMeta }) {
         </p>
         <h3>Features</h3>
         <p>
-          Level forecasts used 3-month, 2-year, and 10-year Treasury yields; 10y–2y and 10y–3m slopes; year-over-year CPI inflation; unemployment; the Federal Funds rate; and six lagged USD/MXN levels. Direction models added three lagged returns and used a compact 18-column representation to limit redundancy.
+          Level forecasts used 3-month, 2-year, and 10-year Treasury yields; 10y–2y and 10y–3m slopes; year-over-year CPI inflation; unemployment; the Federal Funds rate; and six lagged USD/MXN levels. Direction models added three lagged returns and used a compact 20-column representation to limit redundancy.
         </p>
         <PlainLanguage>
           A lag is simply an earlier observation. “FX lag 1” is last month’s exchange rate; “return lag 2” is the return from two months ago. Lags give a model memory without assuming it can see the future.
@@ -72,7 +72,7 @@ export function Cs229Article({ article }: { article: ArticleMeta }) {
         <p className="article-section-number">03</p>
         <h2>Complex models need simple opponents</h2>
         <p>
-          I compared linear regression, logistic regression, a linear support-vector machine, random forests, XGBoost, and a two-hidden-layer multilayer perceptron. Trees were kept shallow; the neural network used 32- and 16-unit hidden layers, dropout, Adam, and early stopping.
+          I compared linear regression, logistic regression, a linear support-vector machine, random forests, XGBoost, and a two-hidden-layer multilayer perceptron. Trees were kept shallow; the direction network used 16- and 8-unit hidden layers with early stopping.
         </p>
         <div className="article-table-wrap">
           <table>
@@ -96,20 +96,20 @@ export function Cs229Article({ article }: { article: ArticleMeta }) {
 
       <section id="results">
         <p className="article-section-number">04</p>
-        <h2>The baseline won</h2>
+        <h2>The ranking changed; the diagnosis did not</h2>
         <p>
-          For level forecasting, the last-value baseline achieved the lowest out-of-sample error. Linear regression stayed close but systematically underpredicted fast depreciation. Random forests and XGBoost reduced some bias at the cost of higher variance. The MLP’s training loss fell while validation loss rose—a textbook overfitting pattern.
+          The reproducible rerun focused on direction classification using a real monthly panel built directly from public FRED series. Earlier level-forecasting runs used development datasets, so I treat those results as exploratory rather than final evidence.
         </p>
         <p>
-          Direction prediction was more revealing. Logistic regression, the linear SVM, and random forest predicted “up” in all 60 test months. Because only 28 months were positive, each matched the majority baseline at 28/60, or <strong>0.467</strong>. The MLP made different predictions but coincidentally achieved the same accuracy, while XGBoost predicted “up” in 58 of 60 months. The AR(1) momentum rule reached 35/60, or <strong>0.583</strong> accuracy.
+          Classifier thresholds were selected on the 2016–2019 validation period and frozen before the 2020–2024 test. XGBoost reached the highest raw accuracy at <strong>0.600</strong>, followed by logistic regression and random forest at <strong>0.583</strong>. The AR(1) rule reached <strong>0.567</strong>.
         </p>
         <p>
-          Most ROC–AUC values remained near random. Logistic regression was the exception at 0.635, suggesting modest ranking signal that its fixed 0.5 decision threshold failed to convert into useful class predictions.
+          Those bars do not tell the whole story. Random forest predicted “down” in all 60 months, and XGBoost predicted “up” only five times. AR(1) produced more balanced calls and achieved the best balanced accuracy: <strong>0.554</strong>, compared with XGBoost’s 0.531. The apparent winner therefore depends on whether the metric rewards majority-class accuracy or performance across both directions.
         </p>
         <ArticleFigure
           src="/articles/usdmxn-direction-accuracy.png"
           alt="Bar chart comparing directional accuracy across machine-learning models and the AR direction baseline"
-          caption="Held-out directional accuracy. The simple previous-return rule was the only method above the random reference line; most learned models reproduced the majority-class rate."
+          caption="Validation-thresholded test accuracy. XGBoost had the highest raw score, but confusion matrices revealed severe class collapse; AR(1) retained the strongest balanced accuracy."
         />
         <PlainLanguage>
           ROC–AUC measures whether a classifier ranks positive examples ahead of negative ones across all thresholds. A value near 0.5 means its scores order the two classes about as well as random guessing—even if one chosen threshold happens to give a passable accuracy.
@@ -120,7 +120,7 @@ export function Cs229Article({ article }: { article: ArticleMeta }) {
         <p className="article-section-number">05</p>
         <h2>Why more capacity did not create more signal</h2>
         <p>
-          The failure was not one bug or one bad hyperparameter. It was the interaction of a difficult target with a constrained dataset. Monthly macro variables are slow-moving, while exchange rates absorb global news and repricing quickly. The largest forecast errors occurred around abrupt moves—most visibly the early COVID period—where lagged macro data offered little warning.
+          The failure was not one bug or one bad hyperparameter. It was the interaction of a difficult target with a constrained dataset. Monthly macro variables are slow-moving, while exchange rates absorb global news and repricing quickly. Relationships estimated through 2015 also faced a very different test regime beginning in 2020.
         </p>
         <ul>
           <li><strong>Low sample size:</strong> fewer than 200 training rows made flexible models unstable.</li>
@@ -129,7 +129,7 @@ export function Cs229Article({ article }: { article: ArticleMeta }) {
           <li><strong>Class collapse:</strong> when features carry little directional information, minimizing loss can favor a near-constant majority prediction.</li>
         </ul>
         <p>
-          Early versions used roughly 40–50 macro features and looked much stronger in-sample. Reducing the direction matrix to 18 carefully selected columns, limiting tree depth, using early stopping, and removing collinear series improved stability—but did not manufacture out-of-sample signal.
+          Early versions used roughly 40–50 macro features and looked much stronger in-sample. Reducing the direction matrix to 20 carefully selected columns, limiting tree depth, using early stopping, and removing collinear series improved stability—but did not manufacture balanced out-of-sample signal.
         </p>
       </section>
 
@@ -137,7 +137,7 @@ export function Cs229Article({ article }: { article: ArticleMeta }) {
         <p className="article-section-number">06</p>
         <h2>What this changed in how I evaluate ML systems</h2>
         <p>
-          The practical lesson was not that machine learning is useless for foreign exchange. It was that model sophistication is not evidence. A strong experiment makes it possible for the simple answer to win.
+          The practical lesson was not that machine learning is useless for foreign exchange. It was that model sophistication—and even the highest accuracy bar—is not evidence of useful behavior. A strong experiment makes the failure mode inspectable.
         </p>
         <ol>
           <li><strong>Make the baseline part of the design.</strong> A model has to beat the cheapest credible decision rule, not just another complex model.</li>
@@ -145,7 +145,7 @@ export function Cs229Article({ article }: { article: ArticleMeta }) {
           <li><strong>Inspect failure behavior.</strong> Confusion matrices and prediction traces exposed majority collapse and excessive smoothing that a single headline metric hid.</li>
           <li><strong>Treat negative results as information.</strong> The experiment narrowed where useful signal probably is not: monthly U.S. macro features alone.</li>
         </ol>
-        <blockquote>When every complex method loses to one lag, the lag is not an inconvenience. It is the result.</blockquote>
+        <blockquote>A higher accuracy bar can still hide a one-class model.</blockquote>
       </section>
 
       <section id="next">
@@ -155,7 +155,7 @@ export function Cs229Article({ article }: { article: ArticleMeta }) {
           A stronger follow-up would change the information set before changing the architecture: daily or weekly data, option-implied volatility, VIX, oil prices, positioning, and market microstructure signals. State-space or Bayesian models could represent structural breaks explicitly. Sequence models would only become credible with substantially more observations.
         </p>
         <p>
-          The broader research question remains useful: under what data frequency and market regime do fundamentals add incremental value over price history? This project established a rigorous null result at the monthly horizon—and a better starting point for answering that next question.
+          The broader research question remains useful: under what data frequency and market regime do fundamentals add incremental value over price history? This project found limited, unstable monthly signal and showed why accuracy, balanced accuracy, score ranking, and confusion matrices must be interpreted together.
         </p>
       </section>
     </ArticleLayout>
