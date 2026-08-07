@@ -101,7 +101,10 @@ export function Cs229Article({ article }: { article: ArticleMeta }) {
           For level forecasting, the last-value baseline achieved the lowest out-of-sample error. Linear regression stayed close but systematically underpredicted fast depreciation. Random forests and XGBoost reduced some bias at the cost of higher variance. The MLP’s training loss fell while validation loss rose—a textbook overfitting pattern.
         </p>
         <p>
-          Direction prediction was more revealing. Logistic regression, the SVM, random forest, XGBoost, and the MLP largely collapsed toward the majority class. Their test accuracy clustered near <strong>0.467</strong>, and ROC–AUC values near 0.5 showed little ability to rank “up” months above “down” months. The AR(1) momentum rule reached <strong>0.583</strong> accuracy.
+          Direction prediction was more revealing. Logistic regression, the linear SVM, and random forest predicted “up” in all 60 test months. Because only 28 months were positive, each matched the majority baseline at 28/60, or <strong>0.467</strong>. The MLP made different predictions but coincidentally achieved the same accuracy, while XGBoost predicted “up” in 58 of 60 months. The AR(1) momentum rule reached 35/60, or <strong>0.583</strong> accuracy.
+        </p>
+        <p>
+          Most ROC–AUC values remained near random. Logistic regression was the exception at 0.635, suggesting modest ranking signal that its fixed 0.5 decision threshold failed to convert into useful class predictions.
         </p>
         <ArticleFigure
           src="/articles/usdmxn-direction-accuracy.png"
