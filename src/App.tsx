@@ -44,7 +44,7 @@ function App() {
           <SectionHeader eyebrow="01 / About" title="Frontend platforms. Applied intelligence. Systems that last." />
           <div className="about-grid reveal">
             <p className="lead-copy">
-              I’m a senior software engineer at <strong>Walmart Global Tech</strong> with 9+ years of experience building dependable web, mobile, and frontend-platform systems at scale.
+              I’m a senior software engineer at <strong>Walmart Global Tech</strong> with 9+ years of experience—including 6+ years at Walmart—building dependable web, mobile, and frontend-platform systems at scale.
             </p>
             <div className="about-detail">
               <p>My foundation is frontend platform engineering: React and TypeScript architecture, Nx monorepos, Module Federation, build tooling, reusable components, testing, and the API integration needed to operate software over time.</p>

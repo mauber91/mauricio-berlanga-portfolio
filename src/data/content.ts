@@ -36,7 +36,7 @@ export const personal = {
   location: 'Bentonville, Arkansas, United States',
   email: 'mberlanga91@gmail.com',
   summary:
-    'I build production web products and intelligent systems, combining 9+ years of software engineering with deep React/TypeScript frontend-platform experience and graduate-level work in machine learning, reinforcement learning, and modern AI systems.',
+    'I build production web products and intelligent systems, combining 9+ years of software engineering—including 6+ years at Walmart Global Tech—with deep React/TypeScript frontend-platform experience and graduate-level work in machine learning, reinforcement learning, and modern AI systems.',
 }
 
 export const socialLinks: SocialLink[] = [
