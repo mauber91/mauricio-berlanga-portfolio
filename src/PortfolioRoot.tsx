@@ -9,6 +9,8 @@ type UiMode = 'classic' | 'focused'
 const uiModeKey = 'mauricio-portfolio-ui-mode'
 
 function initialMode(): UiMode {
+  const requestedMode = new URLSearchParams(window.location.search).get('ui')
+  if (requestedMode === 'focused' || requestedMode === 'classic') return requestedMode
   try { return window.localStorage.getItem(uiModeKey) === 'focused' ? 'focused' : 'classic' } catch { return 'classic' }
 }
 
