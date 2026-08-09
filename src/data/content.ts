@@ -31,12 +31,12 @@ export type GitHubProject = {
 
 export const personal = {
   name: 'Mauricio Berlanga',
-  title: 'Senior Software Engineer · AI / ML Engineer',
+  title: 'Senior Software Engineer · Frontend Platforms & Applied AI',
   employer: 'Walmart Global Tech',
   location: 'Bentonville, Arkansas, United States',
   email: 'mberlanga91@gmail.com',
   summary:
-    'I build production software and intelligent systems, combining more than ten years of software engineering with graduate-level work in machine learning, reinforcement learning, and modern AI systems.',
+    'I build production web products and intelligent systems, combining 9+ years of software engineering with deep React/TypeScript frontend-platform experience and graduate-level work in machine learning, reinforcement learning, and modern AI systems.',
 }
 
 export const socialLinks: SocialLink[] = [
@@ -55,39 +55,41 @@ export const experience = [
     role: 'Senior Software Engineer',
     period: 'Jul 2023 – Present',
     description:
-      'Engineering large-scale frontend systems with React, monorepos, micro-frontends, and module federation, with an emphasis on maintainable architecture and production reliability.',
+      'Lead frontend architecture for production React/TypeScript applications across Walmart’s Global Sourcing organization: Nx monorepos, shared tooling, React Router, Jest, and Module Federation with Webpack and Vite.',
     focus: [
-      'React architecture',
-      'Modular frontends',
+      'React / TypeScript',
       'Nx monorepos',
+      'React Router',
+      'Jest',
+      'Module Federation',
+      'Webpack / Vite',
+      'Mentoring',
       'System design',
-      'Cross-team engineering',
-      'Production reliability',
     ],
   },
   {
     company: 'Walmart',
     role: 'Software Engineer III',
-    period: 'Dec 2019 – Jul 2023',
+    period: 'Oct 2019 – Jul 2023',
     description:
-      'Built internal frontend products with Angular and contributed to modular frontend architecture using micro-frontends and module federation.',
-    focus: ['Angular', 'Micro-frontends', 'Module federation', 'Internal platforms'],
+      'Built internal frontend products and helped bring multiple versions of React and legacy Angular together under shared micro-frontend shells, while integrating Java/Spring APIs and production delivery workflows.',
+    focus: ['Angular interoperability', 'Micro-frontends', 'Module Federation', 'Java / Spring APIs', 'Docker / Nginx', 'Internal platforms'],
   },
   {
     company: 'TIBCO / Kwan Tecnología',
-    role: 'Software Engineer',
+    role: 'Frontend Software Engineer',
     period: 'Mar 2017 – Nov 2019',
     description:
-      'Worked on TIBCO Flogo, an event-driven, flow-based application engine for visually building APIs, microservices, serverless functions, activities, and connectors.',
-    focus: ['TIBCO Flogo', 'Event-driven systems', 'APIs', 'Microservices', 'RxJS'],
+      'Developed the Angular/TypeScript UI for TIBCO Flogo, an event-driven application builder for microservices, serverless functions, APIs, and connectors; built reusable components and JSON-driven forms with validation.',
+    focus: ['Angular / TypeScript', 'Reusable components', 'JSON forms', 'Node.js / Express', 'AWS S3', 'Karma / Jasmine'],
   },
   {
     company: 'GoBus Rutas / Inovap',
-    role: 'Software Developer',
-    period: 'Apr 2016 – Feb 2017',
+    role: 'Co-founder / Software Developer',
+    period: 'Mar 2015 – Feb 2017',
     description:
-      'Built web and hybrid mobile applications for public-transit tracking and geofenced employee check-ins using Ionic, Angular, Laravel, relational databases, and AWS infrastructure.',
-    focus: ['Ionic', 'Angular', 'Laravel', 'PostgreSQL', 'MySQL', 'AWS'],
+      'Co-founded a public-transit product and led Ionic/Angular mobile development with Google Maps/Leaflet, crowdsourced live-bus locations, and an admin route-monitoring tool that grew past 10,000 registered users.',
+    focus: ['Ionic / Angular', 'Google Maps / Leaflet', 'Mobile products', 'Laravel', 'PostgreSQL / MySQL', 'AWS'],
   },
   {
     company: 'Edumatics México',
@@ -237,8 +239,9 @@ export const githubProjects: GitHubProject[] = [
 
 export const skillGroups = [
   { title: 'AI / ML', skills: ['PyTorch', 'ML fundamentals', 'Embeddings', 'RAG', 'Reranking', 'LLM systems', 'Reinforcement learning'] },
-  { title: 'Software Engineering', skills: ['TypeScript', 'JavaScript', 'Python'] },
-  { title: 'Frontend Systems', skills: ['React', 'Nx', 'Vite', 'Webpack', 'Rspack', 'Module Federation'] },
+  { title: 'Frontend Systems', skills: ['React', 'TypeScript', 'Angular', 'Nx', 'React Router', 'Module Federation', 'Vite', 'Webpack', 'Rspack'] },
+  { title: 'Frontend Product Craft', skills: ['Responsive UI', 'Reusable components', 'Jest', 'Playwright', 'Technical SEO', 'API integration', 'Three.js / WebGL'] },
+  { title: 'Software Engineering', skills: ['JavaScript', 'Python', 'Java / Spring', 'Node.js / Express'] },
   { title: 'APIs & Infrastructure', skills: ['GraphQL', 'Apollo', 'REST', 'Docker'] },
   { title: 'AI Infrastructure', skills: ['Local LLMs', 'GPU inference', 'Model evaluation', 'Experimentation'] },
 ]

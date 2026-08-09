@@ -22,7 +22,7 @@ function App() {
       <main id="main">
         <section className="hero shell" aria-labelledby="hero-title">
           <div className="hero-copy">
-            <p className="hero-kicker">Mauricio Berlanga</p>
+            <p className="hero-kicker">Mauricio Berlanga · Frontend Platforms & Applied AI</p>
             <h1 id="hero-title">Engineering systems that <em>learn, reason,</em> and perform.</h1>
             <p className="hero-summary">{personal.summary}</p>
             <div className="hero-actions">
@@ -41,13 +41,13 @@ function App() {
         </section>
 
         <section className="section shell about" id="about">
-          <SectionHeader eyebrow="01 / About" title="Production engineering depth. Expanding AI scope." />
+          <SectionHeader eyebrow="01 / About" title="Frontend platforms. Applied intelligence. Systems that last." />
           <div className="about-grid reveal">
             <p className="lead-copy">
-              I’m a senior software engineer at <strong>Walmart Global Tech</strong> with more than ten years of experience building dependable web and frontend systems at scale.
+              I’m a senior software engineer at <strong>Walmart Global Tech</strong> with 9+ years of experience building dependable web, mobile, and frontend-platform systems at scale.
             </p>
             <div className="about-detail">
-              <p>My foundation is production software: React architecture, modular frontend systems, monorepos, API integration, and the engineering discipline required to operate software over time.</p>
+              <p>My foundation is frontend platform engineering: React and TypeScript architecture, Nx monorepos, Module Federation, build tooling, reusable components, testing, and the API integration needed to operate software over time.</p>
               <p>That foundation now extends into AI engineering and machine learning systems through graduate-level Stanford coursework and hands-on work with retrieval, model evaluation, local inference, and agentic architectures.</p>
             </div>
             <blockquote>
@@ -173,7 +173,7 @@ function App() {
 
         <section className="section skills-section">
           <div className="shell">
-            <SectionHeader eyebrow="06 / Technical Range" title="A stack shaped by systems." />
+            <SectionHeader eyebrow="06 / Technical Range" title="A frontend platform stack shaped by systems." />
             <div className="skills-grid">
               {skillGroups.map((group) => (
                 <article className="skill-group reveal" key={group.title}>
@@ -228,7 +228,7 @@ function App() {
 
       <footer className="site-footer shell">
         <p>© {new Date().getFullYear()} Mauricio Berlanga</p>
-        <p>Senior Software Engineer · AI / ML Systems</p>
+        <p>{personal.title}</p>
         <a href="#top">Back to top ↑</a>
       </footer>
     </div>
