@@ -1,6 +1,7 @@
 import { Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { ThemeToggle } from './ThemeToggle'
+import { sitePath } from '../lib/paths'
 
 const navigation = [
   ['About', '#about'],
@@ -10,6 +11,7 @@ const navigation = [
   ['Education', '#education'],
   ['Writing', '#writing'],
   ['Contact', '#contact'],
+  ['Game world', sitePath('/game/')],
 ]
 
 export function Header() {

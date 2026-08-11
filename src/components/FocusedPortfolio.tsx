@@ -5,6 +5,7 @@ import {
   Check,
   Code2,
   ExternalLink,
+  Gamepad2,
   Mail,
   Volume2,
   VolumeX,
@@ -77,6 +78,7 @@ export function FocusedPortfolio() {
           <a href="#experience" onClick={() => cue('tick')}>Experience</a>
           <a href="#notes" onClick={() => cue('tick')}>Notes</a>
           <a href="#contact" onClick={() => cue('tick')}>Contact</a>
+          <a href={sitePath('/game/')} onClick={() => cue('press')}>Game world</a>
         </nav>
         <button className="focused-sound-toggle" type="button" onClick={toggleSound} aria-pressed={soundOn}>
           {soundOn ? <Volume2 size={14} /> : <VolumeX size={14} />}
@@ -93,6 +95,7 @@ export function FocusedPortfolio() {
               <p className="focused-hero-summary">I build production interfaces and AI systems that make complex work feel clear, fast, and dependable.</p>
               <div className="focused-hero-actions">
                 <a className="focused-primary-button" href="#work" onClick={() => cue('press')}>See selected work <ArrowDown size={15} /></a>
+                <a className="focused-text-link" href={sitePath('/game/')} onClick={() => cue('press')}><Gamepad2 size={15} /> Enter the Systems District</a>
                 <a className="focused-text-link" href="mailto:mberlanga91@gmail.com" onClick={() => cue('press')}>Start a conversation <ArrowUpRight size={15} /></a>
               </div>
               <div className="focused-hero-metrics" aria-label="Career highlights">
