@@ -4,6 +4,13 @@ const output = new URL('../dist/', import.meta.url)
 const siteUrl = 'https://mauber91.github.io/mauricio-berlanga-portfolio'
 const routes = [
   {
+    path: '/game/',
+    title: 'The Systems District — Mauricio Berlanga Interactive Portfolio',
+    description: 'Explore Mauricio Berlanga’s experience, projects, research, writing, and technical range through an original interactive game world.',
+    image: '/game-world-map.webp',
+    imageAlt: 'A handcrafted island technology district with six buildings connected by paths, created for Mauricio Berlanga’s interactive portfolio.',
+  },
+  {
     path: '/writing/usd-mxn-forecasting/',
     title: 'When the baseline wins: lessons from forecasting USD/MXN — Mauricio Berlanga',
     description: 'A technical account of testing linear models, tree ensembles, and a neural network against autoregressive baselines on monthly USD/MXN data.',

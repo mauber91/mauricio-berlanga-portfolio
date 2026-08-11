@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowRight, ArrowUpRight, BriefcaseBusiness, Code2, FlaskConical, Mail } from 'lucide-react'
+import { ArrowDown, ArrowRight, ArrowUpRight, BriefcaseBusiness, Code2, FlaskConical, Gamepad2, Mail } from 'lucide-react'
 import { Header } from './components/Header'
 import { SectionHeader } from './components/SectionHeader'
 import { HeroSystemMap, ProjectVisual } from './components/TechnicalVisuals'
@@ -27,6 +27,7 @@ function App() {
             <p className="hero-summary">{personal.summary}</p>
             <div className="hero-actions">
               <a className="button button-primary" href="#projects">View projects <ArrowDown size={15} /></a>
+              <a className="text-link" href={sitePath('/game/')}><Gamepad2 size={16} /> Enter game world <ArrowRight size={14} /></a>
               <a className="text-link" href={githubProfile?.href} target="_blank" rel="noreferrer"><Code2 size={16} /> GitHub <ArrowUpRight size={14} /></a>
               <a className="text-link" href={linkedInProfile?.href} target="_blank" rel="noreferrer"><BriefcaseBusiness size={16} /> LinkedIn <ArrowUpRight size={14} /></a>
             </div>

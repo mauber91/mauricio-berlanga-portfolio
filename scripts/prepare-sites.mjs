@@ -10,6 +10,12 @@ await copyFile(hostingSource, new URL('hosting.json', metadataDir))
 
 const worker = `
 const articleMeta = {
+  '/game/': {
+    title: 'The Systems District — Mauricio Berlanga Interactive Portfolio',
+    description: 'Explore Mauricio Berlanga’s experience, projects, research, writing, and technical range through an original interactive game world.',
+    image: '/game-world-map.webp',
+    imageAlt: 'A handcrafted island technology district with six buildings connected by paths, created for Mauricio Berlanga’s interactive portfolio.',
+  },
   '/writing/usd-mxn-forecasting/': {
     title: 'When the baseline wins: lessons from forecasting USD/MXN — Mauricio Berlanga',
     description: 'A technical account of testing linear models, tree ensembles, and a neural network against autoregressive baselines on monthly USD/MXN data.',
@@ -51,7 +57,7 @@ export default {
     }
 
     if (url.pathname === '/sitemap.xml') {
-      const paths = ['/', '/writing/usd-mxn-forecasting/', '/writing/verifier-aware-model-routing/', '/writing/colmo/']
+      const paths = ['/', '/game/', '/writing/usd-mxn-forecasting/', '/writing/verifier-aware-model-routing/', '/writing/colmo/']
       const entries = paths.map((path) => \`<url><loc>\${url.origin}\${path}</loc></url>\`).join('')
       return textResponse(
         \`<?xml version="1.0" encoding="UTF-8"?>\\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\${entries}</urlset>\`,
