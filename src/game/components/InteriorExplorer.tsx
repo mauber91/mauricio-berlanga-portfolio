@@ -18,6 +18,7 @@ type InteriorExplorerProps = {
   selectionOpen: boolean
   paused: boolean
   onInspect: (index: number) => void
+  onNearbyExhibitChange?: (exhibitId: string | null) => void
   onExit: () => void
 }
 
@@ -35,6 +36,7 @@ export function InteriorExplorer({
   selectionOpen,
   paused,
   onInspect,
+  onNearbyExhibitChange,
   onExit,
 }: InteriorExplorerProps) {
   const navigation = useMemo(() => getInteriorCollision(building.id), [building.id])
@@ -81,7 +83,10 @@ export function InteriorExplorer({
     if (nextKey === nearbyKeyRef.current) return
     nearbyKeyRef.current = nextKey
     setNearby(next)
-  }, [findNearby])
+    onNearbyExhibitChange?.(
+      next?.kind === 'exhibit' ? scene.exhibits[next.index]?.id ?? null : null,
+    )
+  }, [findNearby, onNearbyExhibitChange, scene.exhibits])
 
   const applyPosition = useCallback((point: { x: number; y: number }) => {
     positionRef.current = point
