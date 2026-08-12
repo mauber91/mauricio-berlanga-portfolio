@@ -50,7 +50,7 @@ type NearbyTarget =
 type CueName = 'navigate' | 'talk' | 'door' | 'complete'
 
 const progressKey = 'mb-systems-district-progress'
-const completionKey = 'mb-systems-district-complete'
+const completionKey = 'mb-systems-district-complete-v2'
 const movementKeys = new Set(['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'w', 'a', 's', 'd', 'W', 'A', 'S', 'D'])
 
 function distance(a: Point, b: Point) {
@@ -147,6 +147,7 @@ export function GamePortfolio() {
   const toastTimerRef = useRef<number | null>(null)
   const nearbyKeyRef = useRef('')
   const audioContextRef = useRef<AudioContext | null>(null)
+  const overlayReturnFocusRef = useRef<HTMLElement | null>(null)
 
   const activeNpcData = useMemo(() => npcs.find((npc) => npc.id === activeNpc) ?? null, [activeNpc])
   const visitedSet = useMemo(() => new Set(visited), [visited])
@@ -190,25 +191,46 @@ export function GamePortfolio() {
     if (soundOn) emitCue(audioContextRef, name)
   }, [soundOn])
 
+  const rememberOverlayTrigger = useCallback(() => {
+    const activeElement = document.activeElement
+    if (!(activeElement instanceof HTMLElement) || activeElement === document.body) return
+    if (!activeElement.closest('.game-overlay')) overlayReturnFocusRef.current = activeElement
+  }, [])
+
+  const restoreOverlayTrigger = useCallback(() => {
+    const previous = overlayReturnFocusRef.current
+    overlayReturnFocusRef.current = null
+    window.requestAnimationFrame(() => {
+      const fallback = document.querySelector<HTMLElement>('.game-command-actions button:not([tabindex="-1"])')
+      const target = previous?.isConnected ? previous : fallback
+      target?.focus({ preventScroll: true })
+    })
+  }, [])
+
+  const discoverBuilding = useCallback((id: BuildingId) => {
+    setVisited((current) => current.includes(id) ? current : [...current, id])
+  }, [])
+
   const openRoom = useCallback((id: BuildingId) => {
     if (transitionTimerRef.current) window.clearTimeout(transitionTimerRef.current)
+    rememberOverlayTrigger()
     setEnteringRoom(id)
     setAtlasOpen(false)
     setDossierOpen(false)
-    setVisited((current) => current.includes(id) ? current : [...current, id])
     cue('door')
     transitionTimerRef.current = window.setTimeout(() => {
       setActiveRoom(id)
       setEnteringRoom(null)
       transitionTimerRef.current = null
     }, reducedEffects ? 100 : 720)
-  }, [cue, reducedEffects])
+  }, [cue, reducedEffects, rememberOverlayTrigger])
 
   const openNpc = useCallback((id: NpcId) => {
+    rememberOverlayTrigger()
     setDialogueIndex(0)
     setActiveNpc(id)
     cue('talk')
-  }, [cue])
+  }, [cue, rememberOverlayTrigger])
 
   const travelTo = useCallback((destination: Point, onArrive: () => void) => {
     if (travelFrameRef.current) window.cancelAnimationFrame(travelFrameRef.current)
@@ -302,7 +324,40 @@ export function GamePortfolio() {
   const closeDialogue = useCallback(() => {
     setActiveNpc(null)
     setDialogueIndex(0)
-  }, [])
+    restoreOverlayTrigger()
+  }, [restoreOverlayTrigger])
+
+  const closeRoom = useCallback(() => {
+    setActiveRoom(null)
+    restoreOverlayTrigger()
+  }, [restoreOverlayTrigger])
+
+  const openAtlas = useCallback(() => {
+    rememberOverlayTrigger()
+    setAtlasOpen(true)
+    setDossierOpen(false)
+  }, [rememberOverlayTrigger])
+
+  const closeAtlas = useCallback(() => {
+    setAtlasOpen(false)
+    restoreOverlayTrigger()
+  }, [restoreOverlayTrigger])
+
+  const openDossier = useCallback(() => {
+    rememberOverlayTrigger()
+    setDossierOpen(true)
+    setAtlasOpen(false)
+  }, [rememberOverlayTrigger])
+
+  const closeDossier = useCallback(() => {
+    setDossierOpen(false)
+    restoreOverlayTrigger()
+  }, [restoreOverlayTrigger])
+
+  const closeCelebration = useCallback(() => {
+    setCelebrationOpen(false)
+    restoreOverlayTrigger()
+  }, [restoreOverlayTrigger])
 
   const advanceDialogue = useCallback(() => {
     if (!activeNpcData) return
@@ -334,12 +389,12 @@ export function GamePortfolio() {
   const startGame = () => {
     setStarted(true)
     applyPlayerPosition(spawnPoint)
-    showToast('Six buildings. Six signals. Wander in any order.')
+    showToast('Seven buildings. Seven district signals. Wander in any order.')
   }
 
   const openDossierFromStart = () => {
     setStarted(true)
-    setDossierOpen(true)
+    openDossier()
   }
 
   useEffect(() => {
@@ -366,13 +421,14 @@ export function GamePortfolio() {
   useEffect(() => {
     if (!started || activeRoom || enteringRoom || completionSeen || celebrationOpen || visited.length !== buildings.length) return
     const timer = window.setTimeout(() => {
+      rememberOverlayTrigger()
       setCelebrationOpen(true)
       setCompletionSeen(true)
       try { window.localStorage.setItem(completionKey, 'true') } catch { /* in-memory fallback */ }
       cue('complete')
     }, reducedEffects ? 120 : 620)
     return () => window.clearTimeout(timer)
-  }, [activeRoom, celebrationOpen, completionSeen, cue, enteringRoom, reducedEffects, started, visited.length])
+  }, [activeRoom, celebrationOpen, completionSeen, cue, enteringRoom, reducedEffects, rememberOverlayTrigger, started, visited.length])
 
   useEffect(() => {
     if (!canMove) {
@@ -420,27 +476,28 @@ export function GamePortfolio() {
       if (target?.matches('input, textarea, select, [contenteditable="true"]')) return
 
       if (event.key === 'Escape') {
-        if (celebrationOpen) setCelebrationOpen(false)
-        else if (activeRoom) setActiveRoom(null)
+        if (celebrationOpen) closeCelebration()
+        else if (activeRoom) closeRoom()
         else if (activeNpc) closeDialogue()
-        else if (dossierOpen) setDossierOpen(false)
-        else if (atlasOpen) setAtlasOpen(false)
+        else if (dossierOpen) closeDossier()
+        else if (atlasOpen) closeAtlas()
         return
       }
 
       if (started && !activeRoom && !activeNpc && !celebrationOpen && (event.key === 'm' || event.key === 'M')) {
         event.preventDefault()
-        setAtlasOpen((value) => !value)
-        setDossierOpen(false)
+        if (atlasOpen) closeAtlas()
+        else openAtlas()
         return
       }
       if (started && !activeRoom && !activeNpc && !celebrationOpen && (event.key === 'p' || event.key === 'P')) {
         event.preventDefault()
-        setDossierOpen((value) => !value)
-        setAtlasOpen(false)
+        if (dossierOpen) closeDossier()
+        else openDossier()
         return
       }
       if (canMove && ['Enter', 'e', 'E', ' '].includes(event.key) && !event.repeat) {
+        if (event.key !== 'e' && event.key !== 'E' && target?.closest('button, a, [role="button"]')) return
         event.preventDefault()
         interact()
         return
@@ -457,7 +514,7 @@ export function GamePortfolio() {
       window.removeEventListener('keydown', keyDown)
       window.removeEventListener('keyup', keyUp)
     }
-  }, [activeNpc, activeRoom, atlasOpen, canMove, celebrationOpen, closeDialogue, dossierOpen, interact, started])
+  }, [activeNpc, activeRoom, atlasOpen, canMove, celebrationOpen, closeAtlas, closeCelebration, closeDialogue, closeDossier, closeRoom, dossierOpen, interact, openAtlas, openDossier, started])
 
   useEffect(() => {
     applyPlayerPosition(positionRef.current)
@@ -478,7 +535,7 @@ export function GamePortfolio() {
 
       <div className="game-world" role="region" aria-label="The Systems District interactive map" aria-hidden={!started || overlaysOpen}>
         <div className="game-world-stage" ref={worldStageRef}>
-          <img className="game-world-map" src={sitePath('/game-world-map.webp')} alt="Illustrated island district with six buildings connected by paths" draggable="false" />
+          <img className="game-world-map" src={sitePath('/game-world-map.webp')} alt="Illustrated island district with seven buildings connected by paths" draggable="false" />
           <div className="game-world-grade" aria-hidden="true" />
           <div className="game-water-glint game-water-glint-one" aria-hidden="true" />
           <div className="game-water-glint game-water-glint-two" aria-hidden="true" />
@@ -566,8 +623,8 @@ export function GamePortfolio() {
             </div>
 
             <nav className="game-command-actions" aria-label="Game and portfolio controls">
-              <button type="button" tabIndex={overlaysOpen ? -1 : 0} aria-label="Open district atlas" onClick={() => { setAtlasOpen(true); setDossierOpen(false) }}><Map size={15} /><span>Atlas</span></button>
-              <button type="button" tabIndex={overlaysOpen ? -1 : 0} aria-label="Open portfolio dossier" onClick={() => { setDossierOpen(true); setAtlasOpen(false) }}><BookOpen size={15} /><span>Dossier</span></button>
+              <button type="button" tabIndex={overlaysOpen ? -1 : 0} aria-label="Open district atlas" onClick={openAtlas}><Map size={15} /><span>Atlas</span></button>
+              <button type="button" tabIndex={overlaysOpen ? -1 : 0} aria-label="Open portfolio dossier" onClick={openDossier}><BookOpen size={15} /><span>Dossier</span></button>
               <button type="button" tabIndex={overlaysOpen ? -1 : 0} aria-label={reducedEffects ? 'Use full motion effects' : 'Reduce motion effects'} onClick={() => setReducedEffects((value) => !value)} aria-pressed={reducedEffects} title="Toggle reduced effects"><Accessibility size={15} /><span>Motion</span></button>
               <button type="button" tabIndex={overlaysOpen ? -1 : 0} aria-label={soundOn ? 'Mute sound cues' : 'Enable sound cues'} onClick={toggleSound} aria-pressed={soundOn} title={soundOn ? 'Mute sound cues' : 'Enable sound cues'}>{soundOn ? <Volume2 size={15} /> : <VolumeX size={15} />}<span>Sound</span></button>
               <a href={sitePath('/')} tabIndex={overlaysOpen ? -1 : 0} title="Return to the classic portfolio"><Home size={15} /><span>Portfolio</span></a>
@@ -593,7 +650,7 @@ export function GamePortfolio() {
               <button className="is-right" type="button" aria-label="Move right" onPointerDown={(event) => { event.preventDefault(); keysRef.current.add('ArrowRight') }} onPointerUp={() => keysRef.current.delete('ArrowRight')} onPointerCancel={() => keysRef.current.delete('ArrowRight')} onPointerLeave={() => keysRef.current.delete('ArrowRight')}><ChevronRight size={18} /></button>
               <button className="is-down" type="button" aria-label="Move down" onPointerDown={(event) => { event.preventDefault(); keysRef.current.add('ArrowDown') }} onPointerUp={() => keysRef.current.delete('ArrowDown')} onPointerCancel={() => keysRef.current.delete('ArrowDown')} onPointerLeave={() => keysRef.current.delete('ArrowDown')}><ChevronDown size={18} /></button>
             </div>
-            <button className={`game-touch-action${nearby ? ' is-ready' : ''}`} type="button" onClick={interact} aria-label={nearby ? `${nearby.kind === 'building' ? 'Enter' : 'Speak with'} ${nearby.label}` : 'Interact'}><Gamepad2 size={17} /><span>Interact</span></button>
+            <button className={`game-touch-action${nearby ? ' is-ready' : ''}`} type="button" onClick={interact} aria-label={nearby ? `${nearby.kind === 'building' ? 'Enter' : 'Speak with'} ${nearby.label}` : 'Interact'}><Gamepad2 size={17} /><span>{nearby ? `${nearby.kind === 'building' ? 'Enter' : 'Talk'} · ${nearby.label}` : 'Interact'}</span></button>
           </div> : null}
           <button className="game-reset-button" type="button" tabIndex={overlaysOpen ? -1 : 0} onClick={resetProgress} title="Reset district progress"><RotateCcw size={13} /> Reset</button>
         </>
@@ -608,13 +665,21 @@ export function GamePortfolio() {
       ) : null}
 
       {activeRoom ? (
-        <RoomScene key={activeRoom} building={getBuilding(activeRoom)} visitedCount={visited.length} onClose={() => setActiveRoom(null)} onOpenBuilding={(id) => openRoom(id)} />
+        <RoomScene
+          key={activeRoom}
+          building={getBuilding(activeRoom)}
+          visitedCount={visited.length}
+          isVisited={visitedSet.has(activeRoom)}
+          onClose={closeRoom}
+          onDiscover={discoverBuilding}
+          onOpenBuilding={(id) => openRoom(id)}
+        />
       ) : null}
 
       {atlasOpen ? (
         <AtlasDrawer
           visited={visitedSet}
-          onClose={() => setAtlasOpen(false)}
+          onClose={closeAtlas}
           onVisit={(building) => { setAtlasOpen(false); visitBuilding(building) }}
         />
       ) : null}
@@ -622,14 +687,14 @@ export function GamePortfolio() {
       {dossierOpen ? (
         <DossierPanel
           visited={visitedSet}
-          onClose={() => setDossierOpen(false)}
+          onClose={closeDossier}
           onOpenBuilding={(id) => openRoom(id)}
         />
       ) : null}
 
       {celebrationOpen ? (
         <CompletionPanel
-          onClose={() => setCelebrationOpen(false)}
+          onClose={closeCelebration}
           onContact={() => { setCelebrationOpen(false); openRoom('signal') }}
         />
       ) : null}

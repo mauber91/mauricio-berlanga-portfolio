@@ -6,9 +6,9 @@ const routes = [
   {
     path: '/game/',
     title: 'The Systems District — Mauricio Berlanga Interactive Portfolio',
-    description: 'Explore Mauricio Berlanga’s experience, projects, research, writing, and technical range through an original interactive game world.',
+    description: 'Explore Mauricio Berlanga’s experience, projects, research, writing, personal interests, and technical range through an original interactive game world.',
     image: '/game-world-map.webp',
-    imageAlt: 'A handcrafted island technology district with six buildings connected by paths, created for Mauricio Berlanga’s interactive portfolio.',
+    imageAlt: 'A handcrafted island technology district with seven buildings connected by paths, created for Mauricio Berlanga’s interactive portfolio.',
   },
   {
     path: '/writing/usd-mxn-forecasting/',

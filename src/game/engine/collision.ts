@@ -10,7 +10,7 @@
  * The map art is illustrative rather than tile based. Collision therefore uses
  * a conservative walkable mask made from the visible paving, bridges, plaza,
  * and doorway aprons. Everything outside that mask is terrain collision; solid
- * props layered on top of the mask (buildings and the plaza beacon) are explicit
+ * props layered on top of the mask (buildings and the central pavilion) are explicit
  * blockers. Keeping both layers makes the geometry inspectable and easy to draw
  * in a development overlay.
  */
@@ -459,6 +459,16 @@ export const WALKABLE_GEOMETRY: readonly CollisionShape[] = [
     height: 7.5,
   },
   {
+    kind: 'rect',
+    id: 'door-conservatory',
+    label: 'Resonance Conservatory doorway apron',
+    surface: 'door-approach',
+    x: 47.2,
+    y: 54.6,
+    width: 5.6,
+    height: 6.8,
+  },
+  {
     kind: 'segment',
     id: 'npc-bay-researcher',
     label: 'Researcher conversation bay',
@@ -590,12 +600,24 @@ export const BLOCKING_GEOMETRY: readonly CollisionShape[] = [
     ],
   },
   {
-    kind: 'circle',
-    id: 'plaza-beacon',
-    label: 'Interface Plaza central beacon',
-    surface: 'scenery',
-    center: { x: 50, y: 48.8 },
-    radius: 1.65,
+    kind: 'polygon',
+    id: 'building-conservatory',
+    label: 'Resonance Conservatory pavilion',
+    surface: 'building',
+    points: [
+      { x: 47.2, y: 43.1 },
+      { x: 52.8, y: 43.1 },
+      { x: 54.7, y: 46.4 },
+      { x: 54.7, y: 54.4 },
+      { x: 53.1, y: 56.8 },
+      { x: 52, y: 56.8 },
+      { x: 52, y: 55.4 },
+      { x: 48, y: 55.4 },
+      { x: 48, y: 56.8 },
+      { x: 46.9, y: 56.8 },
+      { x: 45.3, y: 54.4 },
+      { x: 45.3, y: 46.4 },
+    ],
   },
 ] as const
 

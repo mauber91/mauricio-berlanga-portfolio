@@ -19,6 +19,7 @@ export type BuildingId =
   | 'archive'
   | 'station'
   | 'signal'
+  | 'conservatory'
 
 export type Building = {
   id: BuildingId
@@ -114,6 +115,17 @@ export const buildings: Building[] = [
     label: { x: 76, y: 69.5 },
     routeHint: 'Southeast trace',
   },
+  {
+    id: 'conservatory',
+    name: 'Resonance Conservatory',
+    shortName: 'Conservatory',
+    eyebrow: 'Creative life & resonance',
+    description: 'Music, live looping, digital art, games, and the coast that keeps Mauricio curious.',
+    accent: '#c995ff',
+    door: { x: 50, y: 59.2 },
+    label: { x: 50, y: 42.8 },
+    routeHint: 'Central plaza',
+  },
 ]
 
 export const npcs: Npc[] = [
@@ -126,7 +138,7 @@ export const npcs: Npc[] = [
     position: { x: 48, y: 83 },
     dialogue: [
       `Welcome to the Systems District. This whole island is ${personal.name}'s working map.`,
-      'Every building holds a different layer: products, platforms, experiments, learning, writing, or a direct signal.',
+      'Every building holds a different layer: products, platforms, experiments, learning, writing, creative life, or a direct signal.',
       'Follow the paths with WASD or the arrow keys. You can also select any doorway—the district will guide you there.',
     ],
   },
