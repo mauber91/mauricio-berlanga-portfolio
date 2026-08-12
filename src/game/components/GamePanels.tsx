@@ -42,6 +42,10 @@ import {
 import { interiorScenes, type InteriorExhibit } from '../data/interiors'
 import { InteriorExplorer } from './InteriorExplorer'
 import {
+  SpotifyStationPlayer,
+  type SpotifyStationId,
+} from './SpotifyStationPlayer'
+import {
   buildings,
   gameContent,
   type Building,
@@ -266,6 +270,7 @@ export function RoomScene({ building, visitedCount, isVisited, onClose, onDiscov
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [inspectorOpen, setInspectorOpen] = useState(false)
   const [detailsOpen, setDetailsOpen] = useState(false)
+  const [activeSpotifyStationId, setActiveSpotifyStationId] = useState<SpotifyStationId | null>(null)
   const roomRef = useRef<HTMLElement>(null)
   const roomBaseRef = useRef<HTMLDivElement>(null)
   const inspectorRef = useRef<HTMLElement>(null)
@@ -305,6 +310,16 @@ export function RoomScene({ building, visitedCount, isVisited, onClose, onDiscov
     setSelectedIndex(index)
     setInspectorOpen(true)
   }
+
+  const handleNearbyExhibitChange = useCallback((exhibitId: string | null) => {
+    if (exhibitId === 'tame-impala' || exhibitId === 'fred-again') {
+      setActiveSpotifyStationId(exhibitId)
+    }
+  }, [])
+
+  const dismissSpotifyPlayer = useCallback(() => {
+    setActiveSpotifyStationId(null)
+  }, [])
 
   useEffect(() => {
     if (!inspectorOpen || detailsOpen) return
@@ -362,7 +377,7 @@ export function RoomScene({ building, visitedCount, isVisited, onClose, onDiscov
 
   return (
     <div className="game-overlay game-room-overlay" role={detailsOpen ? undefined : 'dialog'} aria-modal={detailsOpen ? undefined : true} aria-labelledby={detailsOpen ? undefined : 'game-room-title'}>
-      <section ref={roomRef} className={`game-room game-room-${building.id}${inspectorOpen ? ' has-inspector-open' : ''}${detailsOpen ? ' has-details-open' : ''}`} style={{ '--room-accent': building.accent } as CSSProperties}>
+      <section ref={roomRef} className={`game-room game-room-${building.id}${inspectorOpen ? ' has-inspector-open' : ''}${detailsOpen ? ' has-details-open' : ''}${activeSpotifyStationId ? ' has-spotify-player' : ''}`} style={{ '--room-accent': building.accent } as CSSProperties}>
         <div className="game-room-base" ref={roomBaseRef} aria-hidden={detailsOpen || undefined}>
           <InteriorExplorer
             building={building}
@@ -371,6 +386,7 @@ export function RoomScene({ building, visitedCount, isVisited, onClose, onDiscov
             selectionOpen={inspectorOpen}
             paused={detailsOpen}
             onInspect={inspectExhibit}
+            onNearbyExhibitChange={handleNearbyExhibitChange}
             onExit={onClose}
           />
 
@@ -402,6 +418,11 @@ export function RoomScene({ building, visitedCount, isVisited, onClose, onDiscov
           ) : null}
 
           <div className="game-interior-guide"><Sparkles size={13} /><span>Walk to an exhibit · Press E to inspect · Return through the doorway</span></div>
+
+          <SpotifyStationPlayer
+            activeStationId={activeSpotifyStationId}
+            onDismiss={dismissSpotifyPlayer}
+          />
         </div>
 
         {detailsOpen ? (
