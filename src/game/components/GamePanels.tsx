@@ -32,6 +32,7 @@ import {
 import { useEffect, useState, type CSSProperties } from 'react'
 import { sitePath } from '../../lib/paths'
 import { interiorScenes } from '../data/interiors'
+import { InteriorExplorer } from './InteriorExplorer'
 import {
   buildings,
   gameContent,
@@ -250,52 +251,45 @@ export function RoomScene({ building, visitedCount, onClose, onOpenBuilding }: R
   const Icon = buildingIcons[building.id]
   const scene = interiorScenes[building.id]
   const [selectedIndex, setSelectedIndex] = useState(0)
+  const [inspectorOpen, setInspectorOpen] = useState(false)
   const [detailsOpen, setDetailsOpen] = useState(false)
   const exhibit = scene.exhibits[selectedIndex]
   const selectRelative = (offset: number) => {
     setSelectedIndex((current) => (current + offset + scene.exhibits.length) % scene.exhibits.length)
+    setInspectorOpen(true)
+  }
+  const inspectExhibit = (index: number) => {
+    setSelectedIndex(index)
+    setInspectorOpen(true)
   }
 
   useEffect(() => {
-    if (!detailsOpen) return
-    const closeDetails = (event: KeyboardEvent) => {
-      if (event.key !== 'Escape') return
+    const closeTopLayer = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape' || (!detailsOpen && !inspectorOpen)) return
       event.preventDefault()
       event.stopImmediatePropagation()
-      setDetailsOpen(false)
+      if (detailsOpen) setDetailsOpen(false)
+      else setInspectorOpen(false)
     }
-    window.addEventListener('keydown', closeDetails, true)
-    return () => window.removeEventListener('keydown', closeDetails, true)
-  }, [detailsOpen])
+    window.addEventListener('keydown', closeTopLayer, true)
+    return () => window.removeEventListener('keydown', closeTopLayer, true)
+  }, [detailsOpen, inspectorOpen])
 
   return (
     <div className="game-overlay game-room-overlay" role="dialog" aria-modal="true" aria-labelledby="game-room-title">
-      <section className={`game-room game-room-${building.id}${detailsOpen ? ' has-details-open' : ''}`} style={{ '--room-accent': building.accent } as CSSProperties}>
-        <div className="game-interior-canvas">
-          <img className="game-interior-image" src={sitePath(scene.image)} alt={`Inside ${building.name}, with several interactive exhibits around an open central floor`} />
-          <div className="game-interior-grade" aria-hidden="true" />
-
-          <div className="game-interior-hotspots" aria-label={`${building.name} exhibits`}>
-            {scene.exhibits.map((item, index) => (
-              <button
-                className={index === selectedIndex ? 'is-selected' : ''}
-                type="button"
-                key={item.id}
-                style={{ left: `${item.position.x}%`, top: `${item.position.y}%` }}
-                onClick={() => setSelectedIndex(index)}
-                aria-label={`Inspect ${item.title}`}
-                aria-pressed={index === selectedIndex}
-              >
-                <span>{item.index}</span><b>{item.eyebrow}</b>
-              </button>
-            ))}
-          </div>
-
-          <div className="game-room-player" data-direction="up" aria-hidden="true"><i /><span style={{ backgroundImage: `url(${sitePath('/game/characters/mauricio-sprites.webp')})` }} /></div>
-        </div>
+      <section className={`game-room game-room-${building.id}${inspectorOpen ? ' has-inspector-open' : ''}${detailsOpen ? ' has-details-open' : ''}`} style={{ '--room-accent': building.accent } as CSSProperties}>
+        <InteriorExplorer
+          building={building}
+          scene={scene}
+          selectedIndex={selectedIndex}
+          selectionOpen={inspectorOpen}
+          paused={detailsOpen}
+          onInspect={inspectExhibit}
+          onExit={onClose}
+        />
 
         <header className="game-interior-header">
-          <button className="game-room-back" type="button" onClick={onClose} autoFocus><ArrowLeft size={16} /> Exit to district</button>
+          <button className="game-room-back" type="button" onClick={onClose}><ArrowLeft size={16} /> Exit to district</button>
           <div className="game-interior-wordmark"><span className="game-room-icon"><Icon size={17} /></span><span><b>{building.name}</b><small>{building.eyebrow}</small></span></div>
           <div className="game-interior-status"><i /> Signal online <b>{visitedCount}/{buildings.length}</b></div>
         </header>
@@ -306,17 +300,20 @@ export function RoomScene({ building, visitedCount, onClose, onOpenBuilding }: R
           <span>{building.description}</span>
         </div>
 
-        <aside className="game-interior-inspector" aria-live="polite">
-          <div className="game-interior-inspector-meta"><span>{exhibit.eyebrow}</span><b>{exhibit.index} / {String(scene.exhibits.length).padStart(2, '0')}</b></div>
-          <h2 key={`${building.id}-${exhibit.id}`}>{exhibit.title}</h2>
-          <p>{exhibit.summary}</p>
-          <div className="game-interior-inspector-actions">
-            <div><button type="button" onClick={() => selectRelative(-1)} aria-label="Previous exhibit"><ArrowLeft size={14} /></button><button type="button" onClick={() => selectRelative(1)} aria-label="Next exhibit"><ArrowRight size={14} /></button></div>
-            <button className="game-modern-button game-modern-button-primary" type="button" onClick={() => setDetailsOpen(true)}>Open case file <ChevronRight size={15} /></button>
-          </div>
-        </aside>
+        {inspectorOpen ? (
+          <aside className="game-interior-inspector" aria-live="polite">
+            <button className="game-interior-inspector-close" type="button" onClick={() => setInspectorOpen(false)} aria-label="Close exhibit card"><X size={14} /></button>
+            <div className="game-interior-inspector-meta"><span>{exhibit.eyebrow}</span><b>{exhibit.index} / {String(scene.exhibits.length).padStart(2, '0')}</b></div>
+            <h2 key={`${building.id}-${exhibit.id}`}>{exhibit.title}</h2>
+            <p>{exhibit.summary}</p>
+            <div className="game-interior-inspector-actions">
+              <div><button type="button" onClick={() => selectRelative(-1)} aria-label="Previous exhibit"><ArrowLeft size={14} /></button><button type="button" onClick={() => selectRelative(1)} aria-label="Next exhibit"><ArrowRight size={14} /></button></div>
+              <button className="game-modern-button game-modern-button-primary" type="button" onClick={() => setDetailsOpen(true)}>Open case file <ChevronRight size={15} /></button>
+            </div>
+          </aside>
+        ) : null}
 
-        <div className="game-interior-guide"><Sparkles size={13} /><span>Select a glowing exhibit to inspect the room.</span></div>
+        <div className="game-interior-guide"><Sparkles size={13} /><span>Walk to a signal · Press E to inspect · Return through the doorway</span></div>
 
         {detailsOpen ? (
           <section className="game-room-details" aria-label={`${building.name} case file`}>
