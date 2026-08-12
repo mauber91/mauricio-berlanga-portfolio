@@ -58,7 +58,7 @@ export function InteriorExplorer({
         point.y - approach.y,
       )
       if (distance <= 6.8 && distance < closestDistance) {
-        closestTarget = { kind: 'exhibit', index, label: exhibit.eyebrow }
+        closestTarget = { kind: 'exhibit', index, label: exhibit.title }
         closestDistance = distance
       }
     }
@@ -212,7 +212,7 @@ export function InteriorExplorer({
     keysRef.current.add(key)
   }, [])
   const releaseKey = useCallback((key: string) => keysRef.current.delete(key), [])
-  const promptLabel = nearby?.kind === 'exhibit' ? `Inspect ${nearby.label}` : nearby?.label ?? 'Walk to a glowing signal'
+  const promptLabel = nearby?.kind === 'exhibit' ? `Inspect ${nearby.label}` : nearby?.label ?? 'Walk to an exhibit'
 
   return (
     <>
@@ -234,7 +234,7 @@ export function InteriorExplorer({
               <button
                 className={`${selectionOpen && index === selectedIndex ? 'is-selected' : ''}${isNearby ? ' is-nearby' : ''}`}
                 type="button"
-                key={item.id}
+                key={`${building.id}:${item.id}`}
                 style={{ left: `${item.position.x}%`, top: `${item.position.y}%` }}
                 onClick={() => onInspect(index)}
                 aria-label={`Inspect ${item.title}`}

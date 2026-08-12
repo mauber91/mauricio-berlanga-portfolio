@@ -272,6 +272,35 @@ const definitions: Record<BuildingId, InteriorDefinition> = {
       ], { x: 66, y: 68 }),
     ],
   },
+  conservatory: {
+    perimeter: [
+      { x: 8, y: 5 }, { x: 92, y: 5 }, { x: 98, y: 16 }, { x: 98, y: 86 },
+      { x: 58, y: 86 }, { x: 58, y: 100 }, { x: 42, y: 100 }, { x: 42, y: 86 },
+      { x: 2, y: 86 }, { x: 2, y: 16 },
+    ],
+    barriers: [
+      exhibitBarrier('conservatory', 'tame-impala', 'Music alcove', [
+        { x: 3, y: 10 }, { x: 28, y: 10 }, { x: 32, y: 17 },
+        { x: 32, y: 39 }, { x: 28, y: 45 }, { x: 3, y: 45 },
+      ], { x: 35, y: 42 }),
+      exhibitBarrier('conservatory', 'fred-again', 'Live-looping studio', [
+        { x: 72, y: 10 }, { x: 97, y: 10 }, { x: 97, y: 45 },
+        { x: 72, y: 45 }, { x: 68, y: 39 }, { x: 68, y: 17 },
+      ], { x: 65, y: 42 }),
+      exhibitBarrier('conservatory', 'nature-beach', 'Coast and nature window', [
+        { x: 36, y: 6 }, { x: 64, y: 6 }, { x: 68, y: 15 }, { x: 66, y: 27 },
+        { x: 60, y: 32 }, { x: 40, y: 32 }, { x: 34, y: 27 }, { x: 32, y: 15 },
+      ], { x: 50, y: 36 }),
+      exhibitBarrier('conservatory', 'visual-art', 'Digital art gallery', [
+        { x: 3, y: 52 }, { x: 29, y: 52 }, { x: 33, y: 60 },
+        { x: 33, y: 82 }, { x: 28, y: 86 }, { x: 3, y: 86 },
+      ], { x: 35, y: 68 }),
+      exhibitBarrier('conservatory', 'videogames', 'Game room', [
+        { x: 71, y: 52 }, { x: 97, y: 52 }, { x: 97, y: 86 },
+        { x: 72, y: 86 }, { x: 67, y: 82 }, { x: 67, y: 60 },
+      ], { x: 65, y: 68 }),
+    ],
+  },
 }
 
 function buildInteriorCollision(id: BuildingId, definition: InteriorDefinition): InteriorCollision {
@@ -313,6 +342,7 @@ export const INTERIOR_COLLISIONS: Readonly<Record<BuildingId, InteriorCollision>
   archive: buildInteriorCollision('archive', definitions.archive),
   station: buildInteriorCollision('station', definitions.station),
   signal: buildInteriorCollision('signal', definitions.signal),
+  conservatory: buildInteriorCollision('conservatory', definitions.conservatory),
 }
 
 /** Primary GamePortfolio integration entrypoint. */
