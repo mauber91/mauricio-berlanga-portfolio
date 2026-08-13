@@ -226,7 +226,7 @@ export function InteriorExplorer({
         ref={stageRef}
         data-room-id={building.id}
         role="region"
-        aria-label={`${building.name} playable interior`}
+        aria-label={`${building.name} interactive interior`}
         tabIndex={-1}
       >
         <img className="game-interior-image" src={sitePath(scene.image)} alt={`Inside ${building.name}, with several interactive exhibits around an open central floor`} draggable="false" />

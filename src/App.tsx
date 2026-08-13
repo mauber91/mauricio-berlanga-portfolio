@@ -27,7 +27,7 @@ function App() {
             <p className="hero-summary">{personal.summary}</p>
             <div className="hero-actions">
               <a className="button button-primary" href="#projects">View projects <ArrowDown size={15} /></a>
-              <a className="text-link" href={sitePath('/game/')}><Gamepad2 size={16} /> Enter game world <ArrowRight size={14} /></a>
+              <a className="text-link" href={sitePath('/game/')}><Gamepad2 size={16} /> Explore interactive CV <ArrowRight size={14} /></a>
               <a className="text-link" href={githubProfile?.href} target="_blank" rel="noreferrer"><Code2 size={16} /> GitHub <ArrowUpRight size={14} /></a>
               <a className="text-link" href={linkedInProfile?.href} target="_blank" rel="noreferrer"><BriefcaseBusiness size={16} /> LinkedIn <ArrowUpRight size={14} /></a>
             </div>

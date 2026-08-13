@@ -29,7 +29,7 @@ export function PortfolioRoot() {
 
   if (gameRoute) {
     return (
-      <Suspense fallback={<div style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', color: '#f7f1e7', background: '#071b27', font: '600 12px ui-monospace, monospace' }}>Opening the Systems District…</div>}>
+      <Suspense fallback={<div style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', color: '#f7f1e7', background: '#071b27', font: '600 12px ui-monospace, monospace' }}>Opening Mauricio’s interactive CV…</div>}>
         <GamePortfolio />
       </Suspense>
     )

@@ -11,10 +11,10 @@ await copyFile(hostingSource, new URL('hosting.json', metadataDir))
 const worker = `
 const articleMeta = {
   '/game/': {
-    title: 'The Systems District — Mauricio Berlanga Interactive Portfolio',
-    description: 'Explore Mauricio Berlanga’s experience, projects, research, writing, personal interests, and technical range through an original interactive game world.',
+    title: 'The Systems District — Mauricio Berlanga Interactive CV',
+    description: 'Explore Senior Software Engineer Mauricio Berlanga’s 9+ years across frontend platforms, production products, applied AI research, technical writing, and creative work through an original interactive world.',
     image: '/game-world-map.webp',
-    imageAlt: 'A handcrafted island technology district with seven buildings connected by paths, created for Mauricio Berlanga’s interactive portfolio.',
+    imageAlt: 'A handcrafted island CV with seven buildings representing Mauricio Berlanga’s career, research, projects, writing, interests, and contact details.',
   },
   '/writing/usd-mxn-forecasting/': {
     title: 'When the baseline wins: lessons from forecasting USD/MXN — Mauricio Berlanga',

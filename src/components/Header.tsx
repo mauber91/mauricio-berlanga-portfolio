@@ -11,7 +11,7 @@ const navigation = [
   ['Education', '#education'],
   ['Writing', '#writing'],
   ['Contact', '#contact'],
-  ['Game world', sitePath('/game/')],
+  ['Interactive CV', sitePath('/game/')],
 ]
 
 export function Header() {

@@ -241,7 +241,7 @@ export function GamePortfolio() {
     const points = findWalkablePath(start, destination)
     if (!points) {
       setIsTraveling(false)
-      showToast('No safe route found from this position. Return to the paved path and try again.')
+      showToast('No safe route from here. Return to the paved path and choose the doorway again.')
       return
     }
     if (points.length === 1) {
@@ -314,7 +314,7 @@ export function GamePortfolio() {
 
   const interact = useCallback(() => {
     if (!nearby) {
-      showToast('Follow a lit path toward a doorway or district guide.')
+      showToast('Choose a doorway to explore the work—or speak with a guide for context.')
       return
     }
     if (nearby.kind === 'building') openRoom(nearby.id)
@@ -377,7 +377,7 @@ export function GamePortfolio() {
       window.localStorage.removeItem(progressKey)
       window.localStorage.removeItem(completionKey)
     } catch { /* in-memory fallback */ }
-    showToast('District signals reset. The map is yours again.')
+    showToast('Exploration reset. Every room and case file is ready to revisit.')
   }, [applyPlayerPosition, showToast])
 
   const toggleSound = () => {
@@ -389,7 +389,7 @@ export function GamePortfolio() {
   const startGame = () => {
     setStarted(true)
     applyPlayerPosition(spawnPoint)
-    showToast('Seven buildings. Seven district signals. Wander in any order.')
+    showToast('Seven rooms map the work, decisions, and interests behind the résumé.')
   }
 
   const openDossierFromStart = () => {
@@ -404,7 +404,7 @@ export function GamePortfolio() {
     const previousThemeColor = themeColor?.content
     document.body.style.overflow = 'hidden'
     document.body.classList.add('systems-district-active')
-    document.title = 'The Systems District — Mauricio Berlanga Interactive Portfolio'
+    document.title = 'The Systems District — Mauricio Berlanga Interactive CV'
     if (themeColor) themeColor.content = '#071b27'
     return () => {
       document.body.style.overflow = previousOverflow
@@ -419,7 +419,7 @@ export function GamePortfolio() {
   }, [visited])
 
   useEffect(() => {
-    if (!started || activeRoom || enteringRoom || completionSeen || celebrationOpen || visited.length !== buildings.length) return
+    if (!started || activeRoom || activeNpc || atlasOpen || dossierOpen || enteringRoom || completionSeen || celebrationOpen || visited.length !== buildings.length) return
     const timer = window.setTimeout(() => {
       rememberOverlayTrigger()
       setCelebrationOpen(true)
@@ -428,7 +428,7 @@ export function GamePortfolio() {
       cue('complete')
     }, reducedEffects ? 120 : 620)
     return () => window.clearTimeout(timer)
-  }, [activeRoom, celebrationOpen, completionSeen, cue, enteringRoom, reducedEffects, rememberOverlayTrigger, started, visited.length])
+  }, [activeNpc, activeRoom, atlasOpen, celebrationOpen, completionSeen, cue, dossierOpen, enteringRoom, reducedEffects, rememberOverlayTrigger, started, visited.length])
 
   useEffect(() => {
     if (!canMove) {
@@ -531,11 +531,11 @@ export function GamePortfolio() {
 
   return (
     <div className="game-app" data-started={started} data-reduced-effects={reducedEffects}>
-      <a className="game-access-skip" href="#game-command-bar" tabIndex={started && !overlaysOpen ? 0 : -1}>Skip to game controls</a>
+      <a className="game-access-skip" href="#game-command-bar" tabIndex={started && !overlaysOpen ? 0 : -1}>Skip to interactive CV controls</a>
 
-      <div className="game-world" role="region" aria-label="The Systems District interactive map" aria-hidden={!started || overlaysOpen}>
+      <div className="game-world" role="region" aria-label="Mauricio Berlanga interactive CV map" aria-hidden={!started || overlaysOpen}>
         <div className="game-world-stage" ref={worldStageRef}>
-          <img className="game-world-map" src={sitePath('/game-world-map.webp')} alt="Illustrated island district with seven buildings connected by paths" draggable="false" />
+          <img className="game-world-map" src={sitePath('/game-world-map.webp')} alt="Illustrated island CV with seven buildings for career, research, projects, writing, interests, and contact" draggable="false" />
           <div className="game-world-grade" aria-hidden="true" />
           <div className="game-water-glint game-water-glint-one" aria-hidden="true" />
           <div className="game-water-glint game-water-glint-two" aria-hidden="true" />
@@ -557,7 +557,7 @@ export function GamePortfolio() {
                   tabIndex={started && !overlaysOpen ? 0 : -1}
                   aria-label={`${online ? 'Revisit' : 'Visit'} ${building.name}: ${building.description}`}
                 >
-                  <span className="game-landmark-state">{online ? <Check size={11} /> : <span />}{online ? 'Signal online' : building.eyebrow}</span>
+                  <span className="game-landmark-state">{online ? <Check size={11} /> : <span />}{online ? 'Evidence logged' : building.eyebrow}</span>
                   <strong>{building.name}</strong>
                   <span className="game-landmark-action"><DoorOpen size={13} /> Enter</span>
                 </button>
@@ -610,21 +610,21 @@ export function GamePortfolio() {
               <span><b>The Systems District</b><small>{activeRoom ? getBuilding(activeRoom).name : 'Overworld · Interface Plaza'}</small></span>
             </div>
 
-            <div className="game-signal-progress" aria-label={`${visited.length} of ${buildings.length} district signals online`}>
+            <div className="game-signal-progress" aria-label={`${visited.length} of ${buildings.length} CV sections explored`}>
               {buildings.map((building) => (
                 <span
                   key={building.id}
                   className={visitedSet.has(building.id) ? 'is-online' : ''}
                   style={{ '--signal-accent': building.accent } as React.CSSProperties}
-                  title={`${building.name}: ${visitedSet.has(building.id) ? 'online' : 'unvisited'}`}
+                  title={`${building.name}: ${visitedSet.has(building.id) ? 'explored' : 'not yet explored'}`}
                 />
               ))}
               <b>{visited.length}/{buildings.length}</b>
             </div>
 
-            <nav className="game-command-actions" aria-label="Game and portfolio controls">
+            <nav className="game-command-actions" aria-label="Interactive CV controls">
               <button type="button" tabIndex={overlaysOpen ? -1 : 0} aria-label="Open district atlas" onClick={openAtlas}><Map size={15} /><span>Atlas</span></button>
-              <button type="button" tabIndex={overlaysOpen ? -1 : 0} aria-label="Open portfolio dossier" onClick={openDossier}><BookOpen size={15} /><span>Dossier</span></button>
+              <button type="button" tabIndex={overlaysOpen ? -1 : 0} aria-label="Open CV dossier" onClick={openDossier}><BookOpen size={15} /><span>Dossier</span></button>
               <button type="button" tabIndex={overlaysOpen ? -1 : 0} aria-label={reducedEffects ? 'Use full motion effects' : 'Reduce motion effects'} onClick={() => setReducedEffects((value) => !value)} aria-pressed={reducedEffects} title="Toggle reduced effects"><Accessibility size={15} /><span>Motion</span></button>
               <button type="button" tabIndex={overlaysOpen ? -1 : 0} aria-label={soundOn ? 'Mute sound cues' : 'Enable sound cues'} onClick={toggleSound} aria-pressed={soundOn} title={soundOn ? 'Mute sound cues' : 'Enable sound cues'}>{soundOn ? <Volume2 size={15} /> : <VolumeX size={15} />}<span>Sound</span></button>
               <a href={sitePath('/')} tabIndex={overlaysOpen ? -1 : 0} title="Return to the classic portfolio"><Home size={15} /><span>Portfolio</span></a>
@@ -633,7 +633,7 @@ export function GamePortfolio() {
 
           <div className="game-world-caption">
             <Compass size={14} />
-            <span><b>Interface Plaza</b><small>Choose any path. Nothing important is locked.</small></span>
+            <span><b>Interface Plaza</b><small>Choose a route: career, research, projects, writing, interests, or contact.</small></span>
           </div>
 
           <div className={`game-interaction-prompt${nearby ? ' is-visible' : ''}`} aria-live="polite">
@@ -701,11 +701,11 @@ export function GamePortfolio() {
 
       {enteringRoom ? (
         <div className="game-door-transition" style={{ '--door-accent': getBuilding(enteringRoom).accent } as React.CSSProperties} role="status" aria-live="polite">
-          <div><span>Crossing the threshold</span><strong>{getBuilding(enteringRoom).name}</strong><i /></div>
+          <div><span>Opening the next chapter</span><strong>{getBuilding(enteringRoom).name}</strong><i /></div>
         </div>
       ) : null}
 
-      <div className="game-corner-signature" aria-hidden="true"><Sparkles size={12} /> Original interactive portfolio · 2026</div>
+      <div className="game-corner-signature" aria-hidden="true"><Sparkles size={12} /> Mauricio Berlanga · Interactive CV · 2026</div>
     </div>
   )
 }
