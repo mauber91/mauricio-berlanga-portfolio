@@ -36,7 +36,7 @@ export const personal = {
   location: 'Bentonville, Arkansas, United States',
   email: 'mberlanga91@gmail.com',
   summary:
-    'I build production web products and intelligent systems, combining 9+ years of software engineering—including 6+ years at Walmart Global Tech—with deep React/TypeScript frontend-platform experience and graduate-level work in machine learning, reinforcement learning, and modern AI systems.',
+    'Frontend engineering is my foundation. I tend to notice something that could work better, build a version, and measure whether it actually did. Lately that has taken me from product platforms and developer tools into applied AI experiments.',
 }
 
 export const socialLinks: SocialLink[] = [
@@ -55,7 +55,7 @@ export const experience = [
     role: 'Senior Software Engineer',
     period: 'Jul 2023 – Present',
     description:
-      'Lead frontend architecture for production React/TypeScript applications across Walmart’s Global Sourcing organization: Nx monorepos, shared tooling, React Router, Jest, and Module Federation with Webpack and Vite.',
+      'Lead frontend architecture for production React/TypeScript applications across Walmart’s Global Sourcing organization. For OneSource, I chose an Nx and Module Federation platform over a heavier internal framework; it let teams release independently and became a shared pattern for later micro-frontend work.',
     focus: [
       'React / TypeScript',
       'Nx monorepos',
@@ -72,7 +72,7 @@ export const experience = [
     role: 'Software Engineer III',
     period: 'Oct 2019 – Jul 2023',
     description:
-      'Built internal frontend products and helped bring multiple versions of React and legacy Angular together under shared micro-frontend shells, while integrating Java/Spring APIs and production delivery workflows.',
+      'Built internal frontend products and became a cross-team point of contact for difficult React bugs and high-impact refactors. Helped bring multiple React versions and legacy Angular apps together under shared micro-frontend shells, integrated with Java/Spring APIs and production delivery workflows.',
     focus: ['Angular interoperability', 'Micro-frontends', 'Module Federation', 'Java / Spring APIs', 'Docker / Nginx', 'Internal platforms'],
   },
   {
@@ -88,7 +88,7 @@ export const experience = [
     role: 'Co-founder / Software Developer',
     period: 'Mar 2015 – Feb 2017',
     description:
-      'Co-founded a public-transit product and led Ionic/Angular mobile development with Google Maps/Leaflet, crowdsourced live-bus locations, and an admin route-monitoring tool that grew past 10,000 registered users.',
+      'Co-founded a public-transit startup with three friends and led Ionic/Angular mobile development with Google Maps/Leaflet, crowdsourced live-bus locations, and an admin route-monitoring tool that grew past 10,000 registered users.',
     focus: ['Ionic / Angular', 'Google Maps / Leaflet', 'Mobile products', 'Laravel', 'PostgreSQL / MySQL', 'AWS'],
   },
   {
@@ -124,12 +124,12 @@ export const projects: Project[] = [
   {
     title: 'Intelligent Code Search / RAG Pipeline',
     description:
-      'A retrieval system for navigating and understanding large codebases using embeddings, semantic search, reranking, and LLM-generated file summaries.',
+      'An internal retrieval system for a coding agent, built after noticing that code lookup was consuming too much context. It combines embeddings, semantic search, reranking, and generated file summaries for large codebases.',
     technologies: ['RAG', 'Embeddings', 'Reranking', 'LLMs', 'Semantic Search'],
     status: 'Built',
     featured: true,
     insight:
-      'Iterated on retrieval quality through ranking heuristics, reranker score boosting, weight tuning, and comparative evaluation.',
+      'Exact-symbol lookup accuracy improved by 5–10% while context-token usage fell 30–40%, showing that retrieval quality and context cost have to be tuned together.',
     visual: 'retrieval',
   },
   {
@@ -148,12 +148,12 @@ export const projects: Project[] = [
   {
     title: 'Verifier-Aware Model Routing for Code Generation',
     description:
-      'A cost-sensitive contextual-bandit study of when to keep a local model’s code and when to escalate to a stronger API model using executable test feedback.',
+      'A cost-sensitive contextual-bandit study of when to keep a local model’s code and when to escalate to a stronger API model, using executable test feedback as a verifier.',
     technologies: ['Contextual Bandits', 'LLM Routing', 'LoRA', 'PyTorch', 'EvalPlus'],
     status: 'Study',
     featured: true,
     insight:
-      'A verifier-aware cheap-then-escalate policy reached strong hidden-test performance at a fraction of full API cost; the learned router was competitive, but calibration and random seeds still mattered.',
+      'The verifier-aware policy reached a 95.8% hidden-test pass rate while escalating 16.9% of tasks. On held-out benchmarks it used 19–23% of normalized API spend with no detected quality loss; learned routing only mattered when it could beat that simple rule consistently.',
     article: '/writing/verifier-aware-model-routing/',
     github: 'https://github.com/mauber91/cs224R',
     visual: 'routing',
@@ -161,7 +161,7 @@ export const projects: Project[] = [
   {
     title: 'COLMo: Cloud-Orchestrated Local Models',
     description:
-      'An empirical research system where a frontier cloud model plans and verifies while locally hosted models perform token-heavy reading over private documents.',
+      'An experimental system where a frontier cloud model plans and verifies while locally hosted models handle token-heavy document and code work. Its evaluation harness measures quality, tokens, cost, latency, retries, escalation, and information crossing the cloud boundary.',
     technologies: ['Local LLMs', 'DGX Spark', 'vLLM', 'Verification', 'Privacy Evaluation'],
     status: 'Exploratory',
     featured: true,

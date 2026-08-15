@@ -1,17 +1,12 @@
 import { Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { ThemeToggle } from './ThemeToggle'
-import { sitePath } from '../lib/paths'
 
 const navigation = [
-  ['About', '#about'],
+  ['Work', '#work'],
+  ['Notes', '#notes'],
   ['Experience', '#experience'],
-  ['AI & Research', '#research'],
-  ['Projects', '#projects'],
-  ['Education', '#education'],
-  ['Writing', '#writing'],
+  ['About', '#about'],
   ['Contact', '#contact'],
-  ['Interactive CV', sitePath('/game/')],
 ]
 
 export function Header() {
@@ -26,7 +21,7 @@ export function Header() {
   return (
     <header className="site-header">
       <a className="wordmark" href="#top" aria-label="Mauricio Berlanga, home">
-        <span>MB</span><i />
+        Mauricio Berlanga
       </a>
 
       <nav id="primary-navigation" className={`navigation ${open ? 'is-open' : ''}`} aria-label="Primary navigation">
@@ -36,7 +31,6 @@ export function Header() {
       </nav>
 
       <div className="header-actions">
-        <ThemeToggle />
         <button
           className="icon-button menu-button"
           type="button"

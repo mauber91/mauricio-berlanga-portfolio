@@ -96,7 +96,7 @@ export function FocusedPortfolio() {
               <div className="focused-hero-actions">
                 <a className="focused-primary-button" href="#work" onClick={() => cue('press')}>See selected work <ArrowDown size={15} /></a>
                 <a className="focused-text-link" href={sitePath('/game/')} onClick={() => cue('press')}><Gamepad2 size={15} /> Explore the Systems District</a>
-                <a className="focused-text-link" href="mailto:mberlanga91@gmail.com" onClick={() => cue('press')}>Start a conversation <ArrowUpRight size={15} /></a>
+                <a className="focused-text-link" href="mailto:mberlanga91@gmail.com" onClick={() => cue('press')}>Email me <ArrowUpRight size={15} /></a>
               </div>
               <div className="focused-hero-metrics" aria-label="Career highlights">
                 <span><b>9+</b> years shipping software</span>
@@ -105,7 +105,7 @@ export function FocusedPortfolio() {
               </div>
             </div>
             <aside className="focused-hero-card">
-              <div className="focused-hero-card-top"><span>Current focus</span><span className="focused-status-dot">Available for the right problem</span></div>
+              <div className="focused-hero-card-top"><span>Current focus</span><span className="focused-status-dot">Studying deep reinforcement learning</span></div>
               <ProjectArt title={selectedProject.title} className="focused-hero-art" />
               <div className="focused-hero-card-copy">
                 <p className="focused-card-label">Interface · model · measurement</p>
@@ -203,7 +203,7 @@ export function FocusedPortfolio() {
         <section id="contact" className="focused-contact-section">
           <div className="focused-shell focused-contact-grid">
             <div><p className="focused-eyebrow">04 / Contact</p><h2>Have a problem worth <em>untangling?</em></h2></div>
-            <div className="focused-contact-copy"><p>I’m interested in ambitious frontend platforms, applied AI, and the connective tissue between a good model and a good product.</p><div className="focused-contact-links"><a href={`mailto:${personal.email}`} onClick={() => cue('press')}><Mail size={15} /> {personal.email}</a>{socialLinks.filter((link) => link.label !== 'Email').map((link) => <a href={link.href} key={link.label} target="_blank" rel="noreferrer" onClick={() => cue('press')}><ExternalLink size={14} /> {link.label}</a>)}</div></div>
+            <div className="focused-contact-copy"><p>I enjoy comparing notes about frontend platforms, applied AI, and the connective tissue between a good model and a good product.</p><div className="focused-contact-links"><a href={`mailto:${personal.email}`} onClick={() => cue('press')}><Mail size={15} /> {personal.email}</a>{socialLinks.filter((link) => link.label !== 'Email').map((link) => <a href={link.href} key={link.label} target="_blank" rel="noreferrer" onClick={() => cue('press')}><ExternalLink size={14} /> {link.label}</a>)}</div></div>
           </div>
         </section>
       </main>
