@@ -1,6 +1,6 @@
 import { ArrowLeft, ArrowUpRight, Clock3, Code2, Sparkles } from 'lucide-react'
 import { type ReactNode, useEffect } from 'react'
-import { ThemeToggle } from '../ThemeToggle'
+import { Header } from '../Header'
 import type { ArticleMeta } from '../../data/articles'
 import { sitePath } from '../../lib/paths'
 
@@ -19,23 +19,18 @@ export function ArticleLayout({ article, stats, sections, children }: ArticleLay
   }, [article])
 
   return (
-    <div className="article-site">
+    <div className="field-page article-site" id="top">
       <a className="skip-link" href="#article-content">Skip to article</a>
-      <header className="article-topbar">
-        <a className="wordmark" href={sitePath('/')} aria-label="Mauricio Berlanga, home"><span>MB</span><i /></a>
-        <a className="article-back" href={sitePath('/#writing')}><ArrowLeft size={14} /> All writing</a>
-        <ThemeToggle />
-      </header>
+      <Header homeLinks />
 
       <main id="article-content">
-        <header className={`article-hero shell${article.leadImage ? ' has-image' : ''}`}>
-          {article.leadImage && (
-            <img
-              className="article-hero-image"
-              src={sitePath(article.leadImage)}
-              alt={article.leadImageAlt ?? ''}
-            />
-          )}
+        <header className="article-hero field-shell">
+          <div className="article-hero-rail field-rail">
+            <a className="article-back" href={sitePath('/#writing')}><ArrowLeft size={14} /> All writing</a>
+            <p>Field note</p>
+            <span>{article.projectType ?? 'Course project'}</span>
+            <span>{article.readTime}</span>
+          </div>
           <div className="article-hero-content">
             <a className="article-course" href={sitePath('/#education')}>{article.course}</a>
             <h1>{article.title}</h1>
@@ -46,20 +41,39 @@ export function ArticleLayout({ article, stats, sections, children }: ArticleLay
               <span>{article.projectType ?? 'Course project'}</span>
             </div>
             <ul className="article-tags">{article.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
+            {article.leadImage && (
+              <figure className="article-hero-figure">
+                <div>
+                  <img src={sitePath(article.leadImage)} alt={article.leadImageAlt ?? ''} />
+                </div>
+              </figure>
+            )}
           </div>
         </header>
 
-        <section className="article-stats shell" aria-label="Project highlights">
-          {stats.map((stat) => <div key={stat.label}><b>{stat.value}</b><span>{stat.label}</span></div>)}
+        <section className="article-stats field-shell" aria-label="Project highlights">
+          <div className="article-stats-rail field-rail">
+            <p>At a glance</p>
+            <span>Evidence from the study</span>
+          </div>
+          <div className="article-stats-main">
+            {stats.map((stat) => <div key={stat.label}><b>{stat.value}</b><span>{stat.label}</span></div>)}
+          </div>
         </section>
 
-        <aside className="article-disclaimer shell" aria-label="Content disclosure">
-          <Sparkles size={16} aria-hidden="true" />
-          <p><strong>Disclosure:</strong> {article.disclosure ?? 'This article was generated with AI from my academic paper. It presents an accessible adaptation of the original research; the paper remains the authoritative source for the complete methodology and results.'}</p>
+        <aside className="article-disclaimer field-shell" aria-label="Content disclosure">
+          <div className="article-disclaimer-rail field-rail">
+            <p>Editorial note</p>
+            <span>How to read this adaptation</span>
+          </div>
+          <div className="article-disclaimer-main">
+            <Sparkles size={16} aria-hidden="true" />
+            <p><strong>Disclosure:</strong> {article.disclosure ?? 'This article was generated with AI from my academic paper. It presents an accessible adaptation of the original research; the paper remains the authoritative source for the complete methodology and results.'}</p>
+          </div>
         </aside>
 
-        <div className="article-layout shell">
-          <aside className="article-toc" aria-label="Article contents">
+        <div className="article-layout field-shell">
+          <aside className="article-toc field-rail" aria-label="Article contents">
             <p>In this article</p>
             <nav>{sections.map((section) => <a href={`#${section.id}`} key={section.id}>{section.label}</a>)}</nav>
             {article.repository && (
@@ -72,9 +86,10 @@ export function ArticleLayout({ article, stats, sections, children }: ArticleLay
         </div>
       </main>
 
-      <footer className="article-footer shell">
+      <footer className="article-footer field-footer field-shell">
         <a href={sitePath('/#writing')}><ArrowLeft size={14} /> More writing</a>
         <p>© {new Date().getFullYear()} Mauricio Berlanga</p>
+        <a href={sitePath('/#top')}>Back to top</a>
       </footer>
     </div>
   )

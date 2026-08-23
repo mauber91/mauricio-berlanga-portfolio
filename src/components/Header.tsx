@@ -1,5 +1,6 @@
 import { Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { sitePath } from '../lib/paths'
 
 const navigation = [
   ['Work', '#work'],
@@ -9,8 +10,10 @@ const navigation = [
   ['Contact', '#contact'],
 ]
 
-export function Header() {
+export function Header({ homeLinks = false }: { homeLinks?: boolean }) {
   const [open, setOpen] = useState(false)
+
+  const hrefFor = (href: string) => homeLinks ? sitePath(`/#${href.slice(1)}`) : href
 
   useEffect(() => {
     const close = () => setOpen(false)
@@ -20,13 +23,13 @@ export function Header() {
 
   return (
     <header className="site-header">
-      <a className="wordmark" href="#top" aria-label="Mauricio Berlanga, home">
+      <a className="wordmark" href={homeLinks ? sitePath('/#top') : '#top'} aria-label="Mauricio Berlanga, home">
         Mauricio Berlanga
       </a>
 
       <nav id="primary-navigation" className={`navigation ${open ? 'is-open' : ''}`} aria-label="Primary navigation">
         {navigation.map(([label, href]) => (
-          <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>
+          <a key={href} href={hrefFor(href)} onClick={() => setOpen(false)}>{label}</a>
         ))}
       </nav>
 
