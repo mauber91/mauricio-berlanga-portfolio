@@ -31,6 +31,13 @@ const routes = [
     image: '/articles/colmo-card-v2.jpg',
     imageAlt: 'A cloud intelligence coordinating a network of local computers through luminous information paths.',
   },
+  {
+    path: '/writing/world-cup-semifinal-forecast/',
+    title: 'How a probabilistic model found 3 of 4 World Cup semifinalists — Mauricio Berlanga',
+    description: 'A methodology-first account of team-strength priors, expected goals, market calibration, and Monte Carlo simulation for the 2026 World Cup.',
+    image: '/articles/world-cup-forecast-card-v2.jpg',
+    imageAlt: 'Thousands of tournament paths converge into four semifinal nodes, three highlighted in green and one in amber.',
+  },
 ]
 
 const builtIndex = await readFile(new URL('index.html', output), 'utf8')

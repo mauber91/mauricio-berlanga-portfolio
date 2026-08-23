@@ -34,6 +34,12 @@ const articleMeta = {
     image: '/articles/colmo-card-v2.jpg',
     imageAlt: 'A cloud intelligence coordinating a network of local computers through luminous information paths.',
   },
+  '/writing/world-cup-semifinal-forecast/': {
+    title: 'How a probabilistic model found 3 of 4 World Cup semifinalists — Mauricio Berlanga',
+    description: 'A methodology-first account of team-strength priors, expected goals, market calibration, and Monte Carlo simulation for the 2026 World Cup.',
+    image: '/articles/world-cup-forecast-card-v2.jpg',
+    imageAlt: 'Thousands of tournament paths converge into four semifinal nodes, three highlighted in green and one in amber.',
+  },
 }
 
 function textResponse(body, contentType) {
@@ -57,7 +63,7 @@ export default {
     }
 
     if (url.pathname === '/sitemap.xml') {
-      const paths = ['/', '/game/', '/writing/usd-mxn-forecasting/', '/writing/verifier-aware-model-routing/', '/writing/colmo/']
+      const paths = ['/', '/game/', '/writing/usd-mxn-forecasting/', '/writing/verifier-aware-model-routing/', '/writing/colmo/', '/writing/world-cup-semifinal-forecast/']
       const entries = paths.map((path) => \`<url><loc>\${url.origin}\${path}</loc></url>\`).join('')
       return textResponse(
         \`<?xml version="1.0" encoding="UTF-8"?>\\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\${entries}</urlset>\`,

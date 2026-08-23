@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Design QA comparison</title>
+    <style>
+      * { box-sizing: border-box; }
+      html, body { width: 2880px; min-width: 2880px; height: 1024px; margin: 0; overflow: hidden; background: #111; }
+      main { display: grid; grid-template-columns: 1440px 1440px; width: 2880px; height: 1024px; }
+      img { display: block; width: 1440px; height: 1024px; object-fit: fill; }
+    </style>
+  </head>
+  <body>
+    <main aria-label="Source design on the left and browser implementation on the right">
+      <img src="./source-design.png" alt="Source design" />
+      <img src="./implementation-desktop-final.png" alt="Browser implementation" />
+    </main>
+  </body>
+</html>

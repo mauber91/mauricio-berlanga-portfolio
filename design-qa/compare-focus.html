@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Design QA focused comparison</title>
+    <style>
+      * { box-sizing: border-box; }
+      html, body { width: 2200px; min-width: 2200px; height: 650px; margin: 0; overflow: hidden; background: #111; }
+      main { display: grid; grid-template-columns: 1100px 1100px; width: 2200px; height: 650px; }
+      img { display: block; width: 1100px; height: 650px; object-fit: fill; }
+    </style>
+  </head>
+  <body>
+    <main aria-label="Featured-section source crop on the left and implementation crop on the right">
+      <img src="./source-feature-crop.png" alt="Source featured section" />
+      <img src="./implementation-feature-crop.png" alt="Implementation featured section" />
+    </main>
+  </body>
+</html>

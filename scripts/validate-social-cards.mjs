@@ -4,6 +4,7 @@ const cardPaths = [
   '../public/articles/usdmxn-card-v2.jpg',
   '../public/articles/model-routing-card-v2.jpg',
   '../public/articles/colmo-card-v2.jpg',
+  '../public/articles/world-cup-forecast-card-v2.jpg',
 ]
 
 function jpegDimensions(buffer) {

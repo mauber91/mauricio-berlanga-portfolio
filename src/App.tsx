@@ -18,7 +18,7 @@ function App() {
   const activeArticle = getArticleByPath(stripSiteBase(window.location.pathname))
   if (activeArticle) return <ArticlePage article={activeArticle} />
 
-  const featuredArticle = articles.find((article) => article.slug === 'usd-mxn-forecasting') ?? articles[0]
+  const featuredArticle = articles.find((article) => article.slug === 'world-cup-semifinal-forecast') ?? articles[0]
 
   return (
     <div className="field-page" id="top">
@@ -46,30 +46,30 @@ function App() {
             <article className="featured-note">
               <div className="featured-primary">
                 <p className="field-kicker">Featured field note</p>
-                <h2 id="featured-note-title">When the baseline wins:<br /> lessons from forecasting USD/MXN</h2>
-                <p className="featured-dek">The strongest models did not reliably beat simple baselines.<br /> That negative result was the useful result.</p>
+                <h2 id="featured-note-title">How a probabilistic model found<br /> 3 of 4 World Cup semifinalists</h2>
+                <p className="featured-dek">The bracket was the visible result.<br /> The probability pipeline underneath it was the real project.</p>
               </div>
 
               <aside className="featured-margin" aria-label="Reflection on the project">
                 <div className="featured-margin-rule" aria-hidden="true" />
                 <div>
                   <h3>What changed my mind</h3>
-                  <p>I used to equate a good study with a new state-of-the-art number. This project reminded me that clarity comes from knowing what doesn’t work, and why.</p>
+                  <p>A tournament prediction is not four isolated picks. Strength uncertainty, score distributions, tie-break rules, and every upstream result reshape the paths that remain possible.</p>
                 </div>
               </aside>
 
               <div className="featured-evidence">
                 <div className="featured-meta">
-                  <p>CS229 <span>·</span> Machine Learning</p>
-                  <em>Useful negative result</em>
+                  <p>Independent <span>·</span> Probabilistic forecasting</p>
+                  <em>Three of four semifinalists</em>
                 </div>
 
                 <figure className="featured-figure">
                   <img
-                    src={sitePath('/articles/usdmxn-direction-accuracy.png')}
-                    alt="Bar chart comparing directional accuracy for seven USD/MXN forecasting models against a random baseline"
+                    src={sitePath('/articles/world-cup-forecast-social.png')}
+                    alt="Thousands of tournament paths converge into four semifinal nodes, three highlighted in green and one in amber"
                   />
-                  <figcaption>Figure 1 · Directional accuracy on the held-out test set.</figcaption>
+                  <figcaption>Figure 1 · Many simulated tournament paths, summarized as one projected bracket.</figcaption>
                   <a className="field-link field-link-accent" href={sitePath(featuredArticle.path)}>
                     Read the note <ArrowRight size={15} aria-hidden="true" />
                   </a>

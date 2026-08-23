@@ -1,5 +1,5 @@
 export type ArticleMeta = {
-  slug: 'usd-mxn-forecasting' | 'verifier-aware-model-routing' | 'colmo'
+  slug: 'usd-mxn-forecasting' | 'verifier-aware-model-routing' | 'colmo' | 'world-cup-semifinal-forecast'
   path: string
   course: string
   projectType?: string
@@ -10,6 +10,7 @@ export type ArticleMeta = {
   repository?: string
   leadImage?: string
   leadImageAlt?: string
+  disclosure?: string
 }
 
 export const articles: ArticleMeta[] = [
@@ -54,6 +55,23 @@ export const articles: ArticleMeta[] = [
     leadImage: '/articles/colmo-social.png',
     leadImageAlt:
       'A cloud intelligence coordinating a network of local computers through luminous information paths',
+  },
+  {
+    slug: 'world-cup-semifinal-forecast',
+    path: '/writing/world-cup-semifinal-forecast/',
+    course: 'Independent project · Probabilistic forecasting',
+    projectType: 'Research project',
+    title: 'How a probabilistic model found 3 of 4 World Cup semifinalists',
+    description:
+      'A methodology-first account of combining team-strength priors, expected goals, market calibration, and full-tournament Monte Carlo simulation to forecast the 2026 World Cup bracket.',
+    readTime: '13 min read',
+    tags: ['Monte Carlo', 'Probabilistic modeling', 'Elo ratings', 'Calibration'],
+    repository: 'https://github.com/mauber91/WC',
+    leadImage: '/articles/world-cup-forecast-social.png',
+    leadImageAlt:
+      'Thousands of faint tournament paths converge into four semifinal nodes, three highlighted in green and one in amber',
+    disclosure:
+      'This article was generated with AI from the WC source code, model documentation, and frozen simulation metadata. The repository remains the authoritative source for the implemented formulas, rules, and experiment details.',
   },
 ]
 

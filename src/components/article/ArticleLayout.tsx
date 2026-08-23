@@ -55,7 +55,7 @@ export function ArticleLayout({ article, stats, sections, children }: ArticleLay
 
         <aside className="article-disclaimer shell" aria-label="Content disclosure">
           <Sparkles size={16} aria-hidden="true" />
-          <p><strong>Disclosure:</strong> This article was generated with AI from my academic paper. It presents an accessible adaptation of the original research; the paper remains the authoritative source for the complete methodology and results.</p>
+          <p><strong>Disclosure:</strong> {article.disclosure ?? 'This article was generated with AI from my academic paper. It presents an accessible adaptation of the original research; the paper remains the authoritative source for the complete methodology and results.'}</p>
         </aside>
 
         <div className="article-layout shell">
