@@ -544,40 +544,8 @@
   color: var(--field-accent);
 }
 
-.field-research-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  border-top: 1px solid var(--field-rule);
-}
-
-.field-research-item {
-  min-height: 190px;
-  padding: 26px 30px 28px 0;
-  border-bottom: 1px solid var(--field-rule);
-}
-
-.field-research-item:nth-child(odd) {
-  padding-right: 42px;
-  border-right: 1px solid var(--field-rule);
-}
-
-.field-research-item:nth-child(even) {
-  padding-left: 42px;
-}
-
-.field-research-item h3 {
-  font-size: 22px;
-  line-height: 1.15;
-}
-
-.field-research-item > p:not(.field-index-stack) {
-  margin-top: 12px;
-  font-size: 13px;
-  line-height: 1.62;
-}
-
 .field-education {
-  margin-top: 48px;
+  margin-top: 0;
   border-top: 1px solid var(--field-rule);
 }
 
@@ -636,6 +604,7 @@
 .field-skill-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 40px;
   border-top: 1px solid var(--field-rule);
 }
 
@@ -773,10 +742,42 @@
   text-align: center;
 }
 
-.field-footer a {
+.field-footer > a {
   justify-self: end;
+}
+
+.field-footer a {
   text-decoration: underline;
   text-underline-offset: 4px;
+}
+
+.field-ledger-bullets {
+  display: grid;
+  gap: 6px;
+  margin: 10px 0 0;
+  padding-left: 18px;
+  list-style: disc;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.field-ledger-bullets li {
+  color: var(--field-body);
+}
+
+.field-ledger-bullets li::marker {
+  color: var(--field-accent);
+}
+
+.field-tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.field-ledger-role .field-inline-list {
+  margin-top: 12px;
 }
 
 /* Proof strip and Selected-work cards */
@@ -1174,21 +1175,18 @@
     max-width: 520px;
   }
 
-  .field-research-grid,
   .field-skill-list,
   .field-contact-links,
   .field-about-grid {
     grid-template-columns: 1fr;
   }
 
-  .field-research-item,
   .field-skill-row {
     min-height: 0;
     padding: 24px 0;
     border-right: 0 !important;
   }
 
-  .field-research-item:nth-child(even),
   .field-skill-row:nth-child(even) {
     padding-left: 0;
   }

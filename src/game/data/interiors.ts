@@ -46,17 +46,17 @@ export const interiorScenes: Record<BuildingId, InteriorScene> = {
       {
         id: 'platform', index: '02', eyebrow: 'Architecture bay', title: 'Frontend platforms at scale',
         summary: 'At Walmart, Mauricio brought multiple React versions and legacy Angular into shared micro-frontend shells; today he leads React/TypeScript foundations with Nx, routing, testing, and Module Federation across Webpack and Vite.',
-        cta: 'Inspect platform decisions', caseFile: { kind: 'career', experienceIndexes: [0, 1], skillGroupTitles: ['Frontend Systems', 'APIs & Infrastructure'] }, position: { x: 73, y: 23 },
+        cta: 'Inspect platform decisions', caseFile: { kind: 'career', experienceIndexes: [0, 1], skillGroupTitles: ['Frontend / product'] }, position: { x: 73, y: 23 },
       },
       {
         id: 'archive', index: '03', eyebrow: 'Schema workshop', title: 'Reusable UI for complex tools',
         summary: 'For TIBCO Flogo, Mauricio built Angular/TypeScript components and validated, JSON-driven forms for configuring microservices, serverless functions, APIs, and connectors.',
-        cta: 'Examine component work', caseFile: { kind: 'career', experienceIndexes: [2], skillGroupTitles: ['Frontend Product Craft'] }, position: { x: 23, y: 66 },
+        cta: 'Examine component work', caseFile: { kind: 'career', experienceIndexes: [2], skillGroupTitles: ['Frontend / product'] }, position: { x: 23, y: 66 },
       },
       {
         id: 'quality', index: '04', eyebrow: 'Team practice', title: 'Engineering beyond implementation',
         summary: 'System design, Jest, Playwright, reusable components, and mentoring show how Mauricio turns individual delivery into shared patterns that teams can test, explain, and extend.',
-        cta: 'Review technical leadership', caseFile: { kind: 'career', experienceIndexes: [0], skillGroupTitles: ['Frontend Product Craft'] }, position: { x: 76, y: 67 },
+        cta: 'Review technical leadership', caseFile: { kind: 'career', experienceIndexes: [0], skillGroupTitles: ['Frontend / product'] }, position: { x: 76, y: 67 },
       },
     ],
   },
@@ -66,7 +66,7 @@ export const interiorScenes: Record<BuildingId, InteriorScene> = {
       {
         id: 'optics', index: '01', eyebrow: 'Modeling compass', title: 'Model judgment before novelty',
         summary: 'Mauricio’s machine-learning foundation spans supervised learning, feature design, neural networks, and evaluation, with equal attention to generalization limits and failure modes.',
-        cta: 'Review ML foundations', caseFile: { kind: 'research', researchThemeIndexes: [1], skillGroupTitles: ['AI / ML'] }, position: { x: 18, y: 44 },
+        cta: 'Review ML foundations', caseFile: { kind: 'research', researchThemeIndexes: [1], skillGroupTitles: ['AI / ML systems'] }, position: { x: 18, y: 44 },
       },
       {
         id: 'orrery', index: '02', eyebrow: 'Course trajectory', title: 'Graduate AI work in progress',
@@ -76,7 +76,7 @@ export const interiorScenes: Record<BuildingId, InteriorScene> = {
       {
         id: 'archive', index: '03', eyebrow: 'Systems telescope', title: 'Retrieval to orchestration',
         summary: 'Mauricio studies how context is found, ranked, and delegated—from embedding and reranking pipelines to model routing and hardware-aware local/cloud execution.',
-        cta: 'Connect the research themes', caseFile: { kind: 'research', researchThemeIndexes: [0, 3], skillGroupTitles: ['AI Infrastructure'] }, position: { x: 78, y: 43 },
+        cta: 'Connect the research themes', caseFile: { kind: 'research', researchThemeIndexes: [0, 3], skillGroupTitles: ['AI / ML systems'] }, position: { x: 78, y: 43 },
       },
       {
         id: 'constellation', index: '04', eyebrow: 'Decision lab', title: 'Sequential decisions to deep RL',

@@ -101,36 +101,50 @@ export const socialLinks: SocialLink[] = [
   { label: 'GitHub', href: 'https://github.com/mauber91', display: 'github.com/mauber91' },
   {
     label: 'LinkedIn',
+    // TODO(owner): claim a vanity LinkedIn URL and update href.
     href: 'https://www.linkedin.com/in/mauricio-berlanga-carrillo-58a62334',
-    display: 'linkedin.com/in/mauricio-berlanga-carrillo-58a62334',
+    display: 'LinkedIn profile',
   },
   { label: 'Email', href: `mailto:${personal.email}`, display: personal.email },
+  { label: 'Résumé', href: personal.resumePath, display: 'PDF, one page' },
 ]
 
-export const experience = [
+export type ExperienceItem = {
+  company: string
+  role: string
+  period: string
+  description: string
+  bullets?: string[]
+  tracks?: Track[]
+  focus: string[]
+}
+
+export const experience: ExperienceItem[] = [
   {
     company: 'Walmart Global Tech',
     role: 'Senior Software Engineer',
     period: 'Jul 2023 – Present',
     description:
-      'Lead frontend architecture for production React/TypeScript applications across Walmart’s Global Sourcing organization. For OneSource, I chose an Nx and Module Federation platform over a heavier internal framework; it let teams release independently and became a shared pattern for later micro-frontend work.',
-    focus: [
-      'React / TypeScript',
-      'Nx monorepos',
-      'React Router',
-      'Jest',
-      'Module Federation',
-      'Webpack / Vite',
-      'Mentoring',
-      'System design',
+      'Own frontend architecture for production React/TypeScript applications across Walmart’s Global Sourcing organization.',
+    bullets: [
+      'Chose Nx + Module Federation over the internal framework for OneSource; teams now release independently and the pattern was reused for later micro-frontend work.',
+      'Built a semantic code-retrieval pipeline for an internal coding agent: +5–10% exact-symbol accuracy, 30–40% fewer context tokens.',
+      'Cross-team escalation point for hard React bugs; mentor interns and interview candidates. TODO(owner): add counts.',
     ],
+    tracks: ['frontend', 'ai'],
+    focus: ['React / TypeScript', 'Nx monorepos', 'Module Federation', 'Webpack / Rspack', 'React Router', 'Jest', 'RAG / Embeddings'],
   },
   {
     company: 'Walmart',
     role: 'Software Engineer III',
     period: 'Oct 2019 – Jul 2023',
     description:
-      'Built internal frontend products and became a cross-team point of contact for difficult React bugs and high-impact refactors. Helped bring multiple React versions and legacy Angular apps together under shared micro-frontend shells, integrated with Java/Spring APIs and production delivery workflows.',
+      'Built internal frontend products and became a cross-team point of contact for difficult React bugs and high-impact refactors.',
+    bullets: [
+      'Brought multiple React versions and legacy Angular apps together under shared micro-frontend shells.',
+      'Integrated frontends with Java/Spring APIs and production delivery workflows (Docker, Nginx).',
+    ],
+    tracks: ['frontend'],
     focus: ['Angular interoperability', 'Micro-frontends', 'Module Federation', 'Java / Spring APIs', 'Docker / Nginx', 'Internal platforms'],
   },
   {
@@ -155,7 +169,7 @@ export const experience = [
     period: 'Dec 2015 – Mar 2016',
     description:
       'Developed a responsive website for an education platform and applied technical SEO that brought multiple relevant local searches onto Google’s first page in under three months.',
-    focus: ['Frontend development', 'Responsive design', 'Technical SEO', 'Scrum', 'Kanban'],
+    focus: ['Frontend development', 'Responsive design', 'Technical SEO'],
   },
 ]
 
@@ -301,13 +315,26 @@ export const featuredProjects: Project[] = featuredProjectTitles.flatMap((title)
   return project ? [project] : []
 })
 
+/** Rendered first in the homepage "More work" list; kept out of `githubProjects` so the interactive CV does not list itself. */
+export const interactiveCvProject: GitHubProject = {
+  title: 'The Systems District',
+  description:
+    'An explorable interactive CV: seven rooms, a custom collision engine, sprite animation, and proximity-triggered audio, built in React and TypeScript.',
+  technologies: ['React', 'TypeScript', 'DOM rendering', 'Custom collision engine'],
+  activity: 'Playable',
+  category: 'Interactive experiment',
+  repository: 'mauricio-berlanga-portfolio',
+  url: '/game/',
+  local: true,
+}
+
 export const githubProjects: GitHubProject[] = [
   {
     title: 'Cost-Aware Model Routing for Code Generation',
     description:
       'A CS224R research project studying contextual-bandit routing and verifier-aware escalation between local and stronger code models, with reproducible evaluation infrastructure for MBPP and LiveCodeBench.',
     technologies: ['Python', 'PyTorch', 'Transformers', 'Contextual Bandits', 'Model Routing'],
-    activity: 'Active · Jul 2026',
+    activity: 'Active',
     category: 'AI research',
     repository: 'cs224R',
     url: 'https://github.com/mauber91/cs224R',
@@ -318,7 +345,7 @@ export const githubProjects: GitHubProject[] = [
     description:
       'A local-first 2026 tournament forecasting and Monte Carlo simulation platform implementing FIFA tie-break rules, live market inputs, automated data refreshes, and typed match-report extraction.',
     technologies: ['React', 'TypeScript', 'FastAPI', 'scikit-learn', 'Monte Carlo'],
-    activity: 'Active · Jun 2026',
+    activity: 'Active',
     category: 'Full-stack ML',
     repository: 'WC',
     url: 'https://github.com/mauber91/WC',
@@ -329,7 +356,7 @@ export const githubProjects: GitHubProject[] = [
     description:
       'A focused reading workflow that organizes exported X bookmarks into searchable categories, surfaces article insights, prioritizes a reading queue, and tracks completion locally.',
     technologies: ['React', 'TypeScript', 'Vite', 'Content Processing', 'Local Storage'],
-    activity: 'Active · Jul 2026',
+    activity: 'Active',
     category: 'Product engineering',
     repository: 'bookmarks-viewer',
     url: 'https://github.com/mauber91/bookmarks-viewer',
@@ -339,7 +366,7 @@ export const githubProjects: GitHubProject[] = [
     description:
       'A self-contained data dashboard exploring heat impact across tournament venues and match schedules through comparative metrics, reference definitions, and embedded charts.',
     technologies: ['JavaScript', 'Chart.js', 'Data Visualization', 'Responsive UI'],
-    activity: 'Published · Jun 2026',
+    activity: 'Published',
     category: 'Data visualization',
     repository: 'worldcup2026-heat-impact-dashboard',
     url: 'https://github.com/mauber91/worldcup2026-heat-impact-dashboard',
@@ -349,7 +376,7 @@ export const githubProjects: GitHubProject[] = [
     description:
       'A responsive React application for tracking football prediction rankings, accuracy, points, and aggregate leaderboard statistics across desktop and mobile.',
     technologies: ['React', 'TypeScript', 'Responsive Design', 'Data UI'],
-    activity: 'Updated · Jan 2026',
+    activity: 'Updated',
     category: 'Frontend product',
     repository: 'leaderboard',
     url: 'https://github.com/mauber91/leaderboard',
@@ -360,7 +387,7 @@ export const githubProjects: GitHubProject[] = [
     description:
       'An interactive browser art experiment that maps real-time hand gestures to a 35,000-particle Three.js environment through MediaPipe hand tracking.',
     technologies: ['Three.js', 'MediaPipe', 'WebGL', 'Gesture Interaction'],
-    activity: 'Updated · Aug 2025',
+    activity: 'Updated',
     category: 'Creative technology',
     repository: 'aetherTouch',
     url: 'https://github.com/mauber91/aetherTouch',
@@ -368,12 +395,38 @@ export const githubProjects: GitHubProject[] = [
 ]
 
 export const skillGroups = [
-  { title: 'AI / ML', skills: ['PyTorch', 'ML fundamentals', 'Embeddings', 'RAG', 'Reranking', 'LLM systems', 'Reinforcement learning'] },
-  { title: 'Frontend Systems', skills: ['React', 'TypeScript', 'Angular', 'Nx', 'React Router', 'Module Federation', 'Vite', 'Webpack', 'Rspack'] },
-  { title: 'Frontend Product Craft', skills: ['Responsive UI', 'Reusable components', 'Jest', 'Playwright', 'Technical SEO', 'API integration', 'Three.js / WebGL'] },
-  { title: 'Software Engineering', skills: ['JavaScript', 'Python', 'Java / Spring', 'Node.js / Express'] },
-  { title: 'APIs & Infrastructure', skills: ['GraphQL', 'Apollo', 'REST', 'Docker'] },
-  { title: 'AI Infrastructure', skills: ['Local LLMs', 'GPU inference', 'Model evaluation', 'Experimentation'] },
+  {
+    title: 'AI / ML systems',
+    skills: [
+      'PyTorch',
+      'Python',
+      'RAG & embeddings',
+      'Reranking',
+      'LLM routing & evaluation',
+      'Contextual bandits / RL',
+      'vLLM & local inference',
+      'Experiment harnesses',
+      // TODO(owner): add the vector store and experiment-tracking tool you use, or delete this comment.
+    ],
+  },
+  {
+    title: 'Frontend / product',
+    skills: [
+      'React',
+      'TypeScript',
+      'Angular',
+      'Nx monorepos',
+      'Module Federation',
+      'Vite / Webpack / Rspack',
+      'React Router',
+      'Jest / Playwright',
+      'Accessibility (WCAG AA)',
+      'Performance budgets',
+      'Three.js / WebGL',
+      'GraphQL / REST',
+      'Docker',
+    ],
+  },
 ]
 
 export const researchThemes = [

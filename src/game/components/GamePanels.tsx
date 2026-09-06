@@ -204,7 +204,7 @@ export function DossierPanel({ visited, onClose, onOpenBuilding }: DossierPanelP
         <header className="game-dossier-topbar">
           <div className="game-dossier-wordmark"><span>MB</span><b>Portfolio dossier</b><small>CV view · Experience, projects, skills & contact</small></div>
           <div className="game-dossier-top-actions">
-            <a href={sitePath('/')}>Classic website <ArrowUpRight size={14} /></a>
+            <a href={sitePath('/')}>Main portfolio <ArrowUpRight size={14} /></a>
             <button className="game-icon-close" type="button" onClick={onClose} aria-label="Close dossier" autoFocus><X size={18} /></button>
           </div>
         </header>
@@ -730,7 +730,7 @@ function ContactCaseFile({ panel, onOpenBuilding }: { panel: Extract<InteriorExh
       window.location.href = `mailto:${personal.email}`
     }
   }
-  const opportunitySkills = skillGroups.filter((group) => ['Frontend Systems', 'Frontend Product Craft', 'AI / ML', 'AI Infrastructure'].includes(group.title))
+  const opportunitySkills = skillGroups.filter((group) => ['Frontend / product', 'AI / ML systems'].includes(group.title))
 
   return (
     <>

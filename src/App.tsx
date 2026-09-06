@@ -7,9 +7,9 @@ import {
   experience,
   featuredProjects,
   githubProjects,
+  interactiveCvProject,
   personal,
   proofStrip,
-  researchThemes,
   skillGroups,
   socialLinks,
   trackLabel,
@@ -58,32 +58,6 @@ function App() {
               <p>{item.text}</p>
             </a>
           ))}
-        </section>
-
-        <section className="field-section field-shell" id="experience" aria-labelledby="experience-title">
-          <div className="field-rail" aria-hidden="true" />
-          <div className="field-section-main">
-            <h2 id="experience-title" className="field-section-title">Experience</h2>
-            <div className="field-ledger">
-              {experience.map((item) => (
-                <article className="field-ledger-row" key={`${item.company}-${item.period}`}>
-                  <div className="field-ledger-meta">
-                    <p>{item.period}</p>
-                  </div>
-                  <div className="field-ledger-title">
-                    <h3>{item.role}</h3>
-                    <span>{item.company}</span>
-                  </div>
-                  <div className="field-ledger-role">
-                    <p>{item.description}</p>
-                    <ul className="field-inline-list" aria-label={`${item.role} focus areas`}>
-                      {item.focus.map((focus) => <li key={focus}>{focus}</li>)}
-                    </ul>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
         </section>
 
         <section className="field-section field-shell" id="work" aria-labelledby="projects-title">
@@ -157,23 +131,31 @@ function App() {
               </a>
             </div>
             <div className="field-index">
-              {githubProjects.filter((project) => !project.homepageHidden).map((project) => (
-                <article className="field-index-row" key={project.repository}>
-                  <div className="field-index-meta">
-                    <p>{project.category}</p>
-                    <span>{project.activity}</span>
-                  </div>
-                  <div>
-                    <h3><a href={project.url} target="_blank" rel="noreferrer">{project.title}</a></h3>
-                    <p>{project.description}</p>
-                    <p className="field-index-stack">{project.technologies.join(' · ')}</p>
-                  </div>
-                  <div className="field-index-links">
-                    <a href={project.url} target="_blank" rel="noreferrer">View source <ArrowUpRight size={13} aria-hidden="true" /></a>
-                    {project.demo && <a href={project.demo} target="_blank" rel="noreferrer">Live site <ArrowUpRight size={13} aria-hidden="true" /></a>}
-                  </div>
-                </article>
-              ))}
+              {[interactiveCvProject, ...githubProjects.filter((project) => !project.homepageHidden)].map((project) => {
+                const href = project.local ? sitePath(project.url) : project.url
+                const external = project.local ? {} : { target: '_blank', rel: 'noreferrer' }
+                return (
+                  <article className="field-index-row" key={project.repository}>
+                    <div className="field-index-meta">
+                      <p>{project.category}</p>
+                      <span>{project.activity}</span>
+                    </div>
+                    <div>
+                      <h3><a href={href} {...external}>{project.title}</a></h3>
+                      <p>{project.description}</p>
+                      <p className="field-index-stack">{project.technologies.join(' · ')}</p>
+                    </div>
+                    <div className="field-index-links">
+                      {project.local ? (
+                        <a href={href}>Play it <ArrowRight size={13} aria-hidden="true" /></a>
+                      ) : (
+                        <a href={href} target="_blank" rel="noreferrer">View source <ArrowUpRight size={13} aria-hidden="true" /></a>
+                      )}
+                      {project.demo && <a href={project.demo} target="_blank" rel="noreferrer">Live site <ArrowUpRight size={13} aria-hidden="true" /></a>}
+                    </div>
+                  </article>
+                )
+              })}
             </div>
           </div>
         </section>
@@ -181,11 +163,11 @@ function App() {
         <section className="field-section field-shell" id="notes" aria-labelledby="notes-title">
           <span className="anchor-alias" id="writing" aria-hidden="true" />
           <div className="field-rail">
-            <p>Notes</p>
-            <span>Technical writing in plain language</span>
+            <p>Writing</p>
+            <span>Methods, results, and caveats in plain language</span>
           </div>
           <div className="field-section-main">
-            <h2 id="notes-title" className="field-section-title">Writing and field notes</h2>
+            <h2 id="notes-title" className="field-section-title">Writing</h2>
             <div className="field-writing-list">
               {articles.map((article) => (
                 <a className="field-writing-row" href={sitePath(article.path)} key={article.title}>
@@ -199,27 +181,54 @@ function App() {
           </div>
         </section>
 
-        <section className="field-section field-shell" id="research" aria-labelledby="research-title">
+        <section className="field-section field-shell" id="experience" aria-labelledby="experience-title">
           <div className="field-rail">
-            <p>Study</p>
-            <span>Research themes and formal coursework</span>
+            <p>Experience</p>
+            <span>Nine years of shipped frontends; applied ML inside the day job since 2024</span>
           </div>
           <div className="field-section-main">
-            <div className="field-heading-row">
-              <h2 id="research-title" className="field-section-title">Research and education</h2>
-              <p>Across retrieval, routing, and local inference, I try to write down the hypothesis and the failure condition before I build.</p>
-            </div>
-            <div className="field-research-grid">
-              {researchThemes.map((theme) => (
-                <article className="field-research-item" key={theme.title}>
-                  <h3>{theme.title}</h3>
-                  <p>{theme.description}</p>
-                  <p className="field-index-stack">{theme.tags.join(' · ')}</p>
+            <h2 id="experience-title" className="field-section-title">Experience</h2>
+            <div className="field-ledger">
+              {experience.map((item) => (
+                <article className="field-ledger-row" key={`${item.company}-${item.period}`}>
+                  <div className="field-ledger-meta">
+                    <p>{item.period}</p>
+                  </div>
+                  <div className="field-ledger-title">
+                    <h3>{item.role}</h3>
+                    <span>{item.company}</span>
+                  </div>
+                  <div className="field-ledger-role">
+                    <p>{item.description}</p>
+                    {item.bullets && (
+                      <ul className="field-ledger-bullets">
+                        {item.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
+                      </ul>
+                    )}
+                    {item.tracks && (
+                      <div className="field-tag-row" aria-label="Tracks">
+                        {item.tracks.map((track) => <span className={`field-tag track-${track}`} key={track}>{trackLabel[track]}</span>)}
+                      </div>
+                    )}
+                    <ul className="field-inline-list" aria-label={`${item.role} focus areas`}>
+                      {item.focus.map((focus) => <li key={focus}>{focus}</li>)}
+                    </ul>
+                  </div>
                 </article>
               ))}
             </div>
+          </div>
+        </section>
 
-            <div className="field-education" id="education">
+        <section className="field-section field-shell" id="research" aria-labelledby="research-title">
+          <span className="anchor-alias" id="education" aria-hidden="true" />
+          <div className="field-rail">
+            <p>Education and skills</p>
+            <span>Formal coursework and the tools I actually use</span>
+          </div>
+          <div className="field-section-main">
+            <h2 id="research-title" className="field-section-title">Education and working set</h2>
+            <div className="field-education">
               {education.map((item) => (
                 <article className="field-education-row" key={item.institution}>
                   <div>
@@ -237,16 +246,6 @@ function App() {
                 </article>
               ))}
             </div>
-          </div>
-        </section>
-
-        <section className="field-section field-shell" aria-labelledby="range-title">
-          <div className="field-rail">
-            <p>Technical range</p>
-            <span>Tools I use, not a keyword cloud</span>
-          </div>
-          <div className="field-section-main">
-            <h2 id="range-title" className="field-section-title">A practical working set</h2>
             <div className="field-skill-list">
               {skillGroups.map((group) => (
                 <article className="field-skill-row" key={group.title}>
@@ -290,7 +289,7 @@ function App() {
             <div className="field-contact-links">
               {socialLinks.map((link) => (
                 <a
-                  href={link.href}
+                  href={sitePath(link.href)}
                   key={link.label}
                   target={link.href.startsWith('http') ? '_blank' : undefined}
                   rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
@@ -299,10 +298,6 @@ function App() {
                   <ArrowUpRight size={16} aria-hidden="true" />
                 </a>
               ))}
-              <a href={sitePath('/game/')}>
-                <span><b>Interactive CV</b><small>A more playful version of the résumé</small></span>
-                <ArrowRight size={16} aria-hidden="true" />
-              </a>
             </div>
           </div>
         </section>
@@ -310,7 +305,10 @@ function App() {
 
       <footer className="field-footer field-shell">
         <p>© {new Date().getFullYear()} Mauricio Berlanga</p>
-        <p>Built as a record of work in progress.</p>
+        <p>
+          React 19 · TypeScript · Vite · hand-written CSS ·{' '}
+          <a href="https://github.com/mauber91/mauricio-berlanga-portfolio" target="_blank" rel="noreferrer">View this site’s source</a>
+        </p>
         <a href="#top">Back to top</a>
       </footer>
     </div>
