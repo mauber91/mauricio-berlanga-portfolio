@@ -1,21 +1,11 @@
 import { lazy, Suspense } from 'react'
 import App from './App'
-import { FocusedPortfolio } from './components/FocusedPortfolio'
-import { getArticleByPath } from './data/articles'
 import { stripSiteBase } from './lib/paths'
 
-type UiMode = 'classic' | 'focused'
 const GamePortfolio = lazy(() => import('./game/GamePortfolio').then((module) => ({ default: module.GamePortfolio })))
 
-function initialMode(): UiMode {
-  const requestedMode = new URLSearchParams(window.location.search).get('ui')
-  return requestedMode === 'focused' ? 'focused' : 'classic'
-}
-
 export function PortfolioRoot() {
-  const mode = initialMode()
   const currentPath = stripSiteBase(window.location.pathname)
-  const articleRoute = Boolean(getArticleByPath(currentPath))
   const gameRoute = currentPath === '/game' || currentPath === '/game/'
 
   if (gameRoute) {
@@ -26,5 +16,5 @@ export function PortfolioRoot() {
     )
   }
 
-  return mode === 'focused' && !articleRoute ? <FocusedPortfolio /> : <App />
+  return <App />
 }

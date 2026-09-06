@@ -4,3 +4,4 @@ dist/
 output/
 .DS_Store
 *.tgz
+.playwright-mcp/
