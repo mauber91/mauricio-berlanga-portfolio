@@ -24,9 +24,9 @@ type ProjectTone = {
 
 const projectTones: Record<string, ProjectTone> = {
   'Intelligent Code Search / RAG Pipeline': { label: 'Product system', color: '#176b65' },
-  'USD/MXN ML Forecasting Study': { label: 'CS229 study', color: '#b75d3b', image: '/articles/usdmxn-social.png' },
-  'Verifier-Aware Model Routing for Code Generation': { label: 'CS224R study', color: '#6941c6', image: '/articles/model-routing-social.png' },
-  'COLMo: Cloud-Orchestrated Local Models': { label: 'Research system', color: '#28746b', image: '/articles/colmo-social.png' },
+  'USD/MXN ML Forecasting Study': { label: 'CS229 study', color: '#b75d3b', image: '/articles/usdmxn-social.webp' },
+  'Verifier-Aware Model Routing for Code Generation': { label: 'CS224R study', color: '#6941c6', image: '/articles/model-routing-social.webp' },
+  'COLMo: Cloud-Orchestrated Local Models': { label: 'Research system', color: '#28746b', image: '/articles/colmo-social.webp' },
 }
 
 const featuredSkillTitles = ['Frontend Systems', 'Frontend Product Craft', 'AI / ML']

@@ -64,9 +64,9 @@ const buildingIcons: Record<BuildingId, LucideIcon> = {
 }
 
 const projectImages: Record<string, string | undefined> = {
-  forecast: '/articles/usdmxn-social.png',
-  routing: '/articles/model-routing-social.png',
-  orchestration: '/articles/colmo-social.png',
+  forecast: '/articles/usdmxn-social.webp',
+  routing: '/articles/model-routing-social.webp',
+  orchestration: '/articles/colmo-social.webp',
 }
 
 const projectEvaluationNotes = [

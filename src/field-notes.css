@@ -7,7 +7,7 @@
   --field-paper: #f8f5ee;
   --field-ink: #181714;
   --field-body: #30302c;
-  --field-muted: #6f6c63;
+  --field-muted: #5f5c53;
   --field-accent: #ad3d2c;
   --field-olive: #556348;
   --field-rule: #d9d1c0;
@@ -15,7 +15,7 @@
   min-height: 100vh;
   color: var(--field-ink);
   background: var(--field-paper);
-  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   text-rendering: optimizeLegibility;
 }
 
@@ -114,7 +114,7 @@
   border: 1px solid var(--field-ink);
   border-radius: 999px;
   color: var(--field-ink);
-  font: 600 13px/1 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font: 600 13px/1 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   white-space: nowrap;
 }
 
@@ -177,7 +177,7 @@
   border-radius: 999px;
   background: #fffdf8;
   color: var(--field-olive);
-  font: 500 12px/1.3 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font: 500 12px/1.3 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 .field-status-dot {
@@ -205,7 +205,7 @@
   border-radius: 6px;
   background: #fffdf8;
   color: var(--field-ink);
-  font: 600 14px/1 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font: 600 14px/1 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 .field-btn:hover {
@@ -276,7 +276,7 @@
 
 .field-rail p {
   color: var(--field-accent);
-  font: 600 11px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font: 600 12px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   letter-spacing: .09em;
   text-transform: uppercase;
 }
@@ -351,8 +351,8 @@
 
 .field-ledger-row {
   display: grid;
-  grid-template-columns: 140px 210px minmax(0, 1fr);
-  gap: 0 46px;
+  grid-template-columns: 160px 200px minmax(0, 1fr);
+  gap: 0 40px;
   padding: 27px 0 28px;
   border-bottom: 1px solid var(--field-rule);
 }
@@ -365,11 +365,12 @@
 .field-ledger-meta p,
 .field-ledger-title span {
   color: var(--field-olive);
-  font: 500 11px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font: 500 13px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  white-space: nowrap;
 }
 
 .field-ledger-title h3 {
-  font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: -.01em;
@@ -396,7 +397,7 @@
   margin: 13px 0 0;
   padding: 0;
   color: var(--field-muted);
-  font: 500 10px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font: 500 12px/1.45 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
 .field-inline-list li {
@@ -456,7 +457,7 @@
 .field-index-meta p,
 .field-index-meta span {
   color: var(--field-olive);
-  font: 500 10px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font: 500 13px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
 .field-index-meta span {
@@ -483,7 +484,7 @@
 .field-index-stack {
   margin-top: 12px !important;
   color: var(--field-olive) !important;
-  font: 500 10px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !important;
+  font: 500 12px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !important;
 }
 
 .field-index-links {
@@ -497,7 +498,7 @@
   gap: 5px;
   align-items: center;
   color: var(--field-accent);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.4;
 }
 
@@ -527,7 +528,7 @@
 .field-writing-row > p,
 .field-writing-row > span {
   color: var(--field-olive);
-  font: 500 10px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font: 500 12px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
 .field-writing-row h3 {
@@ -595,14 +596,14 @@
 
 .field-education-row > div:first-child p {
   color: var(--field-olive);
-  font: 600 11px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font: 600 12px/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
 .field-education-row > div:first-child span {
   display: block;
   margin-top: 6px;
   color: var(--field-muted);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.5;
 }
 
@@ -655,7 +656,7 @@
 
 .field-skill-row h3 {
   color: var(--field-accent);
-  font: 600 11px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font: 600 12px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   letter-spacing: .04em;
 }
 
@@ -749,7 +750,7 @@
 
 .field-contact-links small {
   color: var(--field-muted);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.4;
 }
 
@@ -760,7 +761,7 @@
   align-items: center;
   min-height: 104px;
   color: var(--field-muted);
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .field-footer p {
@@ -854,7 +855,7 @@
 .field-track-legend li {
   padding: 4px 8px;
   border-radius: 4px;
-  font: 500 12px/1 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font: 500 12px/1 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 .track-ai {
@@ -981,6 +982,12 @@
 }
 
 @media (max-width: 820px) {
+  .field-heading-row {
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    align-items: start;
+  }
+
   .field-proof {
     grid-template-columns: 1fr 1fr;
   }
@@ -1222,6 +1229,11 @@
 }
 
 @media (max-width: 480px) {
+  .field-cta-row .field-btn {
+    padding: 12px 14px;
+    font-size: 13px;
+  }
+
   .field-track-legend {
     display: none;
   }
@@ -1284,7 +1296,7 @@
   align-items: center;
   margin-bottom: 48px;
   color: var(--field-olive);
-  font: 500 10px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font: 500 12px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
 .article-site .article-hero-rail .article-back:hover {
@@ -1303,7 +1315,7 @@
   margin-top: 4px;
   color: var(--field-olive);
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .article-site .article-hero-content {
@@ -1316,7 +1328,7 @@
   display: inline-block;
   margin: 0 0 16px;
   color: var(--field-accent);
-  font: 600 11px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font: 600 12px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   letter-spacing: .09em;
   text-transform: uppercase;
 }
@@ -1345,7 +1357,7 @@
   gap: 8px 20px;
   margin-top: 24px;
   color: var(--field-olive);
-  font: 500 10px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font: 500 12px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   letter-spacing: 0;
   text-transform: none;
 }
@@ -1368,7 +1380,7 @@
   padding: 0;
   color: var(--field-muted);
   border: 0;
-  font: 500 10px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font: 500 12px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
 .article-site .article-tags li:not(:last-child)::after {
@@ -1451,7 +1463,7 @@
 .article-site .article-stats-main span {
   margin-top: 9px;
   color: var(--field-muted);
-  font: 500 9px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font: 500 12px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   letter-spacing: .04em;
   text-transform: uppercase;
 }
@@ -1507,7 +1519,7 @@
 .article-site .article-toc > p {
   margin-bottom: 18px;
   color: var(--field-accent);
-  font: 600 11px/1.4 ui-monospace, Menlo, Consolas, monospace;
+  font: 600 12px/1.4 ui-monospace, Menlo, Consolas, monospace;
   letter-spacing: .09em;
   text-transform: uppercase;
 }
@@ -1521,7 +1533,7 @@
   padding: 10px 0;
   color: var(--field-muted);
   border-bottom: 1px solid var(--field-rule);
-  font: 500 10px/1.4 ui-monospace, Menlo, Consolas, monospace;
+  font: 500 12px/1.4 ui-monospace, Menlo, Consolas, monospace;
   transition: color 160ms, padding 160ms;
 }
 
@@ -1541,7 +1553,7 @@
 .article-site .article-rail-label {
   margin: 0 0 4px;
   color: var(--field-muted);
-  font: 600 11px/1.4 ui-monospace, Menlo, Consolas, monospace;
+  font: 600 12px/1.4 ui-monospace, Menlo, Consolas, monospace;
   letter-spacing: .09em;
   text-transform: uppercase;
 }
@@ -1551,7 +1563,7 @@
   gap: 6px;
   align-items: center;
   color: var(--field-ink);
-  font: 600 12px/1.4 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font: 600 12px/1.4 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 .article-site .article-repo-link:hover {
@@ -1580,7 +1592,7 @@
 .article-site .article-section-number {
   margin-bottom: 16px;
   color: var(--field-accent);
-  font: 600 10px/1.4 ui-monospace, Menlo, Consolas, monospace;
+  font: 600 12px/1.4 ui-monospace, Menlo, Consolas, monospace;
 }
 
 .article-site .article-prose h2 {
@@ -1668,7 +1680,7 @@
 
 .article-site .plain-language b {
   color: var(--field-accent);
-  font: 600 10px/1.4 ui-monospace, Menlo, Consolas, monospace;
+  font: 600 12px/1.4 ui-monospace, Menlo, Consolas, monospace;
   letter-spacing: .06em;
   text-transform: uppercase;
 }
@@ -1723,7 +1735,7 @@
 .article-site .article-figure figcaption {
   margin-top: 10px;
   color: var(--field-muted);
-  font: 500 10px/1.55 ui-monospace, Menlo, Consolas, monospace;
+  font: 500 12px/1.55 ui-monospace, Menlo, Consolas, monospace;
 }
 
 .article-site .article-table-wrap {
@@ -1833,7 +1845,7 @@
   padding-bottom: 14px;
   border-bottom: 1px solid var(--field-rule);
   color: var(--field-muted);
-  font: 400 12.5px/1.5 Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font: 400 12.5px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 .article-site .article-disclosure em {
@@ -1849,7 +1861,7 @@
   gap: 7px;
   align-items: center;
   color: var(--field-olive);
-  font: 500 10px/1.4 ui-monospace, Menlo, Consolas, monospace;
+  font: 500 12px/1.4 ui-monospace, Menlo, Consolas, monospace;
 }
 
 .article-site .article-footer a:hover {
@@ -1858,7 +1870,7 @@
 
 .article-site .article-footer p:not(.article-disclosure) {
   color: var(--field-muted);
-  font: 500 10px/1.4 ui-monospace, Menlo, Consolas, monospace;
+  font: 500 12px/1.4 ui-monospace, Menlo, Consolas, monospace;
 }
 
 @media (max-width: 1120px) {

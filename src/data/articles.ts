@@ -35,7 +35,9 @@ export const articles: ArticleMeta[] = [
       result: 'XGBoost had the highest raw accuracy (0.600); a one-lag AR rule kept the best balanced accuracy.',
       caveat: 'No robust directional winner; the negative result is the finding.',
     },
-    leadImage: '/articles/usdmxn-social.png',
+    leadImage: '/articles/usdmxn-social.webp',
+    leadImageWidth: 1600,
+    leadImageHeight: 686,
     leadImageAlt:
       'Illustration blending the United States and Mexico, currency imagery, forecasting curves, and machine-learning diagrams',
   },
@@ -55,7 +57,9 @@ export const articles: ArticleMeta[] = [
       caveat: 'Learned routing only beat the simple verifier rule when it did so consistently; REINFORCE variants did not.',
     },
     repository: 'https://github.com/mauber91/cs224R',
-    leadImage: '/articles/model-routing-social.png',
+    leadImage: '/articles/model-routing-social.webp',
+    leadImageWidth: 1600,
+    leadImageHeight: 686,
     leadImageAlt:
       'A small local model routes a stream of work toward a brighter, more powerful model through a branching decision path',
   },
@@ -76,7 +80,9 @@ export const articles: ArticleMeta[] = [
       caveat: 'The cloud-mini control exists specifically to falsify the economic case for local workers.',
     },
     repository: 'https://github.com/mauber91/COLMo',
-    leadImage: '/articles/colmo-social.png',
+    leadImage: '/articles/colmo-social.webp',
+    leadImageWidth: 1600,
+    leadImageHeight: 900,
     leadImageAlt:
       'A cloud intelligence coordinating a network of local computers through luminous information paths',
   },
@@ -97,7 +103,9 @@ export const articles: ArticleMeta[] = [
       caveat: 'One tournament is one sample; 3 of 4 is not a 75% accuracy claim.',
     },
     repository: 'https://github.com/mauber91/WC',
-    leadImage: '/articles/world-cup-forecast-social.png',
+    leadImage: '/articles/world-cup-forecast-social.webp',
+    leadImageWidth: 1600,
+    leadImageHeight: 729,
     leadImageAlt:
       'Thousands of faint tournament paths converge into four semifinal nodes, three highlighted in green and one in amber',
     disclosure:
