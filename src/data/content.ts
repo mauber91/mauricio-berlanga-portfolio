@@ -7,9 +7,9 @@ export type SocialLink = {
 export type Track = 'ai' | 'frontend' | 'both'
 
 export const trackLabel: Record<Track, string> = {
-  ai: 'AI system',
-  frontend: 'Frontend platform',
-  both: 'Full-stack ML',
+  ai: 'ML',
+  frontend: 'Frontend',
+  both: 'Both',
 }
 
 export type Project = {
@@ -48,11 +48,11 @@ export type GitHubProject = {
 
 export const personal = {
   name: 'Mauricio Berlanga',
-  title: 'Senior Software Engineer · Frontend Platforms & Applied ML Systems',
+  title: 'Senior Software Engineer · Frontend, and lately ML',
   employer: 'Walmart Global Tech',
   location: 'Bentonville, Arkansas, United States',
   email: 'mberlanga91@gmail.com',
-  availability: 'Open to AI/ML engineering roles · remote or Bentonville, AR',
+  status: 'Walmart Global Tech · Bentonville, AR',
   resumePath: '/resume.pdf',
   now: {
     currently: 'Verifier-aware routing for code generation, Stanford CS224R',
@@ -61,7 +61,7 @@ export const personal = {
     stack: ['PyTorch', 'vLLM', 'React 19', 'TypeScript', 'Nx'],
   },
   summary:
-    'Frontend engineering is my foundation. I tend to notice something that could work better, build a version, and measure whether it actually did. Lately that has taken me from product platforms and developer tools into applied AI experiments.',
+    'I started in frontend and still like it. Most of what I have done since follows the same pattern: notice something that could work better, build a version, check whether it did. Over the last couple of years that has pulled me toward applied ML.',
 }
 
 export type ProofItem = { track: Track; label: string; value: string; text: string; href: string }
@@ -69,30 +69,30 @@ export type ProofItem = { track: Track; label: string; value: string; text: stri
 export const proofStrip: ProofItem[] = [
   {
     track: 'ai',
-    label: 'AI system',
+    label: 'ML · Stanford project',
     value: '95.8%',
-    text: 'hidden-test pass rate at 19–23% of frontier API spend, verifier-aware routing',
+    text: 'hidden-test pass rate while sending only 17% of tasks to the expensive model',
     href: '/writing/verifier-aware-model-routing/',
   },
   {
     track: 'ai',
-    label: 'AI system · at Walmart',
+    label: 'ML · at Walmart',
     value: '−30–40%',
-    text: 'context tokens for an internal coding agent via semantic code retrieval',
+    text: 'context tokens for an internal coding agent, after adding semantic code retrieval',
     href: '#work',
   },
   {
     track: 'frontend',
-    label: 'Frontend platform',
+    label: 'Frontend · at Walmart',
     value: '1 → many',
-    text: 'micro-frontend shells adopted across Global Sourcing teams; independent releases',
+    text: 'teams releasing independently on the micro-frontend platform I picked and set up',
     href: '#experience',
   },
   {
     track: 'both',
-    label: 'Full-stack ML',
+    label: 'Both · side project',
     value: '3 of 4',
-    text: 'World Cup semifinalists forecast by a Monte Carlo pipeline with a live React dashboard',
+    text: 'World Cup semifinalists in a forecast I froze before the tournament (one sample, not a track record)',
     href: '/writing/world-cup-semifinal-forecast/',
   },
 ]
@@ -125,11 +125,11 @@ export const experience: ExperienceItem[] = [
     role: 'Senior Software Engineer',
     period: 'Jul 2023 – Present',
     description:
-      'Own frontend architecture for production React/TypeScript applications across Walmart’s Global Sourcing organization.',
+      'Frontend architecture for the React/TypeScript apps in Walmart’s Global Sourcing org.',
     bullets: [
-      'Chose Nx + Module Federation over the internal framework for OneSource; teams now release independently and the pattern was reused for later micro-frontend work.',
-      'Built a semantic code-retrieval pipeline for an internal coding agent: +5–10% exact-symbol accuracy, 30–40% fewer context tokens.',
-      'Cross-team escalation point for hard React bugs; mentor interns and interview candidates. TODO(owner): add counts.',
+      'Picked Nx + Module Federation over the internal framework for OneSource. Teams release on their own schedule now, and later micro-frontend work copied the setup.',
+      'Built semantic code retrieval for an internal coding agent: +5–10% on exact-symbol lookups, 30–40% fewer context tokens.',
+      'The person other teams ping about hard React bugs. Mentor interns, interview candidates. TODO(owner): add counts.',
     ],
     tracks: ['frontend', 'ai'],
     focus: ['React / TypeScript', 'Nx monorepos', 'Module Federation', 'Webpack / Rspack', 'React Router', 'Jest', 'RAG / Embeddings'],
@@ -139,7 +139,7 @@ export const experience: ExperienceItem[] = [
     role: 'Software Engineer III',
     period: 'Oct 2019 – Jul 2023',
     description:
-      'Built internal frontend products and became a cross-team point of contact for difficult React bugs and high-impact refactors.',
+      'Built internal frontend products and became the go-to for awkward React bugs and large refactors.',
     bullets: [
       'Brought multiple React versions and legacy Angular apps together under shared micro-frontend shells.',
       'Integrated frontends with Java/Spring APIs and production delivery workflows (Docker, Nginx).',
@@ -152,7 +152,7 @@ export const experience: ExperienceItem[] = [
     role: 'Frontend Software Engineer',
     period: 'Mar 2017 – Nov 2019',
     description:
-      'Developed the Angular/TypeScript UI for TIBCO Flogo, an event-driven application builder for microservices, serverless functions, APIs, and connectors; built reusable components and JSON-driven forms with validation.',
+      'Angular/TypeScript UI for TIBCO Flogo, a visual builder for event-driven apps and integrations. Mostly reusable components and JSON-driven forms with validation.',
     focus: ['Angular / TypeScript', 'Reusable components', 'JSON forms', 'Node.js / Express', 'AWS S3', 'Karma / Jasmine'],
   },
   {
@@ -160,7 +160,7 @@ export const experience: ExperienceItem[] = [
     role: 'Co-founder / Software Developer',
     period: 'Mar 2015 – Feb 2017',
     description:
-      'Co-founded a public-transit startup with three friends and led Ionic/Angular mobile development with Google Maps/Leaflet, crowdsourced live-bus locations, and an admin route-monitoring tool that grew past 10,000 registered users.',
+      'Co-founded a public-transit app with three friends. I built the Ionic/Angular mobile app (maps, crowdsourced live bus locations) and the admin route-monitoring tool. It passed 10,000 registered users.',
     focus: ['Ionic / Angular', 'Google Maps / Leaflet', 'Mobile products', 'Laravel', 'PostgreSQL / MySQL', 'AWS'],
   },
   {
@@ -168,7 +168,7 @@ export const experience: ExperienceItem[] = [
     role: 'Frontend Developer and SEO Analyst',
     period: 'Dec 2015 – Mar 2016',
     description:
-      'Developed a responsive website for an education platform and applied technical SEO that brought multiple relevant local searches onto Google’s first page in under three months.',
+      'Built a responsive site for an education company and did the technical SEO; several local searches reached Google’s first page within three months.',
     focus: ['Frontend development', 'Responsive design', 'Technical SEO'],
   },
 ]
@@ -196,7 +196,7 @@ export const projects: Project[] = [
   {
     title: 'Intelligent Code Search / RAG Pipeline',
     description:
-      'An internal retrieval system for a coding agent, built after noticing that code lookup was consuming too much context. It combines embeddings, semantic search, reranking, and generated file summaries for large codebases.',
+      'Retrieval for an internal coding agent, built after noticing that code lookup was eating most of the context window. Embeddings, semantic search, reranking, and generated file summaries over large codebases.',
     technologies: ['RAG', 'Embeddings', 'Reranking', 'LLMs', 'Semantic Search'],
     status: 'Built',
     featured: true,
@@ -205,7 +205,7 @@ export const projects: Project[] = [
     outcomeLabel: 'exact-symbol lookup accuracy with 30–40% fewer context tokens',
     context: 'Walmart Global Tech',
     insight:
-      'Exact-symbol lookup accuracy improved by 5–10% while context-token usage fell 30–40%, showing that retrieval quality and context cost have to be tuned together.',
+      'Exact-symbol lookups got 5–10% better while context-token usage fell 30–40%. The two had to be tuned together; improving one alone made the other worse.',
     visual: 'retrieval',
   },
   {
@@ -217,11 +217,11 @@ export const projects: Project[] = [
     featured: false,
     track: 'ai',
     outcome: 'Baseline wins',
-    outcomeLabel: 'AR(1) kept the best balanced accuracy; a negative result worth publishing',
+    outcomeLabel: 'a one-lag AR rule kept the best balanced accuracy; nothing I tried beat it reliably',
     context: 'Stanford CS229',
     image: '/articles/usdmxn-card-v2.jpg',
     insight:
-      'Simple baselines remained difficult to beat—a useful result that reinforced rigorous evaluation in noisy financial time series.',
+      'The simple baseline held. Not the result I wanted, but the evaluation was honest, so it is the result.',
     article: '/writing/usd-mxn-forecasting/',
     github: 'https://github.com/mauber91/USD_MXN_prediction',
     visual: 'forecast',
@@ -229,7 +229,7 @@ export const projects: Project[] = [
   {
     title: 'Verifier-Aware Model Routing for Code Generation',
     description:
-      'A cost-sensitive contextual-bandit study of when to keep a local model’s code and when to escalate to a stronger API model, using executable test feedback as a verifier.',
+      'When should you trust a cheap local model’s code and when should you pay for the strong one? A contextual-bandit study that uses executable tests as the verifier.',
     technologies: ['Contextual Bandits', 'LLM Routing', 'LoRA', 'PyTorch', 'EvalPlus'],
     status: 'Study',
     featured: true,
@@ -239,7 +239,7 @@ export const projects: Project[] = [
     context: 'Stanford CS224R',
     image: '/articles/model-routing-card-v2.jpg',
     insight:
-      'The verifier-aware policy reached a 95.8% hidden-test pass rate while escalating 16.9% of tasks. On held-out benchmarks it used 19–23% of normalized API spend with no detected quality loss; learned routing only mattered when it could beat that simple rule consistently.',
+      '95.8% hidden-test pass rate while escalating 16.9% of tasks, at 19–23% of the API spend. The uncomfortable finding: a simple verifier rule did most of the work, and the learned router only earned its keep when it beat that rule consistently.',
     article: '/writing/verifier-aware-model-routing/',
     github: 'https://github.com/mauber91/cs224R',
     visual: 'routing',
@@ -247,17 +247,17 @@ export const projects: Project[] = [
   {
     title: 'COLMo: Cloud-Orchestrated Local Models',
     description:
-      'An experimental system where a frontier cloud model plans and verifies while locally hosted models handle token-heavy document and code work. Its evaluation harness measures quality, tokens, cost, latency, retries, escalation, and information crossing the cloud boundary.',
+      'A cloud model plans and checks; local models on a DGX Spark do the token-heavy reading. The harness measures quality, tokens, cost, latency, retries, escalations, and what information actually crosses the cloud boundary.',
     technologies: ['Local LLMs', 'DGX Spark', 'vLLM', 'Verification', 'Privacy Evaluation'],
     status: 'Exploratory',
     featured: false,
     track: 'ai',
     outcome: 'Work in progress',
-    outcomeLabel: 'cloud-mini control can falsify the local-worker economics',
+    outcomeLabel: 'harness built; includes a control that could prove the whole idea uneconomic',
     context: 'Independent research',
     image: '/articles/colmo-card-v2.jpg',
     insight:
-      'The study measures the real boundary between cost, quality, and privacy—including a cloud-mini control that can falsify the economic case for local workers.',
+      'I built in a cheap cloud-only control on purpose. If it wins, local workers are not worth the trouble, and I would rather know.',
     article: '/writing/colmo/',
     github: 'https://github.com/mauber91/COLMo',
     visual: 'orchestration',
@@ -265,32 +265,32 @@ export const projects: Project[] = [
   {
     title: 'OneSource: choosing Nx + Module Federation over the internal framework',
     description:
-      'An architecture decision record for Walmart Global Sourcing’s frontend platform: constraints, options considered, what was deliberately left out, and what it cost to operate.',
+      'The decision record for Walmart Global Sourcing’s frontend platform: what we needed, what we looked at, what we left out, and what it has cost to run.',
     technologies: ['React', 'TypeScript', 'Nx', 'Module Federation', 'Webpack / Rspack'],
     status: 'Built',
     featured: true,
     track: 'frontend',
     outcome: 'Independent releases',
-    outcomeLabel: 'per team; pattern reused for later micro-frontend work',
+    outcomeLabel: 'per team; the setup was copied for later micro-frontend work',
     context: 'Walmart Global Tech',
     insight:
-      'An abstraction has to earn its operational and cognitive cost; the lighter platform won because teams could reason about it end to end.',
+      'The lighter option won because one team could understand the whole thing end to end. That mattered more than features.',
     article: '/writing/onesource-decision-record/',
     visual: 'orchestration',
   },
   {
     title: 'World Cup 2026 forecast: Monte Carlo pipeline + live dashboard',
     description:
-      'Team-strength priors, market calibration, and a full-tournament simulator with FIFA tie-break rules, surfaced in a React/FastAPI product.',
+      'Team-strength priors, market calibration, and a full-tournament simulator with FIFA tie-break rules, with a React/FastAPI dashboard on top.',
     technologies: ['React', 'TypeScript', 'FastAPI', 'scikit-learn', 'Monte Carlo'],
     status: 'Built',
     featured: true,
     track: 'both',
     outcome: '3 of 4',
-    outcomeLabel: 'semifinalists called from a frozen, seeded forecast',
+    outcomeLabel: 'semifinalists in the forecast I froze before kickoff',
     context: 'Independent',
     insight:
-      'A tournament prediction is a chain of dependent events; the frozen probability table is the real artifact, not the bracket screenshot.',
+      'The real output is the frozen probability table, not the bracket. And one tournament is one sample; some of this was luck.',
     article: '/writing/world-cup-semifinal-forecast/',
     github: 'https://github.com/mauber91/WC',
     // TODO(owner): add `demo: 'https://...'` if the dashboard is hosted.
@@ -319,7 +319,7 @@ export const featuredProjects: Project[] = featuredProjectTitles.flatMap((title)
 export const interactiveCvProject: GitHubProject = {
   title: 'The Systems District',
   description:
-    'An explorable interactive CV: seven rooms, a custom collision engine, sprite animation, and proximity-triggered audio, built in React and TypeScript.',
+    'My CV as a small explorable world: seven rooms, a homemade collision engine, sprite animation, and audio that fades in as you walk up to things. Built mostly for fun.',
   technologies: ['React', 'TypeScript', 'DOM rendering', 'Custom collision engine'],
   activity: 'Playable',
   category: 'Interactive experiment',
@@ -354,7 +354,7 @@ export const githubProjects: GitHubProject[] = [
   {
     title: 'X Bookmarks Reader',
     description:
-      'A focused reading workflow that organizes exported X bookmarks into searchable categories, surfaces article insights, prioritizes a reading queue, and tracks completion locally.',
+      'Turns an export of X bookmarks into a categorized, searchable reading queue that lives in local storage.',
     technologies: ['React', 'TypeScript', 'Vite', 'Content Processing', 'Local Storage'],
     activity: 'Active',
     category: 'Product engineering',
@@ -364,7 +364,7 @@ export const githubProjects: GitHubProject[] = [
   {
     title: 'World Cup 2026 Heat Impact Atlas',
     description:
-      'A self-contained data dashboard exploring heat impact across tournament venues and match schedules through comparative metrics, reference definitions, and embedded charts.',
+      'A single-page dashboard on heat risk across 2026 World Cup venues and kickoff times.',
     technologies: ['JavaScript', 'Chart.js', 'Data Visualization', 'Responsive UI'],
     activity: 'Published',
     category: 'Data visualization',
@@ -374,7 +374,7 @@ export const githubProjects: GitHubProject[] = [
   {
     title: 'Football Predictions Leaderboard',
     description:
-      'A responsive React application for tracking football prediction rankings, accuracy, points, and aggregate leaderboard statistics across desktop and mobile.',
+      'Tracks football prediction rankings: accuracy, points, and leaderboards, on desktop and mobile.',
     technologies: ['React', 'TypeScript', 'Responsive Design', 'Data UI'],
     activity: 'Updated',
     category: 'Frontend product',
@@ -385,7 +385,7 @@ export const githubProjects: GitHubProject[] = [
   {
     title: 'HandFlow / aetherTouch',
     description:
-      'An interactive browser art experiment that maps real-time hand gestures to a 35,000-particle Three.js environment through MediaPipe hand tracking.',
+      'Hand gestures (via MediaPipe) driving a 35,000-particle Three.js scene in the browser. Art, not product.',
     technologies: ['Three.js', 'MediaPipe', 'WebGL', 'Gesture Interaction'],
     activity: 'Updated',
     category: 'Creative technology',
