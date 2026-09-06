@@ -1,4 +1,4 @@
-import { ArrowRight, ArrowUpRight } from 'lucide-react'
+import { ArrowDown, ArrowRight, ArrowUpRight } from 'lucide-react'
 import { Header } from './components/Header'
 import { ArticlePage } from './components/article/ArticlePage'
 import { articles, getArticleByPath } from './data/articles'
@@ -26,17 +26,27 @@ function App() {
       <Header />
 
       <main id="main">
-        <section className="field-intro field-shell" id="about" aria-labelledby="intro-title">
+        <section className="field-intro field-shell" aria-labelledby="intro-title">
           <div className="field-intro-copy">
-            <h1 id="intro-title">Senior software engineer, frontend platform builder,<br className="field-desktop-break" /> and student of machine learning.</h1>
-            <p>I like to start with a question, build a useful version, and measure whether it actually helped—from frontend platforms to AI experiments.</p>
+            <p className="field-status"><span aria-hidden="true" className="field-status-dot" />{personal.availability}</p>
+            <h1 id="intro-title">I build the production frontends people use, and the <em>ML systems</em> that decide what they see, then measure whether either one worked.</h1>
+            <p>Senior engineer at Walmart Global Tech (9 years shipping React/TypeScript platforms). Now building retrieval, model-routing, and evaluation systems for LLM products, with graduate AI coursework at Stanford.</p>
+            <div className="field-cta-row">
+              <a className="field-btn field-btn-accent" href="#work">See selected work <ArrowDown size={14} aria-hidden="true" /></a>
+              <a className="field-btn" href={sitePath(personal.resumePath)} target="_blank" rel="noreferrer">Résumé (PDF)</a>
+              <a className="field-btn" href={`mailto:${personal.email}`}>Email</a>
+            </div>
           </div>
 
-          <aside className="field-context" aria-label="Current location and study">
-            <p className="field-location">Bentonville, Arkansas<br /> United States</p>
-            <span className="field-short-rule" aria-hidden="true" />
-            <p className="field-context-label">Studying:</p>
-            <p className="field-context-value">CS224R, Deep<br /> Reinforcement Learning</p>
+          <aside className="field-context" aria-label="What I am working on now">
+            <p className="field-context-label">Currently</p>
+            <p className="field-context-value">{personal.now.currently}</p>
+            <p className="field-context-label">Recently shipped</p>
+            <p className="field-context-value">{personal.now.recentlyShipped}</p>
+            <p className="field-context-label">Reading</p>
+            <p className="field-context-value">{personal.now.reading}</p>
+            <p className="field-context-label">Stack this week</p>
+            <p className="field-context-value field-context-stack">{personal.now.stack.join(' · ')}</p>
           </aside>
         </section>
 
@@ -264,7 +274,7 @@ function App() {
           </div>
         </section>
 
-        <section className="field-section field-shell field-about-detail" aria-labelledby="about-detail-title">
+        <section className="field-section field-shell field-about-detail" id="about" aria-labelledby="about-detail-title">
           <div className="field-rail">
             <p>About</p>
             <span>Frontend foundations, applied intelligence</span>
