@@ -211,9 +211,9 @@ export function DossierPanel({ visited, onClose, onOpenBuilding }: DossierPanelP
 
         <div className="game-dossier-scroll">
           <section className="game-dossier-hero">
-            <p>Senior Software Engineer · Frontend Platforms & Applied AI</p>
+            <p>Senior Software Engineer · Frontend, and lately ML</p>
             <h2 id="dossier-title">Mauricio<br /><em>Berlanga</em></h2>
-            <div><p>{personal.summary}</p><a className="game-modern-button game-modern-button-dark" href={`mailto:${personal.email}`}>Discuss a role or problem <Mail size={15} /></a></div>
+            <div><p>{personal.summary}</p><a className="game-modern-button game-modern-button-dark" href={`mailto:${personal.email}`}>Say hello <Mail size={15} /></a></div>
           </section>
 
           <section className="game-dossier-metrics">

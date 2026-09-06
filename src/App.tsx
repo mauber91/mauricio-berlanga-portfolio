@@ -28,13 +28,12 @@ function App() {
       <main id="main">
         <section className="field-intro field-shell" aria-labelledby="intro-title">
           <div className="field-intro-copy">
-            <p className="field-status"><span aria-hidden="true" className="field-status-dot" />{personal.availability}</p>
-            <h1 id="intro-title">I build the production frontends people use, and the <em>ML systems</em> that decide what they see, then measure whether either one worked.</h1>
-            <p>Senior engineer at Walmart Global Tech (9 years shipping React/TypeScript platforms). Now building retrieval, model-routing, and evaluation systems for LLM products, with graduate AI coursework at Stanford.</p>
+            <p className="field-status">{personal.status}</p>
+            <h1 id="intro-title">Nine years building frontends. Lately, the <em>ML systems</em> behind them too.</h1>
+            <p>I’m a senior engineer at Walmart Global Tech, where I look after the frontend platform for Global Sourcing and built the code retrieval for an internal coding agent. On the side I’m working through Stanford’s AI graduate certificate and writing up what I try, including the parts that didn’t work.</p>
             <div className="field-cta-row">
-              <a className="field-btn field-btn-accent" href="#work">See selected work <ArrowDown size={14} aria-hidden="true" /></a>
-              <a className="field-btn" href={sitePath(personal.resumePath)} target="_blank" rel="noreferrer">Résumé (PDF)</a>
-              <a className="field-btn" href={`mailto:${personal.email}`}>Email</a>
+              <a className="field-btn field-btn-accent" href="#work">See the work <ArrowDown size={14} aria-hidden="true" /></a>
+              <a className="field-btn" href={`mailto:${personal.email}`}>Email me</a>
             </div>
           </div>
 
@@ -64,14 +63,14 @@ function App() {
           <span className="anchor-alias" id="projects" aria-hidden="true" />
           <div className="field-rail">
             <p>Selected work</p>
-            <span>Systems, studies, and useful failures</span>
+            <span>Four things I’d point to first</span>
           </div>
           <div className="field-section-main">
             <div className="field-heading-row field-heading-row-wrap">
               <h2 id="projects-title" className="field-section-title">Selected work</h2>
               <ul className="field-track-legend" aria-label="Track legend">
-                <li className="track-ai">AI system</li>
-                <li className="track-frontend">Frontend platform</li>
+                <li className="track-ai">ML</li>
+                <li className="track-frontend">Frontend</li>
                 <li className="track-both">Both</li>
               </ul>
               <a className="field-link" href="#public-work">All projects &amp; repos <ArrowRight size={14} aria-hidden="true" /></a>
@@ -121,7 +120,7 @@ function App() {
         <section className="field-section field-shell" id="public-work" aria-labelledby="public-work-title">
           <div className="field-rail">
             <p>Public work</p>
-            <span>Recent repositories and experiments</span>
+            <span>Smaller things, mostly for fun</span>
           </div>
           <div className="field-section-main">
             <div className="field-heading-row">
@@ -164,7 +163,7 @@ function App() {
           <span className="anchor-alias" id="writing" aria-hidden="true" />
           <div className="field-rail">
             <p>Writing</p>
-            <span>Methods, results, and caveats in plain language</span>
+            <span>Longer write-ups, including the ones that didn’t pan out</span>
           </div>
           <div className="field-section-main">
             <h2 id="notes-title" className="field-section-title">Writing</h2>
@@ -184,7 +183,7 @@ function App() {
         <section className="field-section field-shell" id="experience" aria-labelledby="experience-title">
           <div className="field-rail">
             <p>Experience</p>
-            <span>Nine years of shipped frontends; applied ML inside the day job since 2024</span>
+            <span>Frontend since 2015; ML inside the day job since 2024</span>
           </div>
           <div className="field-section-main">
             <h2 id="experience-title" className="field-section-title">Experience</h2>
@@ -224,7 +223,7 @@ function App() {
           <span className="anchor-alias" id="education" aria-hidden="true" />
           <div className="field-rail">
             <p>Education and skills</p>
-            <span>Formal coursework and the tools I actually use</span>
+            <span>Coursework and the tools I reach for</span>
           </div>
           <div className="field-section-main">
             <h2 id="research-title" className="field-section-title">Education and working set</h2>
@@ -260,16 +259,16 @@ function App() {
         <section className="field-section field-shell field-about-detail" id="about" aria-labelledby="about-detail-title">
           <div className="field-rail">
             <p>About</p>
-            <span>Frontend foundations, applied intelligence</span>
+            <span>A bit more background</span>
           </div>
           <div className="field-section-main">
-            <h2 id="about-detail-title" className="field-section-title">What I work on</h2>
+            <h2 id="about-detail-title" className="field-section-title">About</h2>
             <div className="field-about-grid">
               <p className="field-about-lead">{personal.summary}</p>
               <div>
-                <p>At Walmart, I have owned large frontend platforms, led teams, interviewed candidates, mentored interns, and supported other teams on difficult React bugs and architectural decisions. Product, design, backend, and engineering partners are part of the work—not handoffs around it.</p>
-                <p>My AI work grew from the same habit: notice a practical constraint, design an experiment, and measure the tradeoff. That has led to semantic code retrieval, verifier-aware model routing, local/cloud orchestration, and graduate study at Stanford.</p>
-                <p>One of my favorite AI projects was also one of the smallest: a WhatsApp assistant that gave a family member access to open models for her home business and for learning. It reinforced something I try to keep in larger systems too: technical quality includes whether the interface is accessible, the behavior is legible, and the tool actually fits into someone’s life.</p>
+                <p>At Walmart I’ve owned a couple of large frontend platforms, mentored interns, interviewed a lot of candidates, and become the person other teams message when a React bug gets weird. I like working closely with product and design rather than receiving handoffs from them.</p>
+                <p>The ML work didn’t start in a classroom. An internal coding agent was spending most of its context window on file lookups, so I built retrieval for it. That went well enough that I wanted to understand the underlying methods properly, which is how the Stanford certificate, the routing project, and COLMo happened. I’m still early on that side and I try to write in a way that makes that clear.</p>
+                <p>The AI project I’m fondest of is also the smallest: a WhatsApp bot that gives a family member access to open models for her home business. No benchmark, no paper. It’s a good reminder that a tool only counts if it fits into someone’s actual day.</p>
               </div>
             </div>
             <blockquote className="field-principle">
@@ -285,7 +284,7 @@ function App() {
           </div>
           <div className="field-section-main">
             <h2 id="contact-title" className="field-section-title">Say hello</h2>
-            <p className="field-contact-copy">I enjoy comparing notes with people working on frontend platforms, applied AI, research tooling, and products where the tradeoffs deserve careful thought.</p>
+            <p className="field-contact-copy">I’m happy at Walmart and not in a rush, but I’d like my next role to sit closer to the ML side of this page. If you’re working on something like that, or just want to compare notes on anything above, email works best.</p>
             <div className="field-contact-links">
               {socialLinks.map((link) => (
                 <a

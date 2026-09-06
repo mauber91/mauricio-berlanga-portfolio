@@ -44,7 +44,7 @@ const articleMeta = {
     title: 'Choosing Nx and Module Federation over the internal framework — Mauricio Berlanga',
     description: 'An architecture decision record for the OneSource frontend platform: constraints, options considered, what was left out, and what it cost to run.',
     image: '/og.png',
-    imageAlt: 'Mauricio Berlanga — Senior Software Engineer, Frontend Platforms & Applied ML Systems.',
+    imageAlt: 'Mauricio Berlanga, senior software engineer.',
   },
 }
 
