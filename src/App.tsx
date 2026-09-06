@@ -5,20 +5,20 @@ import { articles, getArticleByPath } from './data/articles'
 import {
   education,
   experience,
+  featuredProjects,
   githubProjects,
   personal,
-  projects,
+  proofStrip,
   researchThemes,
   skillGroups,
   socialLinks,
+  trackLabel,
 } from './data/content'
 import { sitePath, stripSiteBase } from './lib/paths'
 
 function App() {
   const activeArticle = getArticleByPath(stripSiteBase(window.location.pathname))
   if (activeArticle) return <ArticlePage article={activeArticle} />
-
-  const featuredArticle = articles.find((article) => article.slug === 'world-cup-semifinal-forecast') ?? articles[0]
 
   return (
     <div className="field-page" id="top">
@@ -50,43 +50,14 @@ function App() {
           </aside>
         </section>
 
-        <section className="field-section field-shell field-feature-section" id="work" aria-labelledby="featured-note-title">
-          <div className="field-rail" aria-hidden="true" />
-          <div className="field-section-main">
-            <article className="featured-note">
-              <div className="featured-primary">
-                <p className="field-kicker">Featured field note</p>
-                <h2 id="featured-note-title">How a probabilistic model found<br /> 3 of 4 World Cup semifinalists</h2>
-                <p className="featured-dek">The bracket was the visible result.<br /> The probability pipeline underneath it was the real project.</p>
-              </div>
-
-              <aside className="featured-margin" aria-label="Reflection on the project">
-                <div className="featured-margin-rule" aria-hidden="true" />
-                <div>
-                  <h3>What changed my mind</h3>
-                  <p>A tournament prediction is not four isolated picks. Strength uncertainty, score distributions, tie-break rules, and every upstream result reshape the paths that remain possible.</p>
-                </div>
-              </aside>
-
-              <div className="featured-evidence">
-                <div className="featured-meta">
-                  <p>Independent <span>·</span> Probabilistic forecasting</p>
-                  <em>Three of four semifinalists</em>
-                </div>
-
-                <figure className="featured-figure">
-                  <img
-                    src={sitePath('/articles/world-cup-forecast-social.png')}
-                    alt="Thousands of tournament paths converge into four semifinal nodes, three highlighted in green and one in amber"
-                  />
-                  <figcaption>Figure 1 · Many simulated tournament paths, summarized as one projected bracket.</figcaption>
-                  <a className="field-link field-link-accent" href={sitePath(featuredArticle.path)}>
-                    Read the note <ArrowRight size={15} aria-hidden="true" />
-                  </a>
-                </figure>
-              </div>
-            </article>
-          </div>
+        <section className="field-proof field-shell" aria-label="Selected outcomes">
+          {proofStrip.map((item) => (
+            <a className={`field-proof-item track-${item.track}`} href={sitePath(item.href)} key={item.value}>
+              <span className="field-proof-label">{item.label}</span>
+              <b>{item.value}</b>
+              <p>{item.text}</p>
+            </a>
+          ))}
         </section>
 
         <section className="field-section field-shell" id="experience" aria-labelledby="experience-title">
@@ -115,43 +86,56 @@ function App() {
           </div>
         </section>
 
-        <section className="field-section field-shell" id="projects" aria-labelledby="projects-title">
+        <section className="field-section field-shell" id="work" aria-labelledby="projects-title">
+          <span className="anchor-alias" id="projects" aria-hidden="true" />
           <div className="field-rail">
             <p>Selected work</p>
             <span>Systems, studies, and useful failures</span>
           </div>
           <div className="field-section-main">
-            <div className="field-heading-row">
-              <h2 id="projects-title" className="field-section-title">Projects</h2>
-              <p>Four projects where the implementation and the evidence both matter.</p>
+            <div className="field-heading-row field-heading-row-wrap">
+              <h2 id="projects-title" className="field-section-title">Selected work</h2>
+              <ul className="field-track-legend" aria-label="Track legend">
+                <li className="track-ai">AI system</li>
+                <li className="track-frontend">Frontend platform</li>
+                <li className="track-both">Both</li>
+              </ul>
+              <a className="field-link" href="#public-work">All projects &amp; repos <ArrowRight size={14} aria-hidden="true" /></a>
             </div>
 
-            <div className="field-project-list">
-              {projects.filter((project) => project.featured).map((project) => (
-                <article className="field-project" key={project.title}>
-                  <div className="field-project-heading">
-                    <p>{project.status.toLowerCase()}</p>
-                    <h3>{project.title}</h3>
-                  </div>
-                  <div className="field-project-copy">
-                    <p>{project.description}</p>
-                    <p className="field-project-insight"><span>What I learned</span>{project.insight}</p>
-                    <ul className="field-inline-list" aria-label={`${project.title} technologies`}>
-                      {project.technologies.map((technology) => <li key={technology}>{technology}</li>)}
-                    </ul>
-                    {(project.article || project.github) && (
-                      <div className="field-link-row">
-                        {project.article && (
-                          <a className="field-link" href={sitePath(project.article)}>
-                            Read case study <ArrowRight size={14} aria-hidden="true" />
-                          </a>
-                        )}
-                        {project.github && (
-                          <a className="field-link" href={project.github} target="_blank" rel="noreferrer">
-                            View source <ArrowUpRight size={14} aria-hidden="true" />
-                          </a>
-                        )}
-                      </div>
+            <div className="field-card-grid">
+              {featuredProjects.map((project) => (
+                <article className="field-card" key={project.title}>
+                  {project.image ? (
+                    <img className="field-card-thumb" src={sitePath(project.image)} alt="" loading="lazy" width={1200} height={630} />
+                  ) : (
+                    <div className={`field-card-thumb field-card-thumb-${project.visual}`} aria-hidden="true" />
+                  )}
+                  <p className={`field-tag track-${project.track}`}>{trackLabel[project.track]} · {project.context}</p>
+                  <h3>{project.title}</h3>
+                  <p className="field-card-outcome"><b>{project.outcome}</b><span>{project.outcomeLabel}</span></p>
+                  <p className="field-card-desc">{project.description}</p>
+                  <p className="field-index-stack">{project.technologies.join(' · ')}</p>
+                  <div className="field-link-row">
+                    {project.article && (
+                      <a className="field-link" href={sitePath(project.article)}>
+                        Case study <ArrowRight size={14} aria-hidden="true" />
+                      </a>
+                    )}
+                    {project.paper && (
+                      <a className="field-link" href={sitePath(project.paper)} target="_blank" rel="noreferrer">
+                        Paper (PDF) <ArrowUpRight size={14} aria-hidden="true" />
+                      </a>
+                    )}
+                    {project.github && (
+                      <a className="field-link" href={project.github} target="_blank" rel="noreferrer">
+                        Repo <ArrowUpRight size={14} aria-hidden="true" />
+                      </a>
+                    )}
+                    {project.demo && (
+                      <a className="field-link" href={project.demo} target="_blank" rel="noreferrer">
+                        Live demo <ArrowUpRight size={14} aria-hidden="true" />
+                      </a>
                     )}
                   </div>
                 </article>
@@ -167,13 +151,13 @@ function App() {
           </div>
           <div className="field-section-main">
             <div className="field-heading-row">
-              <h2 id="public-work-title" className="field-section-title">More things I’ve built</h2>
+              <h2 id="public-work-title" className="field-section-title">More work</h2>
               <a className="field-link" href="https://github.com/mauber91" target="_blank" rel="noreferrer">
                 GitHub profile <ArrowUpRight size={14} aria-hidden="true" />
               </a>
             </div>
             <div className="field-index">
-              {githubProjects.map((project) => (
+              {githubProjects.filter((project) => !project.homepageHidden).map((project) => (
                 <article className="field-index-row" key={project.repository}>
                   <div className="field-index-meta">
                     <p>{project.category}</p>
