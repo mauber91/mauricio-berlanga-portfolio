@@ -1,16 +1,18 @@
-import { ArrowRight, ArrowUpRight } from 'lucide-react'
+import { ArrowDown, ArrowRight, ArrowUpRight, FileText } from 'lucide-react'
 import { Header } from './components/Header'
 import { ArticlePage } from './components/article/ArticlePage'
 import { articles, getArticleByPath } from './data/articles'
 import {
   education,
   experience,
+  featuredProjects,
   githubProjects,
+  interactiveCvProject,
   personal,
-  projects,
-  researchThemes,
+  proofStrip,
   skillGroups,
   socialLinks,
+  trackLabel,
 } from './data/content'
 import { sitePath, stripSiteBase } from './lib/paths'
 
@@ -18,130 +20,96 @@ function App() {
   const activeArticle = getArticleByPath(stripSiteBase(window.location.pathname))
   if (activeArticle) return <ArticlePage article={activeArticle} />
 
-  const featuredArticle = articles.find((article) => article.slug === 'world-cup-semifinal-forecast') ?? articles[0]
-
   return (
     <div className="field-page" id="top">
       <a className="skip-link" href="#main">Skip to content</a>
       <Header />
 
       <main id="main">
-        <section className="field-intro field-shell" id="about" aria-labelledby="intro-title">
+        <section className="field-intro field-shell" aria-labelledby="intro-title">
           <div className="field-intro-copy">
-            <h1 id="intro-title">Senior software engineer, frontend platform builder,<br className="field-desktop-break" /> and student of machine learning.</h1>
-            <p>I like to start with a question, build a useful version, and measure whether it actually helped—from frontend platforms to AI experiments.</p>
+            <p className="field-status"><span aria-hidden="true" className="field-status-dot" />{personal.availability}</p>
+            <h1 id="intro-title">I build the production frontends people use, and the <em>ML systems</em> that decide what they see, then measure whether either one worked.</h1>
+            <p>Senior engineer at Walmart Global Tech (9 years shipping React/TypeScript platforms). Now building retrieval, model-routing, and evaluation systems for LLM products, with graduate AI coursework at Stanford.</p>
+            <div className="field-cta-row">
+              <a className="field-btn field-btn-accent" href="#work">See selected work <ArrowDown size={14} aria-hidden="true" /></a>
+              <a className="field-btn" href={sitePath(personal.resumePath)} target="_blank" rel="noreferrer">Résumé (PDF)</a>
+              <a className="field-btn" href={`mailto:${personal.email}`}>Email</a>
+            </div>
           </div>
 
-          <aside className="field-context" aria-label="Current location and study">
-            <p className="field-location">Bentonville, Arkansas<br /> United States</p>
-            <span className="field-short-rule" aria-hidden="true" />
-            <p className="field-context-label">Studying:</p>
-            <p className="field-context-value">CS224R, Deep<br /> Reinforcement Learning</p>
+          <aside className="field-context" aria-label="What I am working on now">
+            <p className="field-context-label">Currently</p>
+            <p className="field-context-value">{personal.now.currently}</p>
+            <p className="field-context-label">Recently shipped</p>
+            <p className="field-context-value">{personal.now.recentlyShipped}</p>
+            <p className="field-context-label">Reading</p>
+            <p className="field-context-value">{personal.now.reading}</p>
+            <p className="field-context-label">Stack this week</p>
+            <p className="field-context-value field-context-stack">{personal.now.stack.join(' · ')}</p>
           </aside>
         </section>
 
-        <section className="field-section field-shell field-feature-section" id="work" aria-labelledby="featured-note-title">
-          <div className="field-rail" aria-hidden="true" />
-          <div className="field-section-main">
-            <article className="featured-note">
-              <div className="featured-primary">
-                <p className="field-kicker">Featured field note</p>
-                <h2 id="featured-note-title">How a probabilistic model found<br /> 3 of 4 World Cup semifinalists</h2>
-                <p className="featured-dek">The bracket was the visible result.<br /> The probability pipeline underneath it was the real project.</p>
-              </div>
-
-              <aside className="featured-margin" aria-label="Reflection on the project">
-                <div className="featured-margin-rule" aria-hidden="true" />
-                <div>
-                  <h3>What changed my mind</h3>
-                  <p>A tournament prediction is not four isolated picks. Strength uncertainty, score distributions, tie-break rules, and every upstream result reshape the paths that remain possible.</p>
-                </div>
-              </aside>
-
-              <div className="featured-evidence">
-                <div className="featured-meta">
-                  <p>Independent <span>·</span> Probabilistic forecasting</p>
-                  <em>Three of four semifinalists</em>
-                </div>
-
-                <figure className="featured-figure">
-                  <img
-                    src={sitePath('/articles/world-cup-forecast-social.png')}
-                    alt="Thousands of tournament paths converge into four semifinal nodes, three highlighted in green and one in amber"
-                  />
-                  <figcaption>Figure 1 · Many simulated tournament paths, summarized as one projected bracket.</figcaption>
-                  <a className="field-link field-link-accent" href={sitePath(featuredArticle.path)}>
-                    Read the note <ArrowRight size={15} aria-hidden="true" />
-                  </a>
-                </figure>
-              </div>
-            </article>
-          </div>
+        <section className="field-proof field-shell" aria-label="Selected outcomes">
+          {proofStrip.map((item) => (
+            <a className={`field-proof-item track-${item.track}`} href={sitePath(item.href)} key={item.value}>
+              <span className="field-proof-label">{item.label}</span>
+              <b>{item.value}</b>
+              <p>{item.text}</p>
+            </a>
+          ))}
         </section>
 
-        <section className="field-section field-shell" id="experience" aria-labelledby="experience-title">
-          <div className="field-rail" aria-hidden="true" />
-          <div className="field-section-main">
-            <h2 id="experience-title" className="field-section-title">Experience</h2>
-            <div className="field-ledger">
-              {experience.map((item) => (
-                <article className="field-ledger-row" key={`${item.company}-${item.period}`}>
-                  <div className="field-ledger-meta">
-                    <p>{item.period}</p>
-                  </div>
-                  <div className="field-ledger-title">
-                    <h3>{item.role}</h3>
-                    <span>{item.company}</span>
-                  </div>
-                  <div className="field-ledger-role">
-                    <p>{item.description}</p>
-                    <ul className="field-inline-list" aria-label={`${item.role} focus areas`}>
-                      {item.focus.map((focus) => <li key={focus}>{focus}</li>)}
-                    </ul>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="field-section field-shell" id="projects" aria-labelledby="projects-title">
+        <section className="field-section field-shell" id="work" aria-labelledby="projects-title">
+          <span className="anchor-alias" id="projects" aria-hidden="true" />
           <div className="field-rail">
             <p>Selected work</p>
             <span>Systems, studies, and useful failures</span>
           </div>
           <div className="field-section-main">
-            <div className="field-heading-row">
-              <h2 id="projects-title" className="field-section-title">Projects</h2>
-              <p>Four projects where the implementation and the evidence both matter.</p>
+            <div className="field-heading-row field-heading-row-wrap">
+              <h2 id="projects-title" className="field-section-title">Selected work</h2>
+              <ul className="field-track-legend" aria-label="Track legend">
+                <li className="track-ai">AI system</li>
+                <li className="track-frontend">Frontend platform</li>
+                <li className="track-both">Both</li>
+              </ul>
+              <a className="field-link" href="#public-work">All projects &amp; repos <ArrowRight size={14} aria-hidden="true" /></a>
             </div>
 
-            <div className="field-project-list">
-              {projects.filter((project) => project.featured).map((project) => (
-                <article className="field-project" key={project.title}>
-                  <div className="field-project-heading">
-                    <p>{project.status.toLowerCase()}</p>
-                    <h3>{project.title}</h3>
-                  </div>
-                  <div className="field-project-copy">
-                    <p>{project.description}</p>
-                    <p className="field-project-insight"><span>What I learned</span>{project.insight}</p>
-                    <ul className="field-inline-list" aria-label={`${project.title} technologies`}>
-                      {project.technologies.map((technology) => <li key={technology}>{technology}</li>)}
-                    </ul>
-                    {(project.article || project.github) && (
-                      <div className="field-link-row">
-                        {project.article && (
-                          <a className="field-link" href={sitePath(project.article)}>
-                            Read case study <ArrowRight size={14} aria-hidden="true" />
-                          </a>
-                        )}
-                        {project.github && (
-                          <a className="field-link" href={project.github} target="_blank" rel="noreferrer">
-                            View source <ArrowUpRight size={14} aria-hidden="true" />
-                          </a>
-                        )}
-                      </div>
+            <div className="field-card-grid">
+              {featuredProjects.map((project) => (
+                <article className="field-card" key={project.title}>
+                  {project.image ? (
+                    <img className="field-card-thumb" src={sitePath(project.image)} alt="" loading="lazy" width={1200} height={630} />
+                  ) : (
+                    <div className={`field-card-thumb field-card-thumb-${project.visual}`} aria-hidden="true" />
+                  )}
+                  <p className={`field-tag track-${project.track}`}>{trackLabel[project.track]} · {project.context}</p>
+                  <h3>{project.title}</h3>
+                  <p className="field-card-outcome"><b>{project.outcome}</b><span>{project.outcomeLabel}</span></p>
+                  <p className="field-card-desc">{project.description}</p>
+                  <p className="field-index-stack">{project.technologies.join(' · ')}</p>
+                  <div className="field-link-row">
+                    {project.article && (
+                      <a className="field-link" href={sitePath(project.article)}>
+                        Case study <ArrowRight size={14} aria-hidden="true" />
+                      </a>
+                    )}
+                    {project.paper && (
+                      <a className="field-link" href={sitePath(project.paper)} target="_blank" rel="noreferrer">
+                        Paper (PDF) <ArrowUpRight size={14} aria-hidden="true" />
+                      </a>
+                    )}
+                    {project.github && (
+                      <a className="field-link" href={project.github} target="_blank" rel="noreferrer">
+                        Repo <ArrowUpRight size={14} aria-hidden="true" />
+                      </a>
+                    )}
+                    {project.demo && (
+                      <a className="field-link" href={project.demo} target="_blank" rel="noreferrer">
+                        Live demo <ArrowUpRight size={14} aria-hidden="true" />
+                      </a>
                     )}
                   </div>
                 </article>
@@ -157,29 +125,37 @@ function App() {
           </div>
           <div className="field-section-main">
             <div className="field-heading-row">
-              <h2 id="public-work-title" className="field-section-title">More things I’ve built</h2>
+              <h2 id="public-work-title" className="field-section-title">More work</h2>
               <a className="field-link" href="https://github.com/mauber91" target="_blank" rel="noreferrer">
                 GitHub profile <ArrowUpRight size={14} aria-hidden="true" />
               </a>
             </div>
             <div className="field-index">
-              {githubProjects.map((project) => (
-                <article className="field-index-row" key={project.repository}>
-                  <div className="field-index-meta">
-                    <p>{project.category}</p>
-                    <span>{project.activity}</span>
-                  </div>
-                  <div>
-                    <h3><a href={project.url} target="_blank" rel="noreferrer">{project.title}</a></h3>
-                    <p>{project.description}</p>
-                    <p className="field-index-stack">{project.technologies.join(' · ')}</p>
-                  </div>
-                  <div className="field-index-links">
-                    <a href={project.url} target="_blank" rel="noreferrer">View source <ArrowUpRight size={13} aria-hidden="true" /></a>
-                    {project.demo && <a href={project.demo} target="_blank" rel="noreferrer">Live site <ArrowUpRight size={13} aria-hidden="true" /></a>}
-                  </div>
-                </article>
-              ))}
+              {[interactiveCvProject, ...githubProjects.filter((project) => !project.homepageHidden)].map((project) => {
+                const href = project.local ? sitePath(project.url) : project.url
+                const external = project.local ? {} : { target: '_blank', rel: 'noreferrer' }
+                return (
+                  <article className="field-index-row" key={project.repository}>
+                    <div className="field-index-meta">
+                      <p>{project.category}</p>
+                      <span>{project.activity}</span>
+                    </div>
+                    <div>
+                      <h3><a href={href} {...external}>{project.title}</a></h3>
+                      <p>{project.description}</p>
+                      <p className="field-index-stack">{project.technologies.join(' · ')}</p>
+                    </div>
+                    <div className="field-index-links">
+                      {project.local ? (
+                        <a href={href}>Play it <ArrowRight size={13} aria-hidden="true" /></a>
+                      ) : (
+                        <a href={href} target="_blank" rel="noreferrer">View source <ArrowUpRight size={13} aria-hidden="true" /></a>
+                      )}
+                      {project.demo && <a href={project.demo} target="_blank" rel="noreferrer">Live site <ArrowUpRight size={13} aria-hidden="true" /></a>}
+                    </div>
+                  </article>
+                )
+              })}
             </div>
           </div>
         </section>
@@ -187,17 +163,17 @@ function App() {
         <section className="field-section field-shell" id="notes" aria-labelledby="notes-title">
           <span className="anchor-alias" id="writing" aria-hidden="true" />
           <div className="field-rail">
-            <p>Notes</p>
-            <span>Technical writing in plain language</span>
+            <p>Writing</p>
+            <span>Methods, results, and caveats in plain language</span>
           </div>
           <div className="field-section-main">
-            <h2 id="notes-title" className="field-section-title">Writing and field notes</h2>
+            <h2 id="notes-title" className="field-section-title">Writing</h2>
             <div className="field-writing-list">
               {articles.map((article) => (
                 <a className="field-writing-row" href={sitePath(article.path)} key={article.title}>
                   <p>{article.course}</p>
                   <h3>{article.title}</h3>
-                  <span>{article.readTime}</span>
+                  <span>{article.readTime}{article.paper && <FileText size={13} aria-label="Paper available" />}</span>
                   <ArrowRight size={16} aria-hidden="true" />
                 </a>
               ))}
@@ -205,27 +181,54 @@ function App() {
           </div>
         </section>
 
-        <section className="field-section field-shell" id="research" aria-labelledby="research-title">
+        <section className="field-section field-shell" id="experience" aria-labelledby="experience-title">
           <div className="field-rail">
-            <p>Study</p>
-            <span>Research themes and formal coursework</span>
+            <p>Experience</p>
+            <span>Nine years of shipped frontends; applied ML inside the day job since 2024</span>
           </div>
           <div className="field-section-main">
-            <div className="field-heading-row">
-              <h2 id="research-title" className="field-section-title">Research and education</h2>
-              <p>Across retrieval, routing, and local inference, I try to write down the hypothesis and the failure condition before I build.</p>
-            </div>
-            <div className="field-research-grid">
-              {researchThemes.map((theme) => (
-                <article className="field-research-item" key={theme.title}>
-                  <h3>{theme.title}</h3>
-                  <p>{theme.description}</p>
-                  <p className="field-index-stack">{theme.tags.join(' · ')}</p>
+            <h2 id="experience-title" className="field-section-title">Experience</h2>
+            <div className="field-ledger">
+              {experience.map((item) => (
+                <article className="field-ledger-row" key={`${item.company}-${item.period}`}>
+                  <div className="field-ledger-meta">
+                    <p>{item.period}</p>
+                  </div>
+                  <div className="field-ledger-title">
+                    <h3>{item.role}</h3>
+                    <span>{item.company}</span>
+                  </div>
+                  <div className="field-ledger-role">
+                    <p>{item.description}</p>
+                    {item.bullets && (
+                      <ul className="field-ledger-bullets">
+                        {item.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
+                      </ul>
+                    )}
+                    {item.tracks && (
+                      <div className="field-tag-row" aria-label="Tracks">
+                        {item.tracks.map((track) => <span className={`field-tag track-${track}`} key={track}>{trackLabel[track]}</span>)}
+                      </div>
+                    )}
+                    <ul className="field-inline-list" aria-label={`${item.role} focus areas`}>
+                      {item.focus.map((focus) => <li key={focus}>{focus}</li>)}
+                    </ul>
+                  </div>
                 </article>
               ))}
             </div>
+          </div>
+        </section>
 
-            <div className="field-education" id="education">
+        <section className="field-section field-shell" id="research" aria-labelledby="research-title">
+          <span className="anchor-alias" id="education" aria-hidden="true" />
+          <div className="field-rail">
+            <p>Education and skills</p>
+            <span>Formal coursework and the tools I actually use</span>
+          </div>
+          <div className="field-section-main">
+            <h2 id="research-title" className="field-section-title">Education and working set</h2>
+            <div className="field-education">
               {education.map((item) => (
                 <article className="field-education-row" key={item.institution}>
                   <div>
@@ -243,16 +246,6 @@ function App() {
                 </article>
               ))}
             </div>
-          </div>
-        </section>
-
-        <section className="field-section field-shell" aria-labelledby="range-title">
-          <div className="field-rail">
-            <p>Technical range</p>
-            <span>Tools I use, not a keyword cloud</span>
-          </div>
-          <div className="field-section-main">
-            <h2 id="range-title" className="field-section-title">A practical working set</h2>
             <div className="field-skill-list">
               {skillGroups.map((group) => (
                 <article className="field-skill-row" key={group.title}>
@@ -264,7 +257,7 @@ function App() {
           </div>
         </section>
 
-        <section className="field-section field-shell field-about-detail" aria-labelledby="about-detail-title">
+        <section className="field-section field-shell field-about-detail" id="about" aria-labelledby="about-detail-title">
           <div className="field-rail">
             <p>About</p>
             <span>Frontend foundations, applied intelligence</span>
@@ -296,7 +289,7 @@ function App() {
             <div className="field-contact-links">
               {socialLinks.map((link) => (
                 <a
-                  href={link.href}
+                  href={sitePath(link.href)}
                   key={link.label}
                   target={link.href.startsWith('http') ? '_blank' : undefined}
                   rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
@@ -305,10 +298,6 @@ function App() {
                   <ArrowUpRight size={16} aria-hidden="true" />
                 </a>
               ))}
-              <a href={sitePath('/game/')}>
-                <span><b>Interactive CV</b><small>A more playful version of the résumé</small></span>
-                <ArrowRight size={16} aria-hidden="true" />
-              </a>
             </div>
           </div>
         </section>
@@ -316,7 +305,10 @@ function App() {
 
       <footer className="field-footer field-shell">
         <p>© {new Date().getFullYear()} Mauricio Berlanga</p>
-        <p>Built as a record of work in progress.</p>
+        <p>
+          React 19 · TypeScript · Vite · hand-written CSS ·{' '}
+          <a href="https://github.com/mauber91/mauricio-berlanga-portfolio" target="_blank" rel="noreferrer">View this site’s source</a>
+        </p>
         <a href="#top">Back to top</a>
       </footer>
     </div>

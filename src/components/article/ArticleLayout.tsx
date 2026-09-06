@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowUpRight, Clock3, Code2, Sparkles } from 'lucide-react'
+import { ArrowLeft, ArrowUpRight, BookOpen, Clock3, Code2, FileText } from 'lucide-react'
 import { type ReactNode, useEffect } from 'react'
 import { Header } from '../Header'
 import type { ArticleMeta } from '../../data/articles'
@@ -11,12 +11,17 @@ type ArticleLayoutProps = {
   children: ReactNode
 }
 
+const defaultDisclosure =
+  'Adapted from my academic paper with AI assistance for readability; I checked every number against the paper and frozen results. The paper and repository are authoritative.'
+
 export function ArticleLayout({ article, stats, sections, children }: ArticleLayoutProps) {
   useEffect(() => {
     document.title = `${article.title} — Mauricio Berlanga`
     document.querySelector('meta[name="description"]')?.setAttribute('content', article.description)
     window.scrollTo(0, 0)
   }, [article])
+
+  const hasSources = Boolean(article.paper || article.repository || article.notebook)
 
   return (
     <div className="field-page article-site" id="top">
@@ -41,10 +46,28 @@ export function ArticleLayout({ article, stats, sections, children }: ArticleLay
               <span>{article.projectType ?? 'Course project'}</span>
             </div>
             <ul className="article-tags">{article.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
+            {article.tldr && (
+              <aside className="article-tldr" aria-label="Summary">
+                <b>TL;DR</b>
+                <ul>
+                  <li><strong>Problem:</strong> {article.tldr.problem}</li>
+                  <li><strong>Method:</strong> {article.tldr.method}</li>
+                  <li><strong>Result:</strong> {article.tldr.result}</li>
+                  <li><strong>Honest caveat:</strong> {article.tldr.caveat}</li>
+                </ul>
+              </aside>
+            )}
             {article.leadImage && (
               <figure className="article-hero-figure">
                 <div>
-                  <img src={sitePath(article.leadImage)} alt={article.leadImageAlt ?? ''} />
+                  <img
+                    src={sitePath(article.leadImage)}
+                    alt={article.leadImageAlt ?? ''}
+                    width={article.leadImageWidth}
+                    height={article.leadImageHeight}
+                    loading="eager"
+                    fetchPriority="high"
+                  />
                 </div>
               </figure>
             )}
@@ -61,25 +84,29 @@ export function ArticleLayout({ article, stats, sections, children }: ArticleLay
           </div>
         </section>
 
-        <aside className="article-disclaimer field-shell" aria-label="Content disclosure">
-          <div className="article-disclaimer-rail field-rail">
-            <p>Editorial note</p>
-            <span>How to read this adaptation</span>
-          </div>
-          <div className="article-disclaimer-main">
-            <Sparkles size={16} aria-hidden="true" />
-            <p><strong>Disclosure:</strong> {article.disclosure ?? 'This article was generated with AI from my academic paper. It presents an accessible adaptation of the original research; the paper remains the authoritative source for the complete methodology and results.'}</p>
-          </div>
-        </aside>
-
         <div className="article-layout field-shell">
           <aside className="article-toc field-rail" aria-label="Article contents">
             <p>In this article</p>
             <nav>{sections.map((section) => <a href={`#${section.id}`} key={section.id}>{section.label}</a>)}</nav>
-            {article.repository && (
-              <a className="article-repo-link" href={article.repository} target="_blank" rel="noreferrer">
-                <Code2 size={14} /> View repository <ArrowUpRight size={13} />
-              </a>
+            {hasSources && (
+              <div className="article-sources">
+                <p className="article-rail-label">Primary sources</p>
+                {article.paper && (
+                  <a className="article-repo-link" href={sitePath(article.paper)} target="_blank" rel="noreferrer">
+                    <FileText size={14} /> Paper (PDF) <ArrowUpRight size={13} />
+                  </a>
+                )}
+                {article.repository && (
+                  <a className="article-repo-link" href={article.repository} target="_blank" rel="noreferrer">
+                    <Code2 size={14} /> Repository <ArrowUpRight size={13} />
+                  </a>
+                )}
+                {article.notebook && (
+                  <a className="article-repo-link" href={sitePath(article.notebook)} target="_blank" rel="noreferrer">
+                    <BookOpen size={14} /> Results notebook <ArrowUpRight size={13} />
+                  </a>
+                )}
+              </div>
             )}
           </aside>
           <article className="article-prose">{children}</article>
@@ -87,6 +114,7 @@ export function ArticleLayout({ article, stats, sections, children }: ArticleLay
       </main>
 
       <footer className="article-footer field-footer field-shell">
+        <p className="article-disclosure"><em>About this write-up.</em> {article.disclosure ?? defaultDisclosure}</p>
         <a href={sitePath('/#writing')}><ArrowLeft size={14} /> More writing</a>
         <p>© {new Date().getFullYear()} Mauricio Berlanga</p>
         <a href={sitePath('/#top')}>Back to top</a>
