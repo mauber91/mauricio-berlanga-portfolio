@@ -1,5 +1,5 @@
 export type ArticleMeta = {
-  slug: 'usd-mxn-forecasting' | 'verifier-aware-model-routing' | 'colmo' | 'world-cup-semifinal-forecast'
+  slug: 'usd-mxn-forecasting' | 'verifier-aware-model-routing' | 'colmo' | 'world-cup-semifinal-forecast' | 'onesource-decision-record'
   path: string
   course: string
   projectType?: string
@@ -14,6 +14,8 @@ export type ArticleMeta = {
   tldr?: { problem: string; method: string; result: string; caveat: string }
   leadImage?: string
   leadImageAlt?: string
+  leadImageWidth?: number
+  leadImageHeight?: number
   disclosure?: string
 }
 
@@ -100,6 +102,24 @@ export const articles: ArticleMeta[] = [
       'Thousands of faint tournament paths converge into four semifinal nodes, three highlighted in green and one in amber',
     disclosure:
       'This article was generated with AI from the WC source code, model documentation, and frozen simulation metadata. The repository remains the authoritative source for the implemented formulas, rules, and experiment details.',
+  },
+  {
+    slug: 'onesource-decision-record',
+    path: '/writing/onesource-decision-record/',
+    course: 'Walmart Global Tech · Frontend platform',
+    projectType: 'Architecture decision record',
+    title: 'Choosing Nx and Module Federation over the internal framework',
+    description:
+      'An architecture decision record for the OneSource frontend platform: the constraints, the options on the table, what was deliberately left out, and what it cost to run.',
+    readTime: '8 min read',
+    tags: ['Micro-frontends', 'Nx', 'Module Federation', 'Architecture'],
+    tldr: {
+      problem: 'Multiple sourcing teams needed to ship React apps independently inside one product shell.',
+      method: 'Compared the heavier internal framework against an Nx monorepo with Module Federation on independent deploys, build time, onboarding, and operational cost.',
+      result: 'Nx + Module Federation was adopted; teams release independently and the pattern was reused for later micro-frontend work.',
+      caveat: 'TODO(owner): one sentence on the real tradeoff you accepted (for example shared-dependency versioning or runtime coupling).',
+    },
+    disclosure: 'Written by me from project notes; no confidential system details are included.',
   },
 ]
 

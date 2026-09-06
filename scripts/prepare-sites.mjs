@@ -40,6 +40,12 @@ const articleMeta = {
     image: '/articles/world-cup-forecast-card-v2.jpg',
     imageAlt: 'Thousands of tournament paths converge into four semifinal nodes, three highlighted in green and one in amber.',
   },
+  '/writing/onesource-decision-record/': {
+    title: 'Choosing Nx and Module Federation over the internal framework — Mauricio Berlanga',
+    description: 'An architecture decision record for the OneSource frontend platform: constraints, options considered, what was left out, and what it cost to run.',
+    image: '/og.png',
+    imageAlt: 'Mauricio Berlanga — Senior Software Engineer, Frontend Platforms & Applied ML Systems.',
+  },
 }
 
 function textResponse(body, contentType) {
@@ -63,7 +69,7 @@ export default {
     }
 
     if (url.pathname === '/sitemap.xml') {
-      const paths = ['/', '/game/', '/writing/usd-mxn-forecasting/', '/writing/verifier-aware-model-routing/', '/writing/colmo/', '/writing/world-cup-semifinal-forecast/']
+      const paths = ['/', '/game/', '/writing/usd-mxn-forecasting/', '/writing/verifier-aware-model-routing/', '/writing/colmo/', '/writing/world-cup-semifinal-forecast/', '/writing/onesource-decision-record/']
       const entries = paths.map((path) => \`<url><loc>\${url.origin}\${path}</loc></url>\`).join('')
       return textResponse(
         \`<?xml version="1.0" encoding="UTF-8"?>\\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\${entries}</urlset>\`,

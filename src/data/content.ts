@@ -261,6 +261,7 @@ export const projects: Project[] = [
     context: 'Walmart Global Tech',
     insight:
       'An abstraction has to earn its operational and cognitive cost; the lighter platform won because teams could reason about it end to end.',
+    article: '/writing/onesource-decision-record/',
     visual: 'orchestration',
   },
   {

@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowRight, ArrowUpRight } from 'lucide-react'
+import { ArrowDown, ArrowRight, ArrowUpRight, FileText } from 'lucide-react'
 import { Header } from './components/Header'
 import { ArticlePage } from './components/article/ArticlePage'
 import { articles, getArticleByPath } from './data/articles'
@@ -191,7 +191,7 @@ function App() {
                 <a className="field-writing-row" href={sitePath(article.path)} key={article.title}>
                   <p>{article.course}</p>
                   <h3>{article.title}</h3>
-                  <span>{article.readTime}</span>
+                  <span>{article.readTime}{article.paper && <FileText size={13} aria-label="Paper available" />}</span>
                   <ArrowRight size={16} aria-hidden="true" />
                 </a>
               ))}
