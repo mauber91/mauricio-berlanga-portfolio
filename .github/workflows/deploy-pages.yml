@@ -24,6 +24,17 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
+      - run: npm run build:github-user-pages
+      - name: Publish user site
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          deploy_key: ${{ secrets.USER_PAGES_DEPLOY_KEY }}
+          external_repository: mauber91/mauber91.github.io
+          publish_branch: main
+          publish_dir: dist
+          force_orphan: true
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com
       - run: npm run build:github-pages
       - uses: actions/upload-pages-artifact@v3
         with:

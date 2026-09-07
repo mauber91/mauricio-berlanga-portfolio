@@ -1,7 +1,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 
 const output = new URL('../dist/', import.meta.url)
-const siteUrl = 'https://mauber91.github.io/mauricio-berlanga-portfolio'
+const siteUrl = (process.env.SITE_URL ?? 'https://mauber91.github.io/mauricio-berlanga-portfolio').replace(/\/$/, '')
 const routes = [
   {
     path: '/game/',
