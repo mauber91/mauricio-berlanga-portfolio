@@ -106,7 +106,7 @@ export const socialLinks: SocialLink[] = [
     display: 'LinkedIn profile',
   },
   { label: 'Email', href: `mailto:${personal.email}`, display: personal.email },
-  { label: 'Résumé', href: personal.resumePath, display: 'PDF, one page' },
+  { label: 'X', href: 'https://x.com/mauriciob91', display: '@mauriciob91' },
 ]
 
 export type ExperienceItem = {
