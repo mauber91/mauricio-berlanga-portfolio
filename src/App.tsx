@@ -284,7 +284,7 @@ function App() {
           </div>
           <div className="field-section-main">
             <h2 id="contact-title" className="field-section-title">Say hello</h2>
-            <p className="field-contact-copy">I’m happy at Walmart and not in a rush, but I’d like my next role to sit closer to the ML side of this page. If you’re working on something like that, or just want to compare notes on anything above, email works best.</p>
+            <p className="field-contact-copy">Always open to collaboration, or exchange of ideas!</p>
             <div className="field-contact-links">
               {socialLinks.map((link) => (
                 <a
