@@ -53,12 +53,11 @@ export const personal = {
   location: 'Bentonville, Arkansas, United States',
   email: 'mberlanga91@gmail.com',
   status: 'Walmart Global Tech · Bentonville, AR',
-  resumePath: '/resume.pdf',
   now: {
-    currently: 'Verifier-aware routing for code generation, Stanford CS224R',
-    recentlyShipped: 'Nx + Module Federation platform for Walmart Global Sourcing',
-    reading: 'Cost-quality tradeoffs in local vs cloud inference',
-    stack: ['PyTorch', 'vLLM', 'React 19', 'TypeScript', 'Nx'],
+    currently: 'Preparation for CS221',
+    recentlyShipped: 'onto-ui',
+    reading: 'Essential Math for AI from O’Reilly',
+    stack: ['LangChain', 'Langfuse', 'Pydantic', 'LangGraph', 'Cloudflare Workers'],
   },
   summary:
     'I started in frontend and still like it. Most of what I have done since follows the same pattern: notice something that could work better, build a version, check whether it did. Over the last couple of years that has pulled me toward applied ML.',

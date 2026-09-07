@@ -1,6 +1,5 @@
-import { ArrowDown, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import { personal } from '../data/content'
 import { sitePath } from '../lib/paths'
 
 const navigation = [
@@ -35,9 +34,6 @@ export function Header({ homeLinks = false }: { homeLinks?: boolean }) {
       </nav>
 
       <div className="header-actions">
-        <a className="header-resume" href={sitePath(personal.resumePath)} target="_blank" rel="noreferrer" aria-label="Résumé (PDF)">
-          <span>Résumé</span> <ArrowDown size={13} aria-hidden="true" />
-        </a>
         <button
           className="icon-button menu-button"
           type="button"
