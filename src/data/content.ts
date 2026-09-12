@@ -2,6 +2,8 @@ export type SocialLink = {
   label: string
   href: string
   display: string
+  description: string
+  action: string
 }
 
 export type Track = 'ai' | 'frontend' | 'both'
@@ -97,15 +99,35 @@ export const proofStrip: ProofItem[] = [
 ]
 
 export const socialLinks: SocialLink[] = [
-  { label: 'GitHub', href: 'https://github.com/mauber91', display: 'github.com/mauber91' },
+  {
+    label: 'GitHub',
+    href: 'https://github.com/mauber91',
+    display: '@mauber91',
+    description: 'Code, experiments, and public work.',
+    action: 'Browse repositories',
+  },
   {
     label: 'LinkedIn',
     // TODO(owner): claim a vanity LinkedIn URL and update href.
     href: 'https://www.linkedin.com/in/mauricio-berlanga-carrillo-58a62334',
-    display: 'LinkedIn profile',
+    display: 'Mauricio Berlanga',
+    description: 'Career history and professional context.',
+    action: 'View profile',
   },
-  { label: 'Email', href: `mailto:${personal.email}`, display: personal.email },
-  { label: 'X', href: 'https://x.com/mauriciob91', display: '@mauriciob91' },
+  {
+    label: 'Email',
+    href: `mailto:${personal.email}`,
+    display: personal.email,
+    description: 'Roles, collaborations, and technical conversations.',
+    action: 'Send an email',
+  },
+  {
+    label: 'X',
+    href: 'https://x.com/mauriciob91',
+    display: '@mauriciob91',
+    description: 'Short notes from the work in progress.',
+    action: 'Follow along',
+  },
 ]
 
 export type ExperienceItem = {

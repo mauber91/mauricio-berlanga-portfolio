@@ -1,4 +1,4 @@
-import { ArrowDown, ArrowRight, ArrowUpRight, FileText } from 'lucide-react'
+import { ArrowDown, ArrowRight, ArrowUpRight, AtSign, BriefcaseBusiness, Code2, FileText, Mail } from 'lucide-react'
 import { Header } from './components/Header'
 import { ArticlePage } from './components/article/ArticlePage'
 import { articles, getArticleByPath } from './data/articles'
@@ -279,24 +279,33 @@ function App() {
 
         <section className="field-section field-shell field-contact" id="contact" aria-labelledby="contact-title">
           <div className="field-rail">
-            <p>Contact</p>
-            <span>{personal.location}</span>
+            <p>Open a channel</p>
+            <span>Choose the route that fits the conversation.</span>
           </div>
           <div className="field-section-main">
-            <h2 id="contact-title" className="field-section-title">Say hello</h2>
-            <p className="field-contact-copy">Always open to collaboration, or exchange of ideas!</p>
+            <h2 id="contact-title" className="field-section-title">Let’s start with the problem.</h2>
+            <p className="field-contact-copy">If you’re working on frontend platforms, applied AI, research tooling, or a product with a knot worth unpicking, send the context. I’d be glad to compare notes.</p>
             <div className="field-contact-links">
-              {socialLinks.map((link) => (
-                <a
-                  href={sitePath(link.href)}
-                  key={link.label}
-                  target={link.href.startsWith('http') ? '_blank' : undefined}
-                  rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
-                >
-                  <span><b>{link.label}</b><small>{link.display}</small></span>
-                  <ArrowUpRight size={16} aria-hidden="true" />
-                </a>
-              ))}
+              {socialLinks.map((link) => {
+                const Icon = link.label === 'Email' ? Mail : link.label === 'LinkedIn' ? BriefcaseBusiness : link.label === 'X' ? AtSign : Code2
+                return (
+                  <a
+                    className={`field-contact-link field-contact-link-${link.label.toLowerCase()}`}
+                    href={sitePath(link.href)}
+                    key={link.label}
+                    target={link.href.startsWith('http') ? '_blank' : undefined}
+                    rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
+                  >
+                    <span className="field-contact-icon" aria-hidden="true"><Icon size={17} /></span>
+                    <span className="field-contact-details">
+                      <b>{link.label}</b>
+                      <small>{link.display}</small>
+                      <span>{link.description}</span>
+                    </span>
+                    <span className="field-contact-action">{link.action}<ArrowUpRight size={15} aria-hidden="true" /></span>
+                  </a>
+                )
+              })}
             </div>
           </div>
         </section>
