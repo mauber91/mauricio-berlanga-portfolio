@@ -1,5 +1,6 @@
 import {
   AudioWaveform,
+  AtSign,
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
@@ -251,8 +252,8 @@ export function DossierPanel({ visited, onClose, onOpenBuilding }: DossierPanelP
           </section>
 
           <footer className="game-dossier-contact">
-            <div><p>See a useful match?</p><h3>Let’s compare the work your team needs with the experience here.</h3></div>
-            <nav>{socialLinks.map((link) => <a href={link.href} key={link.label} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noreferrer' : undefined}>{link.label} <ArrowUpRight size={14} /></a>)}</nav>
+            <div><p>Start with the problem.</p><h3>Let’s compare the work your team needs with the experience here.</h3></div>
+            <nav>{socialLinks.map((link) => <a href={link.href} key={link.label} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noreferrer' : undefined}>{link.action} <ArrowUpRight size={14} /></a>)}</nav>
           </footer>
         </div>
       </section>
@@ -720,7 +721,7 @@ function GitHubCaseFile({ repository }: { repository?: string }) {
 function ContactCaseFile({ panel, onOpenBuilding }: { panel: Extract<InteriorExhibit['caseFile'], { kind: 'contact' }>['panel']; onOpenBuilding: (id: BuildingId) => void }) {
   const { personal, skillGroups, socialLinks } = gameContent
   const [copied, setCopied] = useState(false)
-  const contactIcons: Record<string, LucideIcon> = { GitHub: Code2, LinkedIn: BriefcaseBusiness, Email: Mail }
+  const contactIcons: Record<string, LucideIcon> = { GitHub: Code2, LinkedIn: BriefcaseBusiness, Email: Mail, X: AtSign }
   const copyEmail = async () => {
     try {
       await navigator.clipboard.writeText(personal.email)
@@ -753,7 +754,7 @@ function ContactCaseFile({ panel, onOpenBuilding }: { panel: Extract<InteriorExh
         <section className="game-contact-grid">
           {socialLinks.map((link) => {
             const Icon = contactIcons[link.label] ?? ArrowUpRight
-            return <a href={link.href} key={link.label} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noreferrer' : undefined}><span><Icon size={20} /></span><p>{link.label}</p><h3>{link.display}</h3><i>Open link <ArrowUpRight size={14} /></i></a>
+            return <a href={link.href} key={link.label} target={link.href.startsWith('http') ? '_blank' : undefined} rel={link.href.startsWith('http') ? 'noreferrer' : undefined}><span><Icon size={20} /></span><p>{link.label}</p><h3>{link.display}</h3><small>{link.description}</small><i>{link.action} <ArrowUpRight size={14} /></i></a>
           })}
         </section>
       ) : null}
